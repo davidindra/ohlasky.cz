@@ -17,8 +17,9 @@ class RouterFactory
 	public static function createRouter()
 	{
 		$router = new RouteList;
-		$router[] = new Route('//<church>.%domain%', 'Church:subdom');
-		$router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default');
+		$router[] = new Route('kostely', 'Church:list');
+		$router[] = new Route('kostel/<church>', 'Church:view');
+		$router[] = new Route('<presenter>/<action>', 'Homepage:default');
 		return $router;
 	}
 
