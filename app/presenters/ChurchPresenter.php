@@ -14,7 +14,7 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function renderSubdom(){
-        $this->redirect('Church:view ' . $this->getParameter('church'));
+        $this->redirect('Church:view', ['church' => $this->getParameter('church')]);
     }
 
     public function renderList(){
