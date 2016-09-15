@@ -15,6 +15,12 @@ session:
 	expiration: 14 days
 
 
+extensions:
+    console: Kdyby\Console\DI\ConsoleExtension
+    events: Kdyby\Events\DI\EventsExtension
+    annotations: Kdyby\Annotations\DI\AnnotationsExtension
+    doctrine: Kdyby\Doctrine\DI\OrmExtension
+
 services:
 	- App\Model\UserManager
 	- App\Forms\FormFactory
