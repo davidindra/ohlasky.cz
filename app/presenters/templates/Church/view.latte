@@ -4,30 +4,30 @@
         Kostel Povýšení sv. Kříže v Prostějově
     </h4>
 
-    <div class="row">
-        <div class="col m4">
-            <div class="card flexible indigo">
-                <div class="card-content white-text">
-                    <span class="card-title">Informace o kostele</span>
-                    <p>
-                        V tomto kostele jsou mše svaté slaveny pravidelně každou sobotu v 17:00 a neděli 9:00.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col m4">
-            <div class="card flexible indigo">
-                <div class="card-content white-text">
-                    <span class="card-title">Kněží</span>
-                    <p>
-                        Mše svaté jsou celebrovány P. Pavlem Čápem.
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="col m4">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2592.6636305474644!2d17.110671800738672!3d49.471970065433375!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47125746e68550bb%3A0xfd4f87696f3f854!2sFilipcovo+n%C3%A1m.+22%2F5%2C+796+01+Prost%C4%9Bjov!5e0!3m2!1scs!2scz!4v1473983070585"
-                    frameborder="0" style="border:0; width: 100%; height: 10em;" allowfullscreen></iframe>
-        </div>
-    </div>
+    <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
+    <table class="churches bordered highlight">
+        <thead>
+        <tr>
+            <th>Datum, čas</th>
+            <th>Úmysl</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        {for $i = 0; $i < 20; $i++}
+        <tr>
+            <td {if $i%7 == 4 || $i%7 == 3}style="font-weight: bold"{/if}>
+                pátek 16. září, 17:00<br>
+                25. týden v mezidobí
+            </td>
+            <td>za živou a zemřelou rodinu a za duše v očistci</td>
+        </tr>
+        {/for}
+        </tbody>
+    </table>
+
+    <ul class="collection">
+        <li class="collection-item">V sobotu proběhla sbírka Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit ipsam porro praesentium reiciendis. Accusantium alias eaque eligendi id itaque maiores omnis quae velit vitae voluptatibus? Culpa dolore id itaque quae.</li>
+        <li class="collection-item">Děkuji všem za úklid kostela Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate doloremque eos, est libero nihil officiis perspiciatis quibusdam? Consequuntur dolore ipsam iste itaque nostrum provident quae quaerat quod ratione velit?</li>
+    </ul>
 </div>
