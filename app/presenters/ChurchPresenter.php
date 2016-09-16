@@ -22,8 +22,8 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function renderList(){
-        $dao = $this->em->getRepository(Church::getClassName());
-        $this->template->churches = Debugger::dump($dao->findAll(), true);
+        $dao = $this->em->getRepository(Church::class);
+        $this->template->churches = $dao->findAll();
     }
 
     public function renderView($church){

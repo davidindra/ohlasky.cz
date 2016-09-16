@@ -3,9 +3,6 @@
 
     <h2 class="indigo-text">Přehled kostelů</h2>
 
-    {$churches|noescape}
-
-
     <table class="churches bordered highlight">
         <thead>
         <tr>
@@ -16,6 +13,11 @@
         </thead>
 
         <tbody>
+        <tr n:foreach="$churches as $church" data-link="{link Church:view $church->linkAbbr}">
+            <td>{$church->fullName}</td>
+            <td><b>dnes 17:00</b> za duše v očistci</td>
+            <td><a href="mailto:faprostejov-spp@ado.cz">P. Aleš Vrzala</a></td>
+        </tr>
         <tr data-link="{link Church:view povyseni}">
             <td>Kostel <b>Povýšení sv. Kříže</b> v Prostějově</td>
             <td><b>dnes 17:00</b> za duše v očistci</td>
