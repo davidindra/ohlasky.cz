@@ -8,3 +8,15 @@ body {
 main {
   flex: 1 0 auto;
 }
+
+td.js-link {
+  cursor: pointer;
+
+  & a.js-link {
+    color: inherit;
+  }
+}
+
+div.flexible {
+  height: auto;
+}
