@@ -38,7 +38,7 @@ class User
     protected $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Church")
+     * @ORM\OneToMany(targetEntity="Church", mappedBy="user")
      */
     protected $churches;
 }

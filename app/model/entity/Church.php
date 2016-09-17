@@ -31,10 +31,5 @@ class Church
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
      */
-    protected $fullName;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User")
-     */
     protected $maintainer;
 }
