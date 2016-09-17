@@ -13,7 +13,10 @@ application:
 
 session:
     expiration: 14 days
+<<<<<<< HEAD
     savePath: %appDir%/../temp/sessions
+=======
+>>>>>>> 84d61976f38c8034110fd9060e2f448e1762bb34
 
 
 extensions:
@@ -24,7 +27,10 @@ extensions:
 
 services:
     - App\Model\Repository\Churches
+<<<<<<< HEAD
     - App\Model\Repository\Users
+=======
+>>>>>>> 84d61976f38c8034110fd9060e2f448e1762bb34
     - App\Model\UserManager
     - App\Forms\FormFactory
     - App\Forms\SignInFormFactory

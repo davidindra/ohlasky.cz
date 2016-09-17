@@ -15,11 +15,16 @@ class Church
     /**
      * @ORM\Column(type="string")
      */
+<<<<<<< HEAD
     protected $abbreviation;
+=======
+    protected $linkAbbr;
+>>>>>>> 84d61976f38c8034110fd9060e2f448e1762bb34
 
     /**
      * @ORM\Column(type="string")
      */
+<<<<<<< HEAD
     protected $name;
 
     /**
@@ -30,6 +35,12 @@ class Church
     /**
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(nullable=false)
+=======
+    protected $fullName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+>>>>>>> 84d61976f38c8034110fd9060e2f448e1762bb34
      */
     protected $maintainer;
 }
