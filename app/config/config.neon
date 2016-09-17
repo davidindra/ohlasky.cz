@@ -6,13 +6,14 @@ parameters:
 
 
 application:
-	errorPresenter: Error
-	mapping:
-		*: App\*Module\Presenters\*Presenter
+    errorPresenter: Error
+    mapping:
+        *: App\*Module\Presenters\*Presenter
 
 
 session:
-	expiration: 14 days
+    expiration: 14 days
+    savePath: %appDir%/../temp/sessions
 
 
 extensions:
@@ -22,8 +23,10 @@ extensions:
     doctrine: Kdyby\Doctrine\DI\OrmExtension
 
 services:
-	- App\Model\UserManager
-	- App\Forms\FormFactory
-	- App\Forms\SignInFormFactory
-	- App\Forms\SignUpFormFactory
-	router: App\RouterFactory::createRouter
+    - App\Model\Repository\Churches
+    - App\Model\Repository\Users
+    - App\Model\UserManager
+    - App\Forms\FormFactory
+    - App\Forms\SignInFormFactory
+    - App\Forms\SignUpFormFactory
+    router: App\RouterFactory::createRouter

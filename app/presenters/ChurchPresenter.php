@@ -2,19 +2,30 @@
 
 namespace App\Presenters;
 
-use App\Church;
 use Nette;
 use App\Model;
-use App\Article;
+use App\Model\Repository\Churches;
 use Tracy\Debugger;
 
 class ChurchPresenter extends BasePresenter
 {
     /**
      * @inject
-     * @var \Kdyby\Doctrine\EntityManager
+     * @var Churches
      */
-    public $em;
+    public $churches;
+
+    /**
+     * @inject
+     * @var Model\Repository\Users
+     */
+    public $users;
+
+    /**
+     * @inject
+     * @var Model\UserManager
+     */
+    public $um;
 
     public function renderDefault()
     {
@@ -22,8 +33,15 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function renderList(){
-        $dao = $this->em->getRepository(Church::class);
-        $this->template->churches = $dao->findAll();
+        $this->template->churches = $this->churches->getAll();
+        //$this->um->add('davidindra', 'heslo123', 'mail@davidindra.cz', 'admin', 'David Indra');
+        //$this->getUser()->login('davidindra', 'heslo123');
+        //$this->getUser()->logout(true);
+        /*$church = new Model\Entity\Church();
+        $church->linkAbbr = 'povyseni';
+        $church->fullName = 'Kostel Povýšení sv. Kříže v Prostějově';
+        $church->maintainer = $this->users->getByUsername('davidindra');
+        $this->churches->create($church);*/
     }
 
     public function renderView($church){

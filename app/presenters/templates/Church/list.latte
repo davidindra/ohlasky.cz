@@ -13,10 +13,10 @@
         </thead>
 
         <tbody>
-        <tr n:foreach="$churches as $church" data-link="{link Church:view $church->linkAbbr}">
-            <td>{$church->fullName}</td>
+        <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
+            <td>{$church->nameHighlighted}</td>
             <td><b>dnes 17:00</b> za duše v očistci</td>
-            <td><a href="mailto:faprostejov-spp@ado.cz">P. Aleš Vrzala</a></td>
+            <td><a href="mailto:{$church->maintainer->email}">{$church->maintainer->fullName}</a></td>
         </tr>
         <tr data-link="{link Church:view povyseni}">
             <td>Kostel <b>Povýšení sv. Kříže</b> v Prostějově</td>
