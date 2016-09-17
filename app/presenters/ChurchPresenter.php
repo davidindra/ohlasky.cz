@@ -2,19 +2,17 @@
 
 namespace App\Presenters;
 
-use App\Church;
 use Nette;
 use App\Model;
-use App\Article;
-use Tracy\Debugger;
+use App\Model\Repository\Churches;
 
 class ChurchPresenter extends BasePresenter
 {
     /**
      * @inject
-     * @var \Kdyby\Doctrine\EntityManager
+     * @var Churches
      */
-    public $em;
+    public $churches;
 
     public function renderDefault()
     {
@@ -22,8 +20,7 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function renderList(){
-        $dao = $this->em->getRepository(Church::class);
-        $this->template->churches = $dao->findAll();
+        $this->template->churches = $this->churches->getAll();
     }
 
     public function renderView($church){
