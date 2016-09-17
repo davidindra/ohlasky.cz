@@ -28,7 +28,7 @@ class Church
     protected $nameHighlighted;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="churches")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $maintainer;
