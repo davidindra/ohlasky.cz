@@ -1,8 +1,21 @@
 {block content}
 <div class="section container">
-    <h4 class="indigo-text">
-        Kostel Povýšení sv. Kříže v Prostějově
-    </h4>
+    <div class="row">
+        <div class="col m10">
+            <h4 class="indigo-text">
+                {$church->nameHighlighted|noescape}
+            </h4>
+        </div>
+        <div class="col m2">
+            <h4>
+                <a href="#" class="right indigo-text text-darken-4"
+                   onmouseover="$(this).removeClass('text-darken-4')"
+                   onmouseout="$(this).addClass('text-darken-4')">
+                    <i class="material-icons small">print</i>
+                </a>
+            </h4>
+        </div>
+    </div>
 
     <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
     <table class="churches bordered striped highlight">
@@ -15,19 +28,25 @@
 
         <tbody>
         {for $i = 0; $i < 20; $i++}
-        <tr>
-            <td {if $i%7 == 4 || $i%7 == 3}style="font-weight: bold"{/if}>
-                pátek 16. září, 17:00<br>
-                25. týden v mezidobí
-            </td>
-            <td>za živou a zemřelou rodinu a za duše v očistci</td>
-        </tr>
+            <tr>
+                <td {if $i%7 == 4 || $i%7 == 3}style="font-weight: bold"{/if}>
+                    pátek 16. září, 17:00<br>
+                    25. týden v mezidobí
+                </td>
+                <td>za živou a zemřelou rodinu a za duše v očistci</td>
+            </tr>
         {/for}
         </tbody>
     </table>
 
     <ul class="collection">
-        <li class="collection-item">V sobotu proběhla sbírka Lorem ipsum dolor sit amet, consectetur adipisicing elit. Impedit ipsam porro praesentium reiciendis. Accusantium alias eaque eligendi id itaque maiores omnis quae velit vitae voluptatibus? Culpa dolore id itaque quae.</li>
-        <li class="collection-item">Děkuji všem za úklid kostela Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores cupiditate doloremque eos, est libero nihil officiis perspiciatis quibusdam? Consequuntur dolore ipsam iste itaque nostrum provident quae quaerat quod ratione velit?</li>
+        <li class="collection-item">V sobotu proběhla sbírka Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            Impedit ipsam porro praesentium reiciendis. Accusantium alias eaque eligendi id itaque maiores omnis quae
+            velit vitae voluptatibus? Culpa dolore id itaque quae.
+        </li>
+        <li class="collection-item">Děkuji všem za úklid kostela Lorem ipsum dolor sit amet, consectetur adipisicing
+            elit. Asperiores cupiditate doloremque eos, est libero nihil officiis perspiciatis quibusdam? Consequuntur
+            dolore ipsam iste itaque nostrum provident quae quaerat quod ratione velit?
+        </li>
     </ul>
 </div>

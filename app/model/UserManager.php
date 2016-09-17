@@ -76,7 +76,6 @@ class UserManager implements Nette\Security\IAuthenticator
 			throw new DuplicateNameException($e->getMessage());
 		}
 	}
-
 }
 
 
