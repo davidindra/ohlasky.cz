@@ -13,10 +13,7 @@ application:
 
 session:
     expiration: 14 days
-<<<<<<< HEAD
     savePath: %appDir%/../temp/sessions
-=======
->>>>>>> 84d61976f38c8034110fd9060e2f448e1762bb34
 
 
 extensions:
