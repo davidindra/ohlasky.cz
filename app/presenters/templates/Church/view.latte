@@ -1,7 +1,7 @@
 {block content}
 <div class="section container">
     <div class="row">
-        <div class="col s10">
+        <div class="col {if $user->isInRole('maintainer')}s10{else}s12{/if}">
             <h4 class="indigo-text">
                 {$church->nameHighlighted|noescape}
             </h4>

@@ -7,10 +7,8 @@ body {
 main {
   flex: 1 0 auto; }
 
-td.js-link {
+.masses tr {
   cursor: pointer; }
-  td.js-link a.js-link {
-    color: inherit; }
 
 div.flexible {
   height: auto; }
