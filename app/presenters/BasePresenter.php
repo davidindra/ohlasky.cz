@@ -48,4 +48,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             );
         });
     }
+
+    public function deleteDirectory($dir) {
+        $files = array_diff(scandir($dir), array('.','..'));
+        foreach ($files as $file) {
+            (is_dir("$dir/$file")) ? $this->deleteDirectory("$dir/$file") : unlink("$dir/$file");
+        }
+        return rmdir($dir);
+    }
 }

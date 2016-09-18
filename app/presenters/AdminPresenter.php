@@ -7,7 +7,7 @@ use App\Model;
 use App\Model\Repository\Churches;
 use App\Model\Repository\Masses;
 
-class ChurchPresenter extends BasePresenter
+class AdminPresenter extends BasePresenter
 {
     /**
      * @inject
@@ -33,14 +33,19 @@ class ChurchPresenter extends BasePresenter
      */
     public $um;
 
-    public function renderDefault()
+    public function startup()
     {
-        $this->redirect('Church:list');
+        /*if(!$this->user->isInRole('admin')){
+            $this->flashMessage('Nemáte oprávnění pro přístup k této stránce.');
+            $this->redirect('Homepage:');
+        }*/
+
+        parent::startup();
     }
 
-    public function renderList(){
-        $this->template->churches = $this->churches->getAll();
-        $this->um->add('davidindra', 'f26.QiIL', 'mail@davidindra.cz', 'admin', 'David Indra');
+    public function renderDefault()
+    {
+        //$this->template->churches = $this->churches->getAll();
         //$this->um->add('davidindra', 'heslo123', 'mail@davidindra.cz', 'admin', 'David Indra');
         //$this->getUser()->login('davidindra', 'heslo123');
         //$this->getUser()->logout(true);
@@ -52,12 +57,18 @@ class ChurchPresenter extends BasePresenter
         $this->churches->create($church);*/
     }
 
-    public function renderView($church){
-        $this->template->church = $this->churches->getByAbbreviation($church);
-        if(!$this->template->church){
-            $this->error();
-        }
+    public function handleCleanCache(){
+        $path = __DIR__ . '/../../temp/cache';
+        $this->deleteDirectory($path);
+        mkdir($path);
 
-        $this->template->masses = $this->masses->getByChurch($this->template->church);
+        $this->flashMessage('Cache úspěšně vyprázdněna.');
+        $this->redirect('this');
+    }
+
+    public function handleAddUser($username = 'cap', $password = 'capcap', $role = 'maintainer', $name = 'P. Pavel Čáp'){
+        $this->um->add($username, $password, 'dummy@mail.cz', $role, $name);
+        $this->flashMessage('Uživatel ' . $username . '/' . $password . ' přidán.');
+        $this->redirect('this');
     }
 }

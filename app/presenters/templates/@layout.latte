@@ -56,13 +56,13 @@
                 </li>
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isInRole('admin')">
                     <a n:href="Church:list">
-                        <b>Administrace</b>
+                        <b>Admin</b>
                     </a>
                 </li>
                 <li>
                     {if $user->isLoggedIn()}
                         <a n:href="Homepage:signOut">
-                            <b>Odhlásit se</b> ({$user->identity->data[1]})
+                            <b>Odhlásit se</b> ({$user->identity->data['fullname']})
                         </a>
                     {else}
                         <a href="#login" class="modal-trigger">

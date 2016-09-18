@@ -37,16 +37,14 @@ class SignInFormFactory
 		$form->addPassword('password', 'Heslo')
 			->setRequired('Zadejte, prosím, své heslo.');
 
-		//$form->addCheckbox('remember', 'Keep me signed in');
-
 		$form->addSubmit('send', 'Přihlásit se');
 
 		$form->onSuccess[] = function (Form $form, $values) use ($onSuccess) {
 			try {
-				$this->user->setExpiration($values->remember ? '14 days' : '20 minutes');
+				$this->user->setExpiration('14 days');
 				$this->user->login($values->username, $values->password);
 			} catch (Nette\Security\AuthenticationException $e) {
-				$form->addError('The username or password you entered is incorrect.');
+				$form->addError('Byly zadány neplatné přihlašovací údaje.');
 				return;
 			}
 			$onSuccess();

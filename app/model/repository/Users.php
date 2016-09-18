@@ -28,6 +28,10 @@ class Users extends Nette\Object
         return $this->users->findAll();
     }
 
+    /**
+     * @param $username
+     * @return User|null
+     */
     public function getByUsername($username){
         return $this->users->findOneBy(['username' => $username]);
     }
