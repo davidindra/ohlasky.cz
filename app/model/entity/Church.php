@@ -32,4 +32,9 @@ class Church
      * @ORM\JoinColumn(nullable=false)
      */
     protected $maintainer;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Mass", mappedBy="church")
+     */
+    protected $masses;
 }

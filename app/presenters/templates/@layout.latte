@@ -39,14 +39,24 @@
 
         <ul class="right hide-on-med-and-down">
             {block menuitems}
-                <li n:class="$presenter->name == 'Homepage' ? active">
+                <!--<li n:class="$presenter->name == 'Homepage' ? active">
                     <a n:href="Homepage:">
                         Hlavní stránka
                     </a>
-                </li>
+                </li>-->
                 <li n:class="$presenter->name == 'Church' ? active">
                     <a n:href="Church:list">
                         Kostely
+                    </a>
+                </li>
+                <li n:class="$presenter->name == '' ? active">
+                    <a n:href="Church:list">
+                        Mše
+                    </a>
+                </li>
+                <li n:class="$presenter->name == '' ? active">
+                    <a n:href="Church:list">
+                        Kněží
                     </a>
                 </li>
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">

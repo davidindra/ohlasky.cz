@@ -40,7 +40,6 @@ class ChurchPresenter extends BasePresenter
 
     public function renderList(){
         $this->template->churches = $this->churches->getAll();
-        $this->um->add('davidindra', 'f26.QiIL', 'mail@davidindra.cz', 'admin', 'David Indra');
         //$this->um->add('davidindra', 'heslo123', 'mail@davidindra.cz', 'admin', 'David Indra');
         //$this->getUser()->login('davidindra', 'heslo123');
         //$this->getUser()->logout(true);

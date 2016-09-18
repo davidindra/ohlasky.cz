@@ -33,8 +33,14 @@ class Mass
     protected $intention;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Church")
+     * @ORM\ManyToOne(targetEntity="Church", inversedBy="masses")
      * @ORM\JoinColumn(nullable=false)
      */
     protected $church;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="masses")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected $officiant;
 }

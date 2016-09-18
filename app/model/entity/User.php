@@ -41,4 +41,9 @@ class User
      * @ORM\OneToMany(targetEntity="Church", mappedBy="maintainer")
      */
     protected $churches;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Mass", mappedBy="officiant")
+     */
+    protected $masses;
 }
