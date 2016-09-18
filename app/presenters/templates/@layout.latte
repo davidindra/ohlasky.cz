@@ -61,7 +61,7 @@
                 </li>
                 <li>
                     {if $user->isLoggedIn()}
-                        <a n:href="Sign:out">
+                        <a n:href="Homepage:signOut">
                             <b>Odhlásit se</b> ({$user->identity->data[1]})
                         </a>
                     {else}
@@ -89,7 +89,7 @@
         <h4>Přihlášení</h4>
         <p>{control signInForm}</p>
     </div>
-    <div class="modal-footer">
+    <div class="modal-footer hide">
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Přihlásit</a>
     </div>
 </div>

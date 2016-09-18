@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
+use App\Forms;
 
 
 /**
@@ -11,6 +12,20 @@ use App\Model;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
+    /** @var Forms\SignInFormFactory @inject */
+    public $signInFactory;
+
+    /**
+     * Sign-in form factory.
+     * @return Nette\Application\UI\Form
+     */
+    protected function createComponentSignInForm()
+    {
+        return $this->signInFactory->create(function () {
+            $this->redirect('Homepage:');
+        });
+    }
+
     protected function beforeRender()
     {
         $this->template->addFilter('czdate', function ($input, $format = 'l j. F G:i') {

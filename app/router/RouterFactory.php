@@ -19,8 +19,8 @@ class RouterFactory
 		$router = new RouteList;
 		$router[] = new Route('kostely', 'Church:list');
 		$router[] = new Route('kostel/<church>', 'Church:view');
-		$router[] = new Route('prihlasit', 'Sign:in');
-		$router[] = new Route('odhlasit', 'Sign:out');
+		$router[] = new Route('prihlasit', 'Homepage:signIn');
+		$router[] = new Route('odhlasit', 'Homepage:signOut');
 		$router[] = new Route('<presenter>/<action>', 'Homepage:default');
 		return $router;
 	}
