@@ -15,6 +15,9 @@ td.js-link {
 div.flexible {
   height: auto; }
 
+.bold {
+  font-weight: bold; }
+
 .masses input[name=date] {
   width: 16ex;
   cursor: pointer; }

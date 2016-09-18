@@ -28,7 +28,7 @@
 
         <tbody>
         <tr n:foreach="$masses as $mass"
-                n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-4'">
+                n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             <td style="line-height: 1.7em;">
                 {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
                 <i n:if="!empty($mass->celebration)">
