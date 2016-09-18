@@ -1,12 +1,12 @@
 {block content}
 <div class="section container">
     <div class="row">
-        <div class="col m10">
+        <div class="col s10">
             <h4 class="indigo-text">
                 {$church->nameHighlighted|noescape}
             </h4>
         </div>
-        <div class="col m2">
+        <div class="col s2">
             <h4>
                 <a href="#" class="right indigo-text text-darken-4"
                    onmouseover="$(this).removeClass('text-darken-4')"
@@ -37,7 +37,7 @@
             </td>
             <td>{$mass->intention}</td>
         </tr>
-        <tr class="add">
+        <tr class="add" style="display: none;">
             <td>
                 <input type="text" class="datepicker"
                        name="date" placeholder="Datum"
