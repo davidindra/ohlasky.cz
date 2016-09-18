@@ -38,23 +38,67 @@
         </a>
 
         <ul class="right hide-on-med-and-down">
-            <li n:class="$presenter->name == 'Homepage' ? active"><a n:href="Homepage:">Hlavní stránka</a></li>
-            <li n:class="$presenter->name == 'Church' ? active"><a n:href="Church:list">Kostely</a></li>
-            <li><a href="#">Přihlásit se</a></li>
+            {block menuitems}
+                <li n:class="$presenter->name == 'Homepage' ? active">
+                    <a n:href="Homepage:">
+                        Hlavní stránka
+                    </a>
+                </li>
+                <li n:class="$presenter->name == 'Church' ? active">
+                    <a n:href="Church:list">
+                        Kostely
+                    </a>
+                </li>
+                <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">
+                    <a n:href="Church:list">
+                        <b>Tisk</b>
+                    </a>
+                </li>
+                <li n:class="$presenter->name == '' ? active" n:if="$user->isInRole('admin')">
+                    <a n:href="Church:list">
+                        <b>Administrace</b>
+                    </a>
+                </li>
+                <li>
+                    {if $user->isLoggedIn()}
+                        <a n:href="Sign:out">
+                            <b>Odhlásit se</b> ({$user->identity->data[1]})
+                        </a>
+                    {else}
+                        <a href="#login" class="modal-trigger">
+                            Přihlásit se
+                        </a>
+                    {/if}
+                </li>
+            {/block}
         </ul>
 
         <ul class="side-nav" id="nav-mobile">
             <li class="black-text" style="padding: 0 16px; font-weight: bold;">
                 Menu
                 <ul>
-                    <li n:class="$presenter->name == 'Homepage' ? active"><a n:href="Homepage:">Hlavní stránka</a></li>
-                    <li n:class="$presenter->name == 'Church' ? active"><a n:href="Church:list">Kostely</a></li>
-                    <li><a href="#">Přihlásit se</a></li>
+                    {include menuitems}
                 </ul>
             </li>
         </ul>
     </div>
 </nav>
+
+<div id="login" class="modal" n:if="!$user->isLoggedIn()">
+    <div class="modal-content">
+        <h4>Přihlášení</h4>
+        <p>{control signInForm}</p>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Přihlásit</a>
+    </div>
+</div>
+
+<script type="text/javascript" n:if="!empty($flashes)">
+    {foreach $flashes as $flash}
+    Materialize.toast({$flash->message}, 3000, 'rounded');
+    {/foreach}
+</script>
 
 <main>
     {include content}

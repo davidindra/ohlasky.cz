@@ -11,10 +11,6 @@ class SignPresenter extends BasePresenter
 	/** @var Forms\SignInFormFactory @inject */
 	public $signInFactory;
 
-	/** @var Forms\SignUpFormFactory @inject */
-	public $signUpFactory;
-
-
 	/**
 	 * Sign-in form factory.
 	 * @return Nette\Application\UI\Form
@@ -26,22 +22,11 @@ class SignPresenter extends BasePresenter
 		});
 	}
 
-
-	/**
-	 * Sign-up form factory.
-	 * @return Nette\Application\UI\Form
-	 */
-	protected function createComponentSignUpForm()
-	{
-		return $this->signUpFactory->create(function () {
-			$this->redirect('Homepage:');
-		});
-	}
-
-
 	public function actionOut()
 	{
-		$this->getUser()->logout();
+		$this->getUser()->logout(true);
+		$this->flashMessage('Byl jste úspěšně odhlášen.');
+		$this->redirect('Homepage:');
 	}
 
 }
