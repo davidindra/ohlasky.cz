@@ -86,8 +86,11 @@
 
 <div id="login" class="modal" n:if="!$user->isLoggedIn()">
     <div class="modal-content">
-        <h4>Přihlášení</h4>
-        <p>{control signInForm}</p>
+        <h4 class="center-align">Přihlášení</h4>
+        <p>
+            {import './components/form.latte'}
+            {include form signInForm}
+        </p>
     </div>
     <div class="modal-footer hide">
         <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Přihlásit</a>

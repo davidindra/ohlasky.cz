@@ -1,17 +1,32 @@
 {define form $form}
-	<form n:name=$form>
-	<ul class=error n:if="$form->ownErrors">
-		<li n:foreach="$form->ownErrors as $error">{$error}</li>
-	</ul>
+    <form n:name=$form class="container center-align">
+        <ul class=error n:if="$form->ownErrors">
+            <li n:foreach="$form->ownErrors as $error">{$error}</li>
+        </ul>
 
-	<table>
-	<tr n:foreach="$form->controls as $input"
-		n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
-		n:class="$input->required ? required">
+        <div n:foreach="$form->controls as $input"
+                n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
+                n:class="$input->required ? 'required row' : 'row'">
+            {if $input->getOption(type) == button}
+                <div class="input-field col s12">
+                    {input $input class => 'btn'}
+                    {label $input}
+                </div>
+            {else}
+                <div class="input-field col s12">
+                    {input $input}
+                    {label $input}
+                </div>
+            {/if}
+        </div>
+        <!--<table>
+                <tr n:foreach="$form->controls as $input"
+                        n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
+                        n:class="$input->required ? required">
 
-		<th>{label $input}</th>
-		<td>{input $input} <span class=error n:ifcontent>{$input->error}</span></td>
-	</tr>
-	</table>
-	</form>
+                    <th>{label $input}</th>
+                    <td>{input $input} <span class=error n:ifcontent>{$input->error}</span></td>
+                </tr>
+            </table>-->
+    </form>
 {/define}
