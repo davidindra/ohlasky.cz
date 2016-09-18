@@ -13,6 +13,13 @@ $(document).ready(function () {
             location.href = $(this).attr('data-link');
         });
 
+    // clean URL GET parameters
+    if(window.location.search.substring(1).length) {
+        if(window.history != undefined && window.history.pushState != undefined) {
+            window.history.pushState({}, document.title, window.location.pathname);
+        }
+    }
+
     $('.datepicker').pickadate({
         min: new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDay,
         format: 'dddd d. mmmm',

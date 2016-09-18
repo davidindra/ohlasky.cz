@@ -35,10 +35,10 @@ class AdminPresenter extends BasePresenter
 
     public function startup()
     {
-        /*if(!$this->user->isInRole('admin')){
+        if(!$this->user->isInRole('admin')){
             $this->flashMessage('Nemáte oprávnění pro přístup k této stránce.');
-            $this->redirect('Homepage:');
-        }*/
+            $this->redirect('Homepage:', ['backlink' => $this->storeRequest()]);
+        }
 
         parent::startup();
     }
