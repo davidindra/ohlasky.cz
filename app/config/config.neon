@@ -25,6 +25,7 @@ extensions:
 services:
     - App\Model\Repository\Churches
     - App\Model\Repository\Users
+    - App\Model\Repository\Masses
     - App\Model\UserManager
     - App\Forms\FormFactory
     - App\Forms\SignInFormFactory

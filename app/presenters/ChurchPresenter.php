@@ -46,5 +46,8 @@ class ChurchPresenter extends BasePresenter
 
     public function renderView($church){
         $this->template->church = $this->churches->getByAbbreviation($church);
+        if(!$this->template->church){
+            $this->error();
+        }
     }
 }

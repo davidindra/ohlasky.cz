@@ -38,8 +38,8 @@
         </a>
 
         <ul class="right hide-on-med-and-down">
-            <li><a n:href="Homepage:">Hlavní stránka</a></li>
-            <li><a n:href="Church:list">Kostely</a></li>
+            <li n:class="$presenter->name == 'Homepage' ? active"><a n:href="Homepage:">Hlavní stránka</a></li>
+            <li n:class="$presenter->name == 'Church' ? active"><a n:href="Church:list">Kostely</a></li>
             <li><a href="#">Přihlásit se</a></li>
         </ul>
 
@@ -47,8 +47,8 @@
             <li class="black-text" style="padding: 0 16px; font-weight: bold;">
                 Menu
                 <ul>
-                    <li><a n:href="Homepage:">Hlavní stránka</a></li>
-                    <li><a n:href="Church:list">Kostely</a></li>
+                    <li n:class="$presenter->name == 'Homepage' ? active"><a n:href="Homepage:">Hlavní stránka</a></li>
+                    <li n:class="$presenter->name == 'Church' ? active"><a n:href="Church:list">Kostely</a></li>
                     <li><a href="#">Přihlásit se</a></li>
                 </ul>
             </li>
