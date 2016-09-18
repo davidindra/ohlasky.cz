@@ -18,7 +18,7 @@
     </div>
 
     <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
-    <table class="churches bordered highlight">
+    <table class="masses bordered highlight">
         <thead>
         <tr>
             <th>Datum, čas</th>
@@ -27,15 +27,38 @@
         </thead>
 
         <tbody>
-        {for $i = 0; $i < 20; $i++}
-            <tr>
-                <td {if $i%7 == 4 || $i%7 == 3}style="font-weight: bold"{/if}>
-                    pátek 16. září, 17:00<br>
-                    25. týden v mezidobí
-                </td>
-                <td>za živou a zemřelou rodinu a za duše v očistci</td>
-            </tr>
-        {/for}
+        <tr n:foreach="$masses as $mass"
+                n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-4'">
+            <td style="line-height: 1.7em;">
+                {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
+                <i n:if="!empty($mass->celebration)">
+                    {$mass->celebration}
+                </i>
+            </td>
+            <td>{$mass->intention}</td>
+        </tr>
+        <tr class="add">
+            <td>
+                <input type="text" class="datepicker"
+                       name="date" placeholder="Datum"
+                       data-value="{\Nette\Utils\DateTime::from(time()+24*60*60)->format('Y-m-d')}">&nbsp;
+
+                <input type="text" class="timepicker"
+                       name="time" placeholder="Čas"
+                       value="9:00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                <input type="checkbox" name="highlight"
+                       id="highlight">
+                <label for="highlight">Slavnost?</label>
+            </td>
+            <td>
+                <input type="text"
+                       name="intention" placeholder="Intence">
+
+                <input type="submit" class="btn"
+                       name="submit" value="Přidat">
+            </td>
+        </tr>
         </tbody>
     </table>
 

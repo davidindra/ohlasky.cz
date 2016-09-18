@@ -13,14 +13,19 @@ class Mass
     use MagicAccessors, Identifier;
 
     /**
-     * @ORM\Column(type="datetime", unique=true)
+     * @ORM\Column(type="datetime")
      */
     protected $datetime;
 
     /**
      * @ORM\Column(type="string", nullable=true)
      */
-    protected $dayModified;
+    protected $celebration;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected $highlighted = false;
 
     /**
      * @ORM\Column(type="string")

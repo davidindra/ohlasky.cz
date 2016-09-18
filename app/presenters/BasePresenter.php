@@ -11,5 +11,26 @@ use App\Model;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-
+    protected function beforeRender()
+    {
+        $this->template->addFilter('czdate', function ($input, $format = 'l j. F G:i') {
+            $en = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December",
+                "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
+            ];
+            $cz = [
+                "ledna", "února", "března", "dubna", "května", "června",
+                "července", "srpna", "září", "října", "listopadu", "prosince",
+                "pondělí", "úterý", "středa", "čtvrtek", "pátek", "sobota", "neděle"
+            ];
+            return str_replace(
+                $en, $cz,
+                date(
+                    $format,
+                    Nette\Utils\DateTime::from($input)->getTimestamp()
+                )
+            );
+        });
+    }
 }

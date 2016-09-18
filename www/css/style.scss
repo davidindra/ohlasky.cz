@@ -20,3 +20,30 @@ td.js-link {
 div.flexible {
   height: auto;
 }
+
+.masses input[name=date]{
+  width: 16ex;
+  cursor: pointer;
+}
+
+.masses input[name=time]{
+  width: 8ex;
+  cursor: pointer;
+}
+
+.masses input[name=highlight]{
+
+}
+
+.masses input[name=intention]{
+  width: 70%;
+}
+
+.masses input[name=submit]{
+
+}
+
+.masses .add td {
+  overflow: hidden;
+  white-space: nowrap;
+}

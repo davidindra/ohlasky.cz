@@ -5,6 +5,7 @@ namespace App\Presenters;
 use Nette;
 use App\Model;
 use App\Model\Repository\Churches;
+use App\Model\Repository\Masses;
 
 class ChurchPresenter extends BasePresenter
 {
@@ -13,6 +14,12 @@ class ChurchPresenter extends BasePresenter
      * @var Churches
      */
     public $churches;
+
+    /**
+     * @inject
+     * @var Masses
+     */
+    public $masses;
 
     /**
      * @inject
@@ -49,5 +56,7 @@ class ChurchPresenter extends BasePresenter
         if(!$this->template->church){
             $this->error();
         }
+
+        $this->template->masses = $this->masses->getByChurch($this->template->church);
     }
 }

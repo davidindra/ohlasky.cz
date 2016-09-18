@@ -4,6 +4,7 @@ namespace App\Model\Repository;
 use Nette;
 use Kdyby\Doctrine\EntityManager;
 use App\Model\Entity\Church;
+use App\Model\Entity\Mass;
 
 class Masses extends Nette\Object
 {
@@ -29,7 +30,7 @@ class Masses extends Nette\Object
     }
 
     public function getByChurch(Church $church){
-        return $this->masses->findOneBy(['church' => $church]);
+        return $this->masses->findBy(['church' => $church], ['datetime' => 'ASC']);
     }
 
     /*public function getByMaintainer(User $maintainer){
