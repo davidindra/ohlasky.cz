@@ -1,4 +1,10 @@
 {define form $form}
+    <script type="text/javascript" n:if="$form->ownErrors">
+        {foreach $form->ownErrors as $error}
+        Materialize.toast({$error}, 3000, 'rounded');
+        {/foreach}
+    </script>
+
     <form n:name=$form class="container center-align">
         <ul class=error n:if="$form->ownErrors">
             <li n:foreach="$form->ownErrors as $error">{$error}</li>
@@ -18,15 +24,10 @@
                     {label $input}
                 </div>
             {/if}
-        </div>
-        <!--<table>
-                <tr n:foreach="$form->controls as $input"
-                        n:if="!$input->getOption(rendered) && $input->getOption(type) !== hidden"
-                        n:class="$input->required ? required">
 
-                    <th>{label $input}</th>
-                    <td>{input $input} <span class=error n:ifcontent>{$input->error}</span></td>
-                </tr>
-            </table>-->
+            <script type="text/javascript" n:if="$input->error">
+                Materialize.toast({$input->error}, 3000, 'rounded');
+            </script>
+        </div>
     </form>
 {/define}
