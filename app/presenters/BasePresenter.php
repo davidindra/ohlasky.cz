@@ -22,6 +22,7 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     protected function createComponentSignInForm()
     {
         return $this->signInFactory->create(function () {
+            $this->flashMessage('Byl jste úspěšně přihlášen!');
             $this->redirect('Homepage:');
         });
     }
