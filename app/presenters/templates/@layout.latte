@@ -160,6 +160,12 @@
         s1.setAttribute('crossorigin','*');
         s0.parentNode.insertBefore(s1,s0);
     })();
+
+    Tawk_API = Tawk_API || {};
+    Tawk_API.visitor = {
+        name  : {$user->isLoggedIn() ? $user->identity->data['fullname'] : 'anonym'},
+        email : {$user->isLoggedIn() ? $user->identity->data['email'] : ''}
+    };
 </script>
 <!--End of Tawk.to Script-->
 
