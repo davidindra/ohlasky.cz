@@ -21,29 +21,35 @@ div.flexible {
   font-weight: bold;
 }
 
-.masses input[name=date]{
-  width: 16ex;
-  cursor: pointer;
+#tawkchat-status-message {
+  transform: rotate(180deg) !important;
 }
 
-.masses input[name=time]{
-  width: 8ex;
-  cursor: pointer;
-}
+.masses {
+  input[name=date]{
+    width: 16ex;
+    cursor: pointer;
+  }
 
-.masses input[name=highlight]{
+  input[name=time]{
+    width: 8ex;
+    cursor: pointer;
+  }
 
-}
+  input[name=highlight]{
 
-.masses input[name=intention]{
-  width: 70%;
-}
+  }
 
-.masses input[name=submit]{
+  input[name=intention]{
+    width: 70%;
+  }
 
-}
+  input[name=submit]{
 
-.masses .add td {
-  overflow: hidden;
-  white-space: nowrap;
+  }
+
+  .add td {
+    overflow: hidden;
+    white-space: nowrap;
+  }
 }

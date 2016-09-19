@@ -169,14 +169,26 @@
     };
 
     Tawk_API.onLoad = function () {
-        Tawk_API.addTags({$user->getRoles()}, function (error) {});
+        Tawk_API.addTags({$user->getRoles()}, function (error) {
+        });
+
+        $('#tawkchat-minified-iframe-element').contents()
+                .find("#tawkchat-status-message")
+                .css("transform", "rotate(180deg)");
     };
     {else}
+    Tawk_API.onLoad = function () {
+        $('#tawkchat-minified-iframe-element')
+                .contents()
+                .find("#tawkchat-status-message")
+                .css("transform", "rotate(180deg)");
+    };
+
     /*Tawk_API.visitor = {
-        name: 'anonym',
-        email: null,
-        hash: {hash_hmac("sha256", '', "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
-    };*/
+     name: 'anonym',
+     email: null,
+     hash: {hash_hmac("sha256", '', "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
+     };*/
     {/if}
 </script>
 <!--End of Tawk.to Script-->
