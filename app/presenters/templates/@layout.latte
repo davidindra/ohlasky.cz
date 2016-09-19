@@ -151,21 +151,35 @@
 
 <!--Start of Tawk.to Script-->
 <script type="text/javascript">
-    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
-    (function(){
-        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
-        s1.async=true;
-        s1.src='https://embed.tawk.to/57dfb787927cd860c83cdcf0/default';
-        s1.charset='UTF-8';
-        s1.setAttribute('crossorigin','*');
-        s0.parentNode.insertBefore(s1,s0);
+    var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = 'https://embed.tawk.to/57dfb787927cd860c83cdcf0/default';
+        s1.charset = 'UTF-8';
+        s1.setAttribute('crossorigin', '*');
+        s0.parentNode.insertBefore(s1, s0);
     })();
 
-    Tawk_API = Tawk_API || {};
-    Tawk_API.visitor = {
-        name  : {$user->isLoggedIn() ? $user->identity->data['fullname'] : 'anonym'},
-        email : {$user->isLoggedIn() ? $user->identity->data['email'] : ''}
+    {if $user->isLoggedIn()}
+    Tawk_API.onLoad = function () {
+        Tawk_API.visitor = {
+            name: {$user->identity->data['fullname']},
+            email: {$user->identity->data['email']},
+            hash: {hash_hmac("sha256", $user->identity->data['email'], "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
+        };
+
+        Tawk_API.addTags({$user->getRoles()}, function (error) {});
     };
+    {else}
+    Tawk_API.onLoad = function () {
+        Tawk_API.visitor = {
+            name: 'anonym',
+            email: null,
+            hash: {hash_hmac("sha256", '', "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
+        };
+    };
+    {/if}
 </script>
 <!--End of Tawk.to Script-->
 
