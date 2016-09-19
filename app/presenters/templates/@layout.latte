@@ -162,23 +162,21 @@
     })();
 
     {if $user->isLoggedIn()}
-    Tawk_API.onLoad = function () {
-        Tawk_API.visitor = {
-            name: {$user->identity->data['fullname']},
-            email: {$user->identity->data['email']},
-            hash: {hash_hmac("sha256", $user->identity->data['email'], "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
-        };
+    Tawk_API.visitor = {
+        name: {$user->identity->data['fullname']},
+        email: {$user->identity->data['email']},
+        hash: {hash_hmac("sha256", $user->identity->data['email'], "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
+    };
 
+    Tawk_API.onLoad = function () {
         Tawk_API.addTags({$user->getRoles()}, function (error) {});
     };
     {else}
-    Tawk_API.onLoad = function () {
-        Tawk_API.visitor = {
-            name: 'anonym',
-            email: null,
-            hash: {hash_hmac("sha256", '', "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
-        };
-    };
+    /*Tawk_API.visitor = {
+        name: 'anonym',
+        email: null,
+        hash: {hash_hmac("sha256", '', "c5ad7c13b136e3b6b2c3694a3966ca1b4b2f2b70")}
+    };*/
     {/if}
 </script>
 <!--End of Tawk.to Script-->
