@@ -2,7 +2,7 @@
 <div class="section container">
     <div class="row">
         <div class="col {if $user->isInRole('maintainer')}s10{else}s12{/if}">
-            <h4 class="indigo-text">
+            <h4 class="indigo-text" n:block="title">
                 {$church->nameHighlighted|noescape}
             </h4>
         </div>
