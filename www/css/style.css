@@ -16,9 +16,6 @@ div.flexible {
 .bold {
   font-weight: bold; }
 
-#tawkchat-status-message {
-  transform: rotate(180deg) !important; }
-
 .masses input[name=date] {
   width: 16ex;
   cursor: pointer; }
