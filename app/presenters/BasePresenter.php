@@ -5,6 +5,7 @@ namespace App\Presenters;
 use Nette;
 use App\Model;
 use App\Forms;
+use Tracy\Debugger;
 
 
 /**
@@ -51,6 +52,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
                     Nette\Utils\DateTime::from($input)->getTimestamp()
                 )
             );
+        });
+
+        $this->template->addFilter('dump', function ($input) {
+            $html = new Nette\Utils\Html();
+            return $html->setHtml(Debugger::dump($input, true));
         });
     }
 

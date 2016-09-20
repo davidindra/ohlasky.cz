@@ -4,6 +4,7 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
+use App\Model\LiturgyCollector;
 use App\Model\Repository\Churches;
 use App\Model\Repository\Masses;
 
@@ -23,15 +24,9 @@ class ChurchPresenter extends BasePresenter
 
     /**
      * @inject
-     * @var Model\Repository\Users
+     * @var LiturgyCollector
      */
-    public $users;
-
-    /**
-     * @inject
-     * @var Model\UserManager
-     */
-    public $um;
+    public $liturgy;
 
     public function renderDefault()
     {
@@ -40,15 +35,6 @@ class ChurchPresenter extends BasePresenter
 
     public function renderList(){
         $this->template->churches = $this->churches->getAll();
-        //$this->um->add('davidindra', 'heslo123', 'mail@davidindra.cz', 'admin', 'David Indra');
-        //$this->getUser()->login('davidindra', 'heslo123');
-        //$this->getUser()->logout(true);
-        /*$church = new Model\Entity\Church();
-        $church->abbreviation = 'povyseni';
-        $church->name = 'Kostel Povýšení sv. Kříže v Prostějově';
-        $church->nameHighlighted = 'Kostel <b>Povýšení sv. Kříže</b> v Prostějově';
-        $church->maintainer = $this->users->getByUsername('davidindra');
-        $this->churches->create($church);*/
     }
 
     public function renderView($church){
@@ -58,5 +44,7 @@ class ChurchPresenter extends BasePresenter
         }
 
         $this->template->masses = $this->masses->getByChurch($this->template->church);
+
+        $this->template->liturgy = $this->liturgy;
     }
 }

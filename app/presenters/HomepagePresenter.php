@@ -4,7 +4,6 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
-use App\Forms;
 
 class HomepagePresenter extends BasePresenter
 {

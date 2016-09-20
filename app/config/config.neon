@@ -26,7 +26,12 @@ services:
     - App\Model\Repository\Churches
     - App\Model\Repository\Users
     - App\Model\Repository\Masses
+
+    - GuzzleHttp\Client
+    - App\Model\LiturgyCollector
+
     - App\Model\UserManager
+
     - App\Forms\FormFactory
     - App\Forms\SignInFormFactory
     router: App\RouterFactory::createRouter

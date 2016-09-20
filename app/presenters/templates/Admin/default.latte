@@ -4,9 +4,16 @@
     <h3 class="indigo-text" n:block="title">Administrace</h3>
 
     <p>
-    <a n:href="cleanCache!" class="btn">Vyprázdnit cache</a>
+        <a n:href="cleanCache!" class="btn">Vyprázdnit cache</a>
 
     <p>
-    <a n:href="addUser! 'admin', 'test', 'admin'" class="btn">Přidat administrátora admin/test</a>
-    <a n:href="addUser! 'cap', 'capcap'" class="btn">Přidat uživatele cap/capcap</a>
+        <a n:href="addUser! 'admin', 'admin', 'admin'" class="btn">Přidat administrátora admin/admin</a>
+        <a n:href="addUser! 'knez', 'knez'" class="btn">Přidat uživatele knez/knez</a>
+
+    <p>
+        <a n:href="addDummyData!" class="btn">Vytvořit testovací data</a>
+
+    <p>
+        <h5>Dnešní liturgie</h5>
+        {$liturgyToday|dump}
 </div>
