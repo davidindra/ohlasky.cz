@@ -76,7 +76,7 @@ class AdminPresenter extends BasePresenter
     }
 
     public function handleAddDummyData(){
-        $user = array_pop($this->users->getAll());
+        $user = @array_pop($this->users->getAll());
         if(!$user){
             $this->flashMessage('Nemáme uživatele, kterému by mohla být data přiřazena.');
             $this->redirect('this');
@@ -90,10 +90,10 @@ class AdminPresenter extends BasePresenter
         $this->churches->create($church);
         $this->flashMessage('Testovací kostel vytvořen.');
 
-        $church = array_pop($this->churches->getAll());
+        $church = @array_pop($this->churches->getAll());
         for($i = 0; $i <= 14; $i++) {
             $mass = new Mass();
-            $mass->datetime = DateTime::from(time())->add(24*60*60*$i);
+            $mass->datetime = DateTime::from(time())->add(\DateInterval::createFromDateString($i . 'day'));
             $mass->celebration = $i % 7 == 6 ? 'Testovací slavnost, významná' : null;
             $mass->highlighted = $i % 7 == 6 ? true : false;
             $mass->intention = 'za rodinu Pokusných a Testovacích' . $i . ' a za duše v očistci';

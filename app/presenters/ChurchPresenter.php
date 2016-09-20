@@ -7,6 +7,7 @@ use App\Model;
 use App\Model\LiturgyCollector;
 use App\Model\Repository\Churches;
 use App\Model\Repository\Masses;
+use Nette\Utils\DateTime;
 
 class ChurchPresenter extends BasePresenter
 {
@@ -43,7 +44,13 @@ class ChurchPresenter extends BasePresenter
             $this->error();
         }
 
-        $this->template->masses = $this->masses->getByChurch($this->template->church);
+        foreach($this->masses->getByChurch($this->template->church) as $mass){
+            if(DateTime::from($mass->datetime) > DateTime::from(time())
+                && DateTime::from($mass->datetime) <= DateTime::from(time() + 7*24*60*60)) {
+
+                $this->template->masses[] = $mass;
+            }
+        }
 
         $this->template->liturgy = $this->liturgy;
     }
