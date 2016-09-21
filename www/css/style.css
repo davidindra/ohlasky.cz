@@ -16,16 +16,23 @@ div.flexible {
 .bold {
   font-weight: bold; }
 
-.masses input[name=date] {
+.masses .add td {
+  padding: 5px; }
+.masses .add input {
+  margin: 0; }
+.masses .add input[name=date] {
   width: 16ex;
   cursor: pointer; }
-.masses input[name=time] {
+.masses .add input[name=time] {
   width: 8ex;
   cursor: pointer; }
-.masses input[name=intention] {
-  width: 70%; }
-.masses .add td {
-  overflow: hidden;
-  white-space: nowrap; }
+.masses .add label[for=highlight] {
+  padding-left: 25px; }
+.masses .add input[name=intention] {
+  width: 76%; }
+.masses .add input[name=submit] {
+  float: right;
+  width: 23%;
+  height: 3rem; }
 
 /*# sourceMappingURL=style.css.map */

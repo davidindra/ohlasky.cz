@@ -37,6 +37,10 @@ class Churches extends Nette\Object
         return $this->churches->findOneBy(['abbreviation' => $abbreviation]);
     }
 
+    public function getById($id){
+        return $this->churches->findOneBy(['id' => $id]);
+    }
+
     public function __destruct()
     {
         $this->em->flush();

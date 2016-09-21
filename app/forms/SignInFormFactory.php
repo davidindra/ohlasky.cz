@@ -26,6 +26,7 @@ class SignInFormFactory
 
 
 	/**
+	 * @param callable $onSuccess
 	 * @return Form
 	 */
 	public function create(callable $onSuccess)

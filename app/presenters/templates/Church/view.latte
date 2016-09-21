@@ -48,27 +48,32 @@
             </td>
             <td>{$mass->intention}</td>
         </tr>
-        <tr class="add" style="display: none;">
-            <td>
-                <input type="text" class="datepicker"
-                       name="date" placeholder="Datum"
-                       data-value="{\Nette\Utils\DateTime::from(time()+24*60*60)->format('Y-m-d')}">&nbsp;
+        <tr class="add" n:if="$user->isLoggedIn()">
+            <form n:name="massForm">
+                <td>
+                    <input type="hidden" n:name="churchId" value="{$church->id}">
+                    <input type="hidden" n:name="massId">
 
-                <input type="text" class="timepicker"
-                       name="time" placeholder="Čas"
-                       value="9:00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="text" class="datepicker"
+                           n:name="date" placeholder="Datum"
+                           data-value="{\Nette\Utils\DateTime::from(time()+24*60*60)->format('Y-m-d')}">&nbsp;
 
-                <input type="checkbox" name="highlight"
-                       id="highlight">
-                <label for="highlight">Slavnost?</label>
-            </td>
-            <td>
-                <input type="text"
-                       name="intention" placeholder="Intence">
+                    <input type="text" class="timepicker"
+                           n:name="time" placeholder="Čas"
+                           value="9:00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                <input type="submit" class="btn"
-                       name="submit" value="Přidat">
-            </td>
+                    <input type="checkbox" n:name="highlight"
+                           id="highlight">
+                    <label for="highlight">slavnost</label>
+                </td>
+                <td>
+                    <input type="text"
+                           n:name="intention" placeholder="Intence">
+
+                    <input type="submit" class="btn"
+                           n:name="send" value="Uložit">
+                </td>
+            </form>
         </tr>
         </tbody>
     </table>

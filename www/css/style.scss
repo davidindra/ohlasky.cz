@@ -21,7 +21,15 @@ div.flexible {
   font-weight: bold;
 }
 
-.masses {
+.masses .add {
+  td {
+    padding: 5px;
+  }
+
+  input {
+    margin: 0;
+  }
+
   input[name=date]{
     width: 16ex;
     cursor: pointer;
@@ -36,16 +44,17 @@ div.flexible {
 
   }
 
+  label[for=highlight]{
+    padding-left: 25px;
+  }
+
   input[name=intention]{
-    width: 70%;
+    width: 76%;
   }
 
   input[name=submit]{
-
-  }
-
-  .add td {
-    overflow: hidden;
-    white-space: nowrap;
+    float: right;
+    width: 23%;
+    height: 3rem;
   }
 }
