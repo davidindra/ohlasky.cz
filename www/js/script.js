@@ -20,6 +20,12 @@ $(document).ready(function () {
         }
     }
 
+    $('a.teal-text, a .teal-text').mouseover(function(){
+        $(this).addClass('text-darken-4');
+    }).mouseout(function() {
+        $(this).removeClass('text-darken-4');
+    });
+
     $('.datepicker').pickadate({
         min: new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDay,
         format: 'dddd d. mmmm',
