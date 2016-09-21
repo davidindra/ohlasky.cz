@@ -1,21 +1,15 @@
 {block content}
 <div class="section container">
-    <div class="row">
-        <div class="col {if $user->isInRole('maintainer')}s10{else}s12{/if}">
-            <h4 class="indigo-text" n:block="title">
-                {$church->nameHighlighted|noescape}
-            </h4>
-        </div>
-        <div class="col s2" n:if="$user->isInRole('maintainer')">
-            <h4>
-                <a href="#" class="teal-text"
-                   onmouseover="$(this).addClass('text-darken-4')"
-                   onmouseout="$(this).removeClass('text-darken-4')">
-                    <i class="material-icons small" style="vertical-align: -4px;">print</i>
-                </a>
-            </h4>
-        </div>
-    </div>
+    <h4 class="indigo-text" n:block="title">
+        {$church->nameHighlighted|noescape}
+
+        <a href="#" class="teal-text"
+                n:if="$user->isInRole('maintainer')"
+           onmouseover="$(this).addClass('text-darken-4')"
+           onmouseout="$(this).removeClass('text-darken-4')">
+            <i class="material-icons small" style="vertical-align: -4px;">print</i>
+        </a>
+    </h4>
 
     <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
     {var $isMaintainer = ($user->isLoggedIn() && $user->identity->username == $church->maintainer->username)}
