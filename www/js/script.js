@@ -46,6 +46,10 @@ $(document).ready(function () {
         labelYearSelect: 'Zvolit rok'
     });
 
+    $('form').submit(function(){
+        $('[name=date]').val($('[name=date_submit]').val());
+    })
+
     $('.timepicker').pickatime({
         twelvehour: false,
         donetext: 'Uložit'

@@ -4,9 +4,16 @@ namespace App\Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\MagicAccessors;
+use Nette\Utils\DateTime;
 
 /**
  * @ORM\Entity
+ * @property DateTime $datetime
+ * @property string $celebration custom day name or NULL
+ * @property boolean $highlighted is the mass a celebration?
+ * @property string $intention
+ * @property Church $church owning church
+ * @property User $officiant priest which is going to celebrate the mass
  */
 class Mass
 {

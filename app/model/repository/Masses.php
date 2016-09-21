@@ -33,6 +33,14 @@ class Masses extends Nette\Object
         return $this->masses->findBy(['church' => $church], ['datetime' => 'ASC']);
     }
 
+    public function getById($id){
+        return $this->masses->findOneBy(['id' => $id]);
+    }
+
+    public function deleteById($id){
+        $this->em->remove($this->getById($id));
+    }
+
     /*public function getByMaintainer(User $maintainer){
         return $this->masses->findBy(['maintainer_id' => $maintainer]);
     }*/

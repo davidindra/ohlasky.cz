@@ -18,11 +18,13 @@
     </div>
 
     <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
+    {var $isMaintainer = ($user->isLoggedIn() && $user->identity->username == $church->maintainer->username)}
     <table class="masses bordered highlight">
         <thead>
         <tr>
             <th>Datum, čas</th>
             <th>Úmysl</th>
+            <th n:if="$isMaintainer">&nbsp;</th>
         </tr>
         </thead>
 
@@ -47,33 +49,40 @@
                 {/if}
             </td>
             <td>{$mass->intention}</td>
+            <td n:if="$isMaintainer">
+                <a n:href="deleteMass!, $mass->id">
+                    <i class="material-icons small teal-text">
+                        delete
+                    </i>
+                </a><br>
+                <a n:href="Church:view $church->abbreviation, $mass->id">
+                    <i class="material-icons small teal-text">
+                        mode_edit
+                    </i>
+                </a>
+            </td>
         </tr>
-        <tr class="add" n:if="$user->isLoggedIn()">
-            <form n:name="massForm">
+        <tr class="add" n:if="$isMaintainer">
+            {form massForm}
                 <td>
-                    <input type="hidden" n:name="churchId" value="{$church->id}">
-                    <input type="hidden" n:name="massId">
+                    <input n:name="churchId" value="{$church->id}">
+                    <input n:name="massId" {if $edit}value="{$mass->id}"{/if}>
 
-                    <input type="text" class="datepicker"
-                           n:name="date" placeholder="Datum"
-                           data-value="{\Nette\Utils\DateTime::from(time()+24*60*60)->format('Y-m-d')}">&nbsp;
+                    <input n:name="date" class="datepicker">
+                    &nbsp;
 
-                    <input type="text" class="timepicker"
-                           n:name="time" placeholder="Čas"
-                           value="9:00">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input n:name="time" class="timepicker" placeholder="Čas">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 
-                    <input type="checkbox" n:name="highlight"
-                           id="highlight">
+                    <input n:name="highlight" id="highlight">
                     <label for="highlight">slavnost</label>
                 </td>
-                <td>
-                    <input type="text"
-                           n:name="intention" placeholder="Intence">
+                <td {if $isMaintainer}colspan="2"{/if}>
+                    <input n:name="intention" placeholder="Intence">
 
-                    <input type="submit" class="btn"
-                           n:name="send" value="Uložit">
+                    <input n:name="send" class="btn">
                 </td>
-            </form>
+            {/form}
         </tr>
         </tbody>
     </table>
