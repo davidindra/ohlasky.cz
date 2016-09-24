@@ -39,7 +39,7 @@
     </script>
 </head>
 
-<body {if $user->isLoggedIn()}onload="window.print()"{/if}>
+<body {if isset($print) && $print}onload="window.print()"{/if}>
 
 {include content}
 

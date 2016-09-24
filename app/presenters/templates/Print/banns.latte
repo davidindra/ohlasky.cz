@@ -6,7 +6,7 @@
         Ohlášky a aktuální přehled bohoslužeb
     </div>
     <div class="subheading">
-        v týdnu od {$weekStart|date:'d. m. Y'} do {$weekEnd|date:'d. m. Y'}
+        v týdnu od {$weekStart|date:'j. n. Y'} do {$weekEnd|date:'j. n. Y'}
     </div>
     <div class="subheading2">
         {foreach $churches as $church}
@@ -75,6 +75,15 @@
             {$announcement->content}
         </div>
     </div>
+
+    <footer>
+        Vygenerováno pomocí
+        <a href="https://ohlasky.cz">
+            <img src="/favicon.ico">
+            Ohlášky.cz
+        </a>
+        | {time()|date:'j.n.Y'}
+    </footer>
 </div>
 
 <!--

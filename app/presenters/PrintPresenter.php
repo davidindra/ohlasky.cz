@@ -86,7 +86,8 @@ class PrintPresenter extends SecuredPresenter
                     $values['type'],
                     implode(',', $values['churches']),
                     $values['period'],
-                    $values['breakAnnouncements']
+                    $values['breakAnnouncements'],
+                    true
                 ]
             );
         };
@@ -94,7 +95,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderExport($type, $churches, $period, $breakAnnouncements)
+    public function renderExport($type, $churches, $period, $breakAnnouncements, $print = false)
     {
         if(empty($type) || empty($churches) || empty($period)){
             $this->error('Formulář byl vyplněn nesprávně.', 500);
@@ -139,6 +140,8 @@ class PrintPresenter extends SecuredPresenter
             }
 
             $this->template->breakAnnouncements = $breakAnnouncements;
+
+            $this->template->print = $print;
 
             $this->template->liturgy = $this->liturgy;
         } else {
