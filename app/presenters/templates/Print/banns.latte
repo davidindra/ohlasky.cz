@@ -28,8 +28,6 @@
         <tr n:foreach="$masses as $key => $mass">
             {var prev = isset($masses[$key - 1]) ? $masses[$key-1]->datetime->format('d.m.Y') : null}
             {var now = $masses[$key]->datetime->format('d.m.Y')}
-            {dump $prev}
-            {dump $now}
             <td class="date" n:if="true || $prev != $now">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
                 {if empty($mass->celebration)}
@@ -49,9 +47,6 @@
                     </span>
                 {/if}
             </td>
-            <!--<td class="date date-empty" n:if="$prev == $now">
-
-            </td>-->
             <td class="time">
                 {$mass->datetime|czdate:'G:i'|noescape}
             </td>
