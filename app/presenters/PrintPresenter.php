@@ -57,11 +57,12 @@ class PrintPresenter extends SecuredPresenter
             ->setRequired('Zvolte, prosím, typ tisku.')
             ->setDefaultValue('banns');
 
-        $churchList = array();
+        $churchList = ['' => Nette\Utils\Html::el('option')->value('')->setHtml('Vyberte, prosím')->disabled(TRUE)];
         foreach ($this->churches->getAll() as $church) {
             $churchList[$church->getId()] = $church->name;
         }
         $form->addMultiSelect('churches', 'Výběr kostelů', $churchList)
+            ->setOmitted('')
             ->setRequired('Zvolte, prosím, alespoň jeden kostel.');
 
         $form->addRadioList('period', 'Období:', ['this' => 'Tento týden', 'next' => 'Následující týden'])
@@ -109,13 +110,13 @@ class PrintPresenter extends SecuredPresenter
             $massList = $this->masses->getByChurches($churchList);
             foreach ($massList as $key => $mass) {
                 if ($period == 'this') {
-                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('this week', time()))) ||
+                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('monday this week', time()))) ||
                         (DateTime::from($mass->datetime) > DateTime::from(strtotime('sunday this week', time() + 24 * 60 * 60 - 1)))
                     ) {
                         unset($massList[$key]);
                     }
                 } else {
-                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('this week', time() + 7 * 24 * 60 * 60))) ||
+                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('monday this week', time() + 7 * 24 * 60 * 60))) ||
                         (DateTime::from($mass->datetime) > DateTime::from(strtotime('sunday this week', time() + 7 * 24 * 60 * 60 + 24 * 60 * 60 - 1)))
                     ) {
                         unset($massList[$key]);
@@ -127,10 +128,10 @@ class PrintPresenter extends SecuredPresenter
             $this->template->announcements = $this->announcements->getByChurches($churchList);
 
             if($period == 'this'){
-                $this->template->weekStart = strtotime('this week', time());
+                $this->template->weekStart = strtotime('monday this week', time());
                 $this->template->weekEnd = strtotime('sunday this week', time() + 24 * 60 * 60 - 1);
             }else{
-                $this->template->weekStart = strtotime('this week', time() + 7 * 24 * 60 * 60);
+                $this->template->weekStart = strtotime('monday this week', time() + 7 * 24 * 60 * 60);
                 $this->template->weekEnd = strtotime('sunday this week', time() + 7 * 24 * 60 * 60 + 24 * 60 * 60 - 1);
             }
 

@@ -2,42 +2,37 @@
 
 <div class="section container">
     <div class="row">
-        <div class="col m6">
-            <div class="row">
-                <div class="col s12">
-                    <h3 class="indigo-text" n:block="title">Tisk ohlášek</h3>
-                </div>
-            </div>
-
-            <div class="row">
-                {form printForm}
-                    <div class="row col s12">
-                        <b>Chci tisknout:</b>
-                        {foreach $form[type]->items as $key => $label}
-                        <input n:name="type:$key" class="with-gap">
-                        <label n:name="type:$key">{$label}</label>
-                        {/foreach}
-                    </div>
-
-                    <div class="row col s12 input-field">
-                        <select n:name="churches"></select>
-                        <label>Výběr kostelů</label>
-                    </div>
-
-                    <div class="row col s12">
-                        <b>Období:</b>
-                        {foreach $form[period]->items as $key => $label}
-                            <input n:name="period:$key" class="with-gap">
-                            <label n:name="period:$key">{$label}</label>
-                        {/foreach}
-                    </div>
-
-                    <div class="row col s12">
-                        <input n:name="send" class="btn">
-                    </div>
-                {/form}
-            </div>
+        <div class="col s12">
+            <h3 class="indigo-text" n:block="title">Tisk ohlášek</h3>
         </div>
+
+        <form n:name="printForm" target="_blank">
+            <div class="row col s12">
+                <b>Chci tisknout:</b>
+                {foreach $form[type]->items as $key => $label}
+                    <input n:name="type:$key" class="with-gap">
+                    <label n:name="type:$key">{$label}</label>
+                {/foreach}
+            </div>
+
+            <div class="row col s12 input-field">
+                <select n:name="churches"></select>
+                <label>Výběr kostelů</label>
+            </div>
+
+            <div class="row col s12">
+                <b>Období:</b>
+                {foreach $form[period]->items as $key => $label}
+                    <input n:name="period:$key" class="with-gap">
+                    <label n:name="period:$key">{$label}</label>
+                {/foreach}
+            </div>
+
+            <div class="row col s12">
+                <input n:name="send" class="btn">
+            </div>
+        </form>
     </div>
+</div>
 </div>
 </div>
