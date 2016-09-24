@@ -9,8 +9,14 @@ main {
   flex: 1 0 auto;
 }
 
-.churches tr {
-  cursor: pointer;
+.churches {
+  tr {
+    cursor: pointer;
+  }
+
+  th {
+    cursor: default;
+  }
 }
 
 div.flexible {
@@ -21,47 +27,63 @@ div.flexible {
   font-weight: bold;
 }
 
-.masses .add {
+.masses {
   td {
-    padding: 5px;
+    &.date {
+      line-height: 1.7em;
+    }
+
+    &.intention {
+
+    }
+
+    &.maintain {
+
+    }
   }
 
-  input {
-    margin: 0;
-  }
+  .add {
+    td {
+      padding: 5px;
+    }
 
-  input[name=date]{
-    width: 16ex;
-    cursor: pointer;
-  }
+    input {
+      margin: 0;
+    }
 
-  input[name=time]{
-    width: 8ex;
-    cursor: pointer;
-  }
+    input[name=date] {
+      width: 16ex;
+      cursor: pointer;
+    }
 
-  input[name=highlight]{
+    input[name=time] {
+      width: 8ex;
+      cursor: pointer;
+    }
 
-  }
+    input[name=highlight] {
 
-  label[for=highlight]{
-    padding-left: 25px;
-  }
+    }
 
-  input[name=intention]{
-    width: 76%;
-  }
+    label[for=highlight] {
+      padding-left: 25px;
+    }
 
-  input[name=submit]{
-    float: right;
-    width: 23%;
-    height: 3rem;
+    input[name=intention] {
+      width: 76%;
+    }
+
+    input[name=submit] {
+      float: right;
+      width: 23%;
+      height: 3rem;
+    }
   }
 }
 
 .collection-item {
   .announcement {
-    word-break: break-word;
+    word-break: break-all;
   }
 
   .maintain {

@@ -9,6 +9,8 @@ main {
 
 .churches tr {
   cursor: pointer; }
+.churches th {
+  cursor: default; }
 
 div.flexible {
   height: auto; }
@@ -16,6 +18,8 @@ div.flexible {
 .bold {
   font-weight: bold; }
 
+.masses td.date {
+  line-height: 1.7em; }
 .masses .add td {
   padding: 5px; }
 .masses .add input {
@@ -36,7 +40,7 @@ div.flexible {
   height: 3rem; }
 
 .collection-item .announcement {
-  word-break: break-word; }
+  word-break: break-all; }
 .collection-item .maintain {
   /*position: absolute;
   right: 0;

@@ -2,12 +2,6 @@
 <div class="section container">
     <h4 class="indigo-text" n:block="title">
         {$church->nameHighlighted|noescape}
-
-        <a href="#" class="teal-text"
-                n:if="$user->isInRole('maintainer')"
-           onmouseover="$(this).addClass('text-darken-4')"
-           onmouseout="$(this).removeClass('text-darken-4')">
-            <i class="material-icons small" style="vertical-align: -4px;">print</i>
         </a>
     </h4>
 
@@ -25,7 +19,7 @@
         <tbody>
         <tr n:foreach="$masses as $mass"
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
-            <td style="line-height: 1.7em;">
+            <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
                 {if empty($mass->celebration)}
                     <i>
@@ -42,8 +36,8 @@
                     </i>
                 {/if}
             </td>
-            <td>{$mass->intention}</td>
-            <td n:if="$isMaintainer">
+            <td class="intention">{$mass->intention}</td>
+            <td class="maintain" n:if="$isMaintainer">
                 <a n:href="deleteMass!, $mass->id">
                     <i class="material-icons small teal-text">
                         delete
@@ -82,7 +76,7 @@
     </table>
 
     <br>
-    <ul class="collection">
+    <ul class="collection" n:if="$isMaintainer || count($announcements) > 0">
         <li n:foreach="$announcements as $announcement" class="collection-item">
             <div class="maintain" n:if="$isMaintainer">
                 <a n:href="Church:view $church->abbreviation, null, $announcement->id">

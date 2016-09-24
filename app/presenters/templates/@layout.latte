@@ -69,14 +69,20 @@
                 </li>
                 <li n:class="$presenter->name == 'Church' ? active">
                     <a n:href="Church:list">
-                        Kostely
+                        Přehled kostelů
                     </a>
                 </li>
-                <!--<li n:class="$presenter->name == '' ? active" n:if="!$user->isLoggedIn()">
-                    <a n:href="Homepage:">
-                        Chci se zapojit
+                <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
+                    <a n:href="About:">
+                        O projektu
                     </a>
                 </li>
+                <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
+                    <a n:href="About:default#jaksezapojit">
+                        Chci se zapojit!
+                    </a>
+                </li>
+                <!--
                 <li n:class="$presenter->name == '' ? active">
                     <a n:href="Homepage:">
                         Mše
@@ -86,7 +92,10 @@
                     <a n:href="Homepage:">
                         Kněží
                     </a>
-                </li>-->
+                </li>
+
+                LITURGIE
+                -->
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">
                     <a n:href="Print:">
                         <b>Tisk</b>
