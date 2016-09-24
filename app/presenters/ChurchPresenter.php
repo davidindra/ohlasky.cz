@@ -155,8 +155,8 @@ class ChurchPresenter extends BasePresenter
         $form->addHidden('announcementId')
             ->setDefaultValue($this->getParameter('editAnnouncement'));
 
-        $form->addText('announcement', 'Ohláška')
-            ->setDefaultValue($announcement ? $announcement->content: null)
+        $form->addTextArea('announcement', 'Ohláška')
+            ->setDefaultValue($announcement ? $announcement->content : null)
             ->setAttribute('placeholder', 'Napište ohlášku');
 
         $form->addSubmit('send', 'Uložit');

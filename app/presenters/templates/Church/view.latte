@@ -85,7 +85,7 @@
     <ul class="collection">
         <li n:foreach="$announcements as $announcement" class="collection-item">
             <div class="maintain" n:if="$isMaintainer">
-                <a n:href="Church:view $church->abbreviation, $mass->id">
+                <a n:href="Church:view $church->abbreviation, null, $announcement->id">
                     <i class="material-icons small teal-text">
                         mode_edit
                     </i>
@@ -97,7 +97,7 @@
                 </a>
             </div>
             <div class="announcement">
-                {$announcement->content}
+                {$announcement->content|breaklines}
             </div>
         </li>
         <li class="collection-item" n:if="$isMaintainer">
