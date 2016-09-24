@@ -72,6 +72,17 @@
                         Přehled kostelů
                     </a>
                 </li>
+                <li n:class="$presenter->name == 'Mass' ? active">
+                    <a n:href="Mass:">
+                        Nejbližší mše
+                    </a>
+                </li>
+                <!--<li n:class="$presenter->name == 'Priest' ? active">
+                    <a n:href="Homepage:">
+                        Kněží
+                    </a>
+                </li>-->
+
                 <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
                     <a n:href="About:">
                         O projektu
@@ -82,20 +93,12 @@
                         Chci se zapojit!
                     </a>
                 </li>
-                <!--
-                <li n:class="$presenter->name == '' ? active">
-                    <a n:href="Homepage:">
-                        Mše
-                    </a>
-                </li>
-                <li n:class="$presenter->name == '' ? active">
-                    <a n:href="Homepage:">
-                        Kněží
-                    </a>
-                </li>
 
-                LITURGIE
-                -->
+                <!--<li n:class="$presenter->name == 'Liturgy' ? active">
+                    <a n:href="Homepage:">
+                        Liturgie
+                    </a>
+                </li>-->
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">
                     <a n:href="Print:">
                         <b>Tisk</b>

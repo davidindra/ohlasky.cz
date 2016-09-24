@@ -4,8 +4,7 @@
         {$church->nameHighlighted|noescape}
     </h4>
 
-    <!-- z téhle tabulky udělat později komponentu! a možná i z listu?-->
-    {var $isMaintainer = ($user->isLoggedIn() && $user->identity->username == $church->maintainer->username)}
+    {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $church->maintainer->username || $user->isInRole('manager'))}
     <table class="masses bordered highlight">
         <thead>
         <tr>

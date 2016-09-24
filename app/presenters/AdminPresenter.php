@@ -69,7 +69,7 @@ class AdminPresenter extends BasePresenter
         $this->redirect('this');
     }
 
-    public function handleAddUser($username = 'knez', $password = 'knez', $role = 'maintainer', $name = 'P. Pokusný Kněz'){
+    public function handleAddUser($username = 'knez', $password = 'knez', $role = '', $name = 'P. Pokusný Kněz'){
         $this->um->add($username, $password, 'pokusny@knez.cz', $role, $name);
         $this->flashMessage('Uživatel ' . $username . '/' . $password . ' přidán.');
         $this->redirect('this');

@@ -108,7 +108,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->onSuccess[] = function (Form $form, $values) {
             $church = $this->churches->getById($values['churchId']);
-            if(!$this->user->isLoggedIn() || $church->maintainer->username != $this->user->identity->username){
+            if(!$this->user->isLoggedIn() || ($church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
                 $this->flashMessage('Nemáte oprávnění upravovat mše tohoto kostela.');
                 $this->redirect('this');
             }
@@ -162,7 +162,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->onSuccess[] = function (Form $form, $values) {
             $church = $this->churches->getById($values['churchId']);
-            if(!$this->user->isLoggedIn() || $church->maintainer->username != $this->user->identity->username){
+            if(!$this->user->isLoggedIn() || ($church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
                 $this->flashMessage('Nemáte oprávnění upravovat ohlášky tohoto kostela.');
                 $this->redirect('this');
             }
