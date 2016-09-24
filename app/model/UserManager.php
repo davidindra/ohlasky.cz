@@ -45,7 +45,7 @@ class UserManager implements Nette\Security\IAuthenticator
 			$user->password = Passwords::hash($password);
 		}
 
-		return new Nette\Security\Identity($user->getId(), $user->role, [
+		return new Nette\Security\Identity($user->getId(), explode(',', $user->role), [
 			'username' => $user->username,
 			'fullname' => $user->fullName,
 			'email' => $user->email
