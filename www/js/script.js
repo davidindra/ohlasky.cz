@@ -6,25 +6,25 @@ $(document).ready(function () {
     $('select').material_select();
 
     $('[data-link]')
-        /*.each(function () {
-            $(this).children()
-                .wrapInner('<a class="js-link" href="' + $(this).attr('data-link') + '"></a>')
-                .addClass('js-link');
-        })*/
+    /*.each(function () {
+     $(this).children()
+     .wrapInner('<a class="js-link" href="' + $(this).attr('data-link') + '"></a>')
+     .addClass('js-link');
+     })*/
         .click(function () {
             location.href = $(this).attr('data-link');
         });
 
     // clean URL GET parameters
-    if(window.location.search.substring(1).length) {
-        if(window.history != undefined && window.history.pushState != undefined) {
+    if (window.location.search.substring(1).length) {
+        if (window.history != undefined && window.history.pushState != undefined) {
             window.history.pushState({}, document.title, window.location.pathname);
         }
     }
 
-    $('a.teal-text, a .teal-text').mouseover(function(){
+    $('a.teal-text, a .teal-text').mouseover(function () {
         $(this).addClass('text-darken-4');
-    }).mouseout(function() {
+    }).mouseout(function () {
         $(this).removeClass('text-darken-4');
     });
 
@@ -51,10 +51,13 @@ $(document).ready(function () {
         labelMonthNext: 'Další měsíc',
         labelMonthPrev: 'Předchozí měsíc',
         labelMonthSelect: 'Zvolit měsíc',
-        labelYearSelect: 'Zvolit rok'
+        labelYearSelect: 'Zvolit rok',
+        onClose: function(){
+            $(document.activeElement).blur()
+        }
     });
 
-    $('form').submit(function(){
+    $('form').submit(function () {
         $('[name=date]').val($('[name=date_submit]').val());
     })
 
