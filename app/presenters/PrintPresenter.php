@@ -57,7 +57,7 @@ class PrintPresenter extends SecuredPresenter
             ->setRequired('Zvolte, prosím, typ tisku.')
             ->setDefaultValue('banns');
 
-        $churchList = ['' => Nette\Utils\Html::el('option')->value('')->setHtml('Vyberte, prosím')->disabled(TRUE)];
+        $churchList = ['' => Nette\Utils\Html::el('option')->value('')->setHtml('Vyberte prosím kostely')->disabled(TRUE)];
         foreach ($this->churches->getAll() as $church) {
             $churchList[$church->getId()] = $church->name;
         }
@@ -68,6 +68,9 @@ class PrintPresenter extends SecuredPresenter
         $form->addRadioList('period', 'Období:', ['this' => 'Tento týden', 'next' => 'Následující týden'])
             ->setRequired('Zvolte, prosím, období.')
             ->setDefaultValue('next');
+
+        $form->addCheckbox('breakAnnouncements', 'Ohlášky až na druhou stranu:')
+            ->setDefaultValue(false);
 
         $form->addSubmit('send', 'Vytisknout');
 
@@ -82,7 +85,8 @@ class PrintPresenter extends SecuredPresenter
                 [
                     $values['type'],
                     implode(',', $values['churches']),
-                    $values['period']
+                    $values['period'],
+                    $values['breakAnnouncements']
                 ]
             );
         };
@@ -90,7 +94,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderPrint($type, $churches, $period)
+    public function renderPrint($type, $churches, $period, $breakAnnouncements)
     {
         if(empty($type) || empty($churches) || empty($period)){
             $this->error('Formulář byl vyplněn nesprávně.', 500);
@@ -98,7 +102,6 @@ class PrintPresenter extends SecuredPresenter
 
         $this->setLayout(__DIR__ . '/templates/Print/@printLayout.latte');
         $churches = explode(',', $churches);
-        Debugger::barDump([$type, $churches, $period]);
 
         if ($type == 'banns') {
             $this->setView('banns');
@@ -134,6 +137,8 @@ class PrintPresenter extends SecuredPresenter
                 $this->template->weekStart = strtotime('monday this week', time() + 7 * 24 * 60 * 60);
                 $this->template->weekEnd = strtotime('sunday this week', time() + 7 * 24 * 60 * 60 + 24 * 60 * 60 - 1);
             }
+
+            $this->template->breakAnnouncements = $breakAnnouncements;
 
             $this->template->liturgy = $this->liturgy;
         } else {

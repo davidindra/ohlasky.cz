@@ -64,6 +64,12 @@
         Na toto období nejsou naplánovány žádné mše.
     </div>
 
+    {if $breakAnnouncements}
+</div>
+
+<div class="page">
+    {/if}
+
     <div class="announcements">
         <div n:foreach="$announcements as $announcement">
             {$announcement->content}
