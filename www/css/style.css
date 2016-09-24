@@ -53,7 +53,8 @@ div.flexible {
     right: 0;
     top: 0;
     bottom: auto;*/
-    float: right; }
+    float: right;
+    margin-top: -4px; }
   .collection .collection-item .row {
     margin-bottom: 0; }
   .collection .collection-item textarea {
