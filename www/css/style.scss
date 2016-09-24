@@ -99,7 +99,11 @@ div.flexible {
   }
 
   textarea {
+    height: 30px;
+    padding: 6px 0 0 0;
+    min-height: 30px;
     margin-bottom: 0;
+
   }
 
   input[type=submit] {
