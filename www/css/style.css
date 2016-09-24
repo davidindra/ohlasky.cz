@@ -37,7 +37,7 @@ div.flexible {
 .masses .add input[name=send] {
   float: right;
   width: 23%;
-  height: 3rem; }
+  margin: 4px 0; }
 
 .collection-item .announcement {
   word-break: break-all; }
