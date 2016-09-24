@@ -38,7 +38,7 @@ div.flexible {
     }
 
     &.maintain {
-
+      float: right;
     }
   }
 
@@ -86,6 +86,8 @@ div.flexible {
 }
 
 .collection-item {
+  padding-right: 10px;
+
   .announcement {
     word-break: break-all;
   }
