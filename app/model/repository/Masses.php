@@ -26,7 +26,7 @@ class Masses extends Nette\Object
     }
 
     public function getAll(){
-        return $this->masses->findAll();
+        return $this->masses->findBy([], ['datetime' => 'ASC']);
     }
 
     public function getByChurch(Church $church){

@@ -139,6 +139,11 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function handleDeleteMass($massId){
+        $mass = $this->announcements->getById($massId);
+        if(!$this->user->isLoggedIn() || ($mass->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))) {
+            $this->flashMessage('Nemáte oprávnění mazat mše tohoto kostela.');
+            $this->redirect('this');
+        }
         $this->masses->deleteById($massId);
         $this->flashMessage('Mše byla odstraněna.');
         $this->redirect('Church:view', [$this->getParameter('church')]);
@@ -190,6 +195,11 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function handleDeleteAnnouncement($announcementId){
+        $announcement = $this->announcements->getById($announcementId);
+        if(!$this->user->isLoggedIn() || ($announcement->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
+            $this->flashMessage('Nemáte oprávnění mazat ohlášky tohoto kostela.');
+            $this->redirect('this');
+        }
         $this->announcements->deleteById($announcementId);
         $this->flashMessage('Ohláška byla odstraněna.');
         $this->redirect('Church:view', [$this->getParameter('church')]);
