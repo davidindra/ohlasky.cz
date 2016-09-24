@@ -5,30 +5,79 @@
     <div class="heading">
         Ohlášky a aktuální přehled bohoslužeb
     </div>
-    <div class="church-name">
-        kostel sv. Petra a Pavla v Prostějově
+    <div class="subheading">
+        v týdnu od {$weekStart|date:'d. m. Y'} do {$weekEnd|date:'d. m. Y'}
+    </div>
+    <div class="subheading2">
+        {foreach $churches as $church}
+            {$church->name|noescape} ({$church->nameShort})
+            {if !$iterator->isLast()} | {/if}
+        {/foreach}
     </div>
 
-    <table class="masses">
+    <table class="masses" n:if="!empty($masses)">
         <thead>
         <tr>
             <th>Den</th>
             <th>Čas</th>
-            <th>Místo</th>
+            <th n:if="count($churches) != 1">Místo</th>
             <th>Úmysl</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td class="date">Pondělí 26. září<br>Svátek narození Panny Marie</td>
-            <td class="time">18:30</td>
-            <td class="place">PP</td>
-            <td class="intention">za živou a zemřelou rodinu a duše v očistci</td>
+        <tr n:foreach="$masses as $key => $mass">
+            {var prev = isset($masses[$key - 1]) ? $masses[$key-1]->datetime->format('d.m.Y') : null}
+            {var now = $masses[$key]->datetime->format('d.m.Y')}
+            {dump $prev}
+            {dump $now}
+            <td class="date" n:if="true || $prev != $now">
+                {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
+                {if empty($mass->celebration)}
+                    <br>
+                    <span class="liturgy">
+                        {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
+                        {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
+                            {$dayInfo->dayEcclesiastical}
+                        {else}
+                            {$dayInfo->feastEcclesiastical}
+                        {/if}
+                    </span>
+                {else}
+                    <br>
+                    <span class="liturgy">
+                        <b>{$mass->celebration}</b>
+                    </span>
+                {/if}
+            </td>
+            <!--<td class="date date-empty" n:if="$prev == $now">
+
+            </td>-->
+            <td class="time">
+                {$mass->datetime|czdate:'G:i'|noescape}
+            </td>
+            <td class="place" n:if="count($churches) != 1">
+                {$mass->church->nameShort}
+            </td>
+            <td class="intention">
+                {$mass->intention}
+            </td>
         </tr>
         </tbody>
     </table>
+
+    <div class="no-masses" n:if="empty($masses)">
+        Na toto období nejsou naplánovány žádné mše.
+    </div>
+
+    <div class="announcements">
+        <div n:foreach="$announcements as $announcement">
+            {$announcement->content}
+        </div>
+    </div>
 </div>
 
-<!--<div class="page">
+<!--
+<div class="page">
 
-</div>-->
+</div>
+-->

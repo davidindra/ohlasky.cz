@@ -11,7 +11,8 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font: 15pt 'Times New Roman', sans-serif;
+  font: 13pt 'Roboto', 'Times New Roman', sans-serif;
+  cursor: default;
 }
 
 @page {
@@ -38,7 +39,7 @@ body {
 }
 
 div {
-  &.heading, &.church-name {
+  &.heading, &.subheading, &.subheading2 {
     text-align: center;
   }
 
@@ -47,8 +48,18 @@ div {
     font-size: 2rem;
   }
 
-  &.church-name {
-    font-size: 1.5rem;
+  &.subheading {
+    font-size: 1.3rem;
+  }
+
+  &.subheading2 {
+    font-size: 1.1rem;
+  }
+
+  &.no-masses {
+    text-align: center;
+    margin: 2rem 0;
+    font-style: italic;
   }
 }
 
@@ -66,13 +77,26 @@ table.masses {
   th {
     background-color: #bcbcbc;
   }
+
+  tr {
+    &:nth-child(even){
+      background-color: #e9e9e9;
+    }
+  }
   
   td {
     text-align: center;
 
-    &.date {
-
+    &.date, &:first-child {
+      .liturgy {
+        font-size: 0.8rem;
+        font-style: italic;
+      }
     }
+
+    /*&.date-empty {
+      background-color: white;
+    }*/
 
     &.time {
 
@@ -85,6 +109,20 @@ table.masses {
     &.intention {
       width: 60%;
       text-align: left;
+    }
+  }
+}
+
+div.announcements {
+  text-align: justify;
+
+  div {
+    margin: 0 1rem;
+    padding: 0.7rem 0rem;
+    border-bottom: 1px solid #7c7c7c;
+
+    &:last-child{
+      border-bottom: none;
     }
   }
 }

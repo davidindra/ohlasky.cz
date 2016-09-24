@@ -58,3 +58,29 @@ div.flexible {
     height: 3rem;
   }
 }
+
+.collection-item {
+  .announcement {
+    word-break: break-word;
+  }
+
+  .maintain {
+    /*position: absolute;
+    right: 0;
+    top: 0;
+    bottom: auto;*/
+    float: right;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  textarea {
+    margin-bottom: 0;
+  }
+
+  input[type=submit] {
+    float: right;
+  }
+}

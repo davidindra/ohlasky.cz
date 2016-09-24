@@ -2,8 +2,10 @@
 
 namespace App\Presenters;
 
+use App\Model\Entity\Announcement;
 use App\Model\Entity\Church;
 use App\Model\Entity\Mass;
+use App\Model\Repository\Announcements;
 use Nette;
 use App\Model;
 use App\Model\LiturgyCollector;
@@ -29,6 +31,12 @@ class ChurchPresenter extends BasePresenter
 
     /**
      * @inject
+     * @var Announcements
+     */
+    public $announcements;
+
+    /**
+     * @inject
      * @var LiturgyCollector
      */
     public $liturgy;
@@ -42,8 +50,9 @@ class ChurchPresenter extends BasePresenter
         $this->template->churches = $this->churches->getAll();
     }
 
-    public function renderView($church, $edit = null){
+    public function renderView($church, $edit = null, $editAnnouncement = null){
         $this->template->edit = $edit;
+        $this->template->editAnnouncement = $editAnnouncement;
 
         $this->template->church = $this->churches->getByAbbreviation($church);
         if(!$this->template->church){
@@ -60,6 +69,8 @@ class ChurchPresenter extends BasePresenter
                 $this->template->masses[] = $mass;
             }
         }
+
+        $this->template->announcements = $this->announcements->getByChurch($this->template->church);
 
         $this->template->liturgy = $this->liturgy;
     }
@@ -131,6 +142,57 @@ class ChurchPresenter extends BasePresenter
     public function handleDeleteMass($massId){
         $this->masses->deleteById($massId);
         $this->flashMessage('Mše byla odstraněna.');
+        $this->redirect('Church:view', [$this->getParameter('church')]);
+    }
+
+    public function createComponentAnnouncementForm(){
+        $announcement = empty($this->getParameter('editAnnouncement')) ? null : $this->announcements->getById($this->getParameter('editAnnouncement'));
+
+        $form = new Form();
+
+        $form->addHidden('churchId')
+            ->setDefaultValue($this->getParameter('church'));
+        $form->addHidden('announcementId')
+            ->setDefaultValue($this->getParameter('editAnnouncement'));
+
+        $form->addText('announcement', 'Ohláška')
+            ->setDefaultValue($announcement ? $announcement->content: null)
+            ->setAttribute('placeholder', 'Napište ohlášku');
+
+        $form->addSubmit('send', 'Uložit');
+
+        $form->onSuccess[] = function (Form $form, $values) {
+            $church = $this->churches->getById($values['churchId']);
+            if(!$this->user->isLoggedIn() || $church->maintainer->username != $this->user->identity->username){
+                $this->flashMessage('Nemáte oprávnění upravovat ohlášky tohoto kostela.');
+                $this->redirect('this');
+            }
+
+            Debugger::barDump($values);
+            if(empty($values['announcementId'])){
+                $announcement = new Announcement();
+                $announcement->church = $church;
+                $announcement->lastEdit = DateTime::from(time());
+                $announcement->content = $values['announcement'];
+                $this->announcements->create($announcement);
+                $this->flashMessage('Ohláška byla vytvořena.');
+                $this->redirect('this');
+            }else{
+                /** @var Announcement $announcement */
+                $announcement = $this->announcements->getById($values['announcementId']);
+                $announcement->lastEdit = DateTime::from(time());
+                $announcement->content = $values['announcement'];
+                $this->flashMessage('Ohláška byla upravena.');
+                $this->redirect('Church:view', [$this->getParameter('church')]);
+            }
+        };
+
+        return $form;
+    }
+
+    public function handleDeleteAnnouncement($announcementId){
+        $this->announcements->deleteById($announcementId);
+        $this->flashMessage('Ohláška byla odstraněna.');
         $this->redirect('Church:view', [$this->getParameter('church')]);
     }
 }

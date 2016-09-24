@@ -15,7 +15,14 @@
         <tbody>
         <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
             <td>{$church->nameHighlighted|noescape}</td>
-            <td><b>dnes 17:00</b> za duše v očistci</td>
+            <td>
+                {if count($church->masses) > 0}
+                    <b>{$church->nearestMass()->datetime|date:'G:i'}</b>
+                    {$church->nearestMass()->intention}
+                {else}
+                    <i>nejsou mše</i>
+                {/if}
+            </td>
             <td><a href="mailto:{$church->maintainer->email}">{$church->maintainer->fullName}</a></td>
         </tr>
         </tbody>

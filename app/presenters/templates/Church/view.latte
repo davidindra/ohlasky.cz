@@ -81,14 +81,39 @@
         </tbody>
     </table>
 
+    <br>
     <ul class="collection">
-        <li class="collection-item">V sobotu proběhla sbírka Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-            Impedit ipsam porro praesentium reiciendis. Accusantium alias eaque eligendi id itaque maiores omnis quae
-            velit vitae voluptatibus? Culpa dolore id itaque quae.
+        <li n:foreach="$announcements as $announcement" class="collection-item">
+            <div class="maintain" n:if="$isMaintainer">
+                <a n:href="Church:view $church->abbreviation, $mass->id">
+                    <i class="material-icons small teal-text">
+                        mode_edit
+                    </i>
+                </a>
+                <a n:href="deleteAnnouncement!, $announcement->id">
+                    <i class="material-icons small teal-text">
+                        delete
+                    </i>
+                </a>
+            </div>
+            <div class="announcement">
+                {$announcement->content}
+            </div>
         </li>
-        <li class="collection-item">Děkuji všem za úklid kostela Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Asperiores cupiditate doloremque eos, est libero nihil officiis perspiciatis quibusdam? Consequuntur
-            dolore ipsam iste itaque nostrum provident quae quaerat quod ratione velit?
+        <li class="collection-item" n:if="$isMaintainer">
+            {form announcementForm}
+                <div class="row">
+                    <div class="col m10">
+                        <input n:name="churchId" value="{$church->id}">
+                        <input n:name="announcementId">
+
+                        <textarea n:name="announcement" class="materialize-textarea"></textarea>
+                    </div>
+                    <div class="col m2">
+                        <input n:name="send" class="btn">
+                    </div>
+                </div>
+            {/form}
         </li>
     </ul>
 </div>

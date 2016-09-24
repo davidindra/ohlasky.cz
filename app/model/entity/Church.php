@@ -4,6 +4,7 @@ namespace App\Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Kdyby\Doctrine\Entities\MagicAccessors;
+use Nette\Utils\DateTime;
 
 /**
  * @ORM\Entity
@@ -25,6 +26,11 @@ class Church
     /**
      * @ORM\Column(type="string")
      */
+    protected $nameShort;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected $nameHighlighted;
 
     /**
@@ -35,6 +41,22 @@ class Church
 
     /**
      * @ORM\OneToMany(targetEntity="Mass", mappedBy="church")
+     * @ORM\OrderBy(value={"datetime" = "ASC"})
      */
     protected $masses;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Announcement", mappedBy="church")
+     */
+    protected $announcements;
+
+    public function nearestMass(){
+        if(count($this->masses) != 0){
+            foreach($this->masses as $mass){
+                if(DateTime::from($mass->datetime) > DateTime::from(time())){
+                    return $mass;
+                }
+            }
+        }
+    }
 }

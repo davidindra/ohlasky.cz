@@ -35,4 +35,19 @@ div.flexible {
   width: 23%;
   height: 3rem; }
 
+.collection-item .announcement {
+  word-break: break-word; }
+.collection-item .maintain {
+  /*position: absolute;
+  right: 0;
+  top: 0;
+  bottom: auto;*/
+  float: right; }
+.collection-item .row {
+  margin-bottom: 0; }
+.collection-item textarea {
+  margin-bottom: 0; }
+.collection-item input[type=submit] {
+  float: right; }
+
 /*# sourceMappingURL=style.css.map */
