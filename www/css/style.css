@@ -44,24 +44,24 @@ div.flexible {
 .picker--opened .picker__frame {
   top: 1%; }
 
-.collection-item {
+.collection .collection-item {
   padding-right: 10px; }
-  .collection-item .announcement {
+  .collection .collection-item .announcement {
     word-break: break-all; }
-  .collection-item .maintain {
+  .collection .collection-item .maintain {
     /*position: absolute;
     right: 0;
     top: 0;
     bottom: auto;*/
     float: right; }
-  .collection-item .row {
+  .collection .collection-item .row {
     margin-bottom: 0; }
-  .collection-item textarea {
+  .collection .collection-item textarea {
     height: 30px;
     padding: 6px 0 0 0;
     min-height: 30px;
     margin-bottom: 0; }
-  .collection-item input[type=submit] {
+  .collection .collection-item input[type=submit] {
     float: right; }
 
 /*# sourceMappingURL=style.css.map */
