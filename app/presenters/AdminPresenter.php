@@ -90,14 +90,13 @@ class AdminPresenter extends BasePresenter
         $this->churches->create($church);
         $this->flashMessage('Testovací kostel vytvořen.');
 
-        for($i = 0; $i <= 14; $i++) {
+        for($i = 0; $i <= 8; $i++) {
             $mass = new Mass();
             $mass->datetime = DateTime::from(time())->add(\DateInterval::createFromDateString($i . 'day'));
             $mass->celebration = $i % 7 == 6 ? 'Testovací slavnost, významná' : null;
             $mass->highlighted = $i % 7 == 6 ? true : false;
             $mass->intention = 'za rodinu Pokusných a Testovacích' . $i . ' a za duše v očistci';
             $mass->church = $church;
-            $mass->officiant = $user;
 
             $this->masses->create($mass);
         }

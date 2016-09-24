@@ -44,10 +44,4 @@ class Mass
      * @ORM\JoinColumn(nullable=false)
      */
     protected $church;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="masses")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected $officiant;
 }

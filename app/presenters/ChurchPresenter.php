@@ -117,7 +117,6 @@ class ChurchPresenter extends BasePresenter
             if(empty($values['massId'])){
                 $mass = new Mass();
                 $mass->church = $church;
-                $mass->officiant = $church->maintainer;
 
                 $mass->datetime = DateTime::from($values['date'] . ' ' . $values['time']);
                 $mass->highlighted = $values['highlight'];
