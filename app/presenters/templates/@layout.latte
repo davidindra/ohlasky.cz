@@ -62,11 +62,6 @@
 
         <ul class="right hide-on-med-and-down">
             {block menuitems}
-                <li n:class="$presenter->name == 'Homepage' ? active" n:if="!$user->isLoggedIn()">
-                    <a n:href="Homepage:">
-                        Hlavní stránka
-                    </a>
-                </li>
                 <li n:class="$presenter->name == 'Church' ? active">
                     <a n:href="Church:list">
                         Přehled kostelů
