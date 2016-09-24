@@ -1,0 +1,47 @@
+{block content}
+
+<div class="section container">
+    <div class="row">
+        <div class="col m6">
+            <div class="row">
+                <div class="col s12">
+                    <h3 class="indigo-text" n:block="title">Tisk ohlášek</h3>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="row col s12">
+                    <b>Chci tisknout:</b>
+                    <input name="type" type="radio" id="ohlasky" class="with-gap" checked> <!-- Sundaynews, banns -->
+                    <label for="ohlasky">Ohlášky</label>
+                    <input name="type" type="radio" id="nedelnik" class="with-gap">
+                    <label for="nedelnik">Nedělník</label>
+                </div>
+
+                <div class="row col s12 input-field">
+                    <select multiple>
+                        <option value="" disabled selected>Vyberte, prosím</option>
+                        <option n:foreach="$churches as $id => $name" value="{$id}">{$name}</option>
+                    </select>
+                    <label>Výběr kostelů</label>
+                </div>
+
+                <div class="row col s12">
+                    <b>Období:</b>
+                    <input name="range" type="radio" id="this" class="with-gap" checked>
+                    <label for="this">Tento týden</label>
+                    <input name="range" type="radio" id="next" class="with-gap">
+                    <label for="next">Následující týden</label>
+                </div>
+
+                <div class="row col s12">
+                    <input type="submit" class="btn" value="Vytisknout">
+                </div>
+                <!--<div class="row col s12">
+                    <i>Dbejte, prosím, při tisku na správné nastavení: tiskněte <b>na výšku</b>, zvolte formát <b>A4</b>.</i>
+                </div>-->
+            </div>
+        </div>
+    </div>
+</div>
+</div>

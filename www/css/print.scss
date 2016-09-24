@@ -1,0 +1,90 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font: 15pt 'Times New Roman', sans-serif;
+}
+
+@page {
+  size: A4;
+  margin: 1cm;
+}
+
+@media print {
+  html, body {
+    width: 210mm;
+    height: 297mm;
+  }
+
+  .page {
+    margin: 0;
+    border: initial;
+    border-radius: initial;
+    width: initial;
+    min-height: initial;
+    box-shadow: initial;
+    background: initial;
+    page-break-after: always;
+  }
+}
+
+div {
+  &.heading, &.church-name {
+    text-align: center;
+  }
+
+  &.heading {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  &.church-name {
+    font-size: 1.5rem;
+  }
+}
+
+table.masses {
+  width: 100%;
+  margin: 1rem 0;
+  border: 1px solid black;
+  border-collapse: collapse;
+
+  td, th {
+    padding: 0.5rem;
+    border: 1px solid black;
+  }
+
+  th {
+    background-color: #bcbcbc;
+  }
+  
+  td {
+    text-align: center;
+
+    &.date {
+
+    }
+
+    &.time {
+
+    }
+
+    &.place {
+
+    }
+
+    &.intention {
+      width: 60%;
+      text-align: left;
+    }
+  }
+}

@@ -72,18 +72,23 @@
                         Kostely
                     </a>
                 </li>
+                <!--<li n:class="$presenter->name == '' ? active" n:if="!$user->isLoggedIn()">
+                    <a n:href="Homepage:">
+                        Chci se zapojit
+                    </a>
+                </li>
                 <li n:class="$presenter->name == '' ? active">
-                    <a notdone_n:href="Church:list">
+                    <a n:href="Homepage:">
                         Mše
                     </a>
                 </li>
                 <li n:class="$presenter->name == '' ? active">
-                    <a notdone_n:href="Church:list">
+                    <a n:href="Homepage:">
                         Kněží
                     </a>
-                </li>
+                </li>-->
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">
-                    <a notdone_n:href="Church:list">
+                    <a n:href="Print:">
                         <b>Tisk</b>
                     </a>
                 </li>
