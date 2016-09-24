@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="{$basePath}/css/print.css">
     <script src="{$basePath}/js/print.js"></script>
 
-    <script>
+    <script n:if="!$user->isInRole('admin')">
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {
@@ -39,7 +39,7 @@
     </script>
 </head>
 
-<body onload="window.print()">
+<body {if $user->isLoggedIn()}onload="window.print()"{/if}>
 
 {include content}
 

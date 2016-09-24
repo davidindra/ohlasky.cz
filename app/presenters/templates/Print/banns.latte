@@ -10,7 +10,7 @@
     </div>
     <div class="subheading2">
         {foreach $churches as $church}
-            {$church->name|noescape} ({$church->nameShort})
+            {$church->name|noescape} <span n:if="count($churches) != 1">({$church->nameShort})</span>
             {if !$iterator->isLast()} | {/if}
         {/foreach}
     </div>

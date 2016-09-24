@@ -81,7 +81,7 @@ class PrintPresenter extends SecuredPresenter
             }
 
             $this->redirect(
-                'Print:print',
+                'Print:export',
                 [
                     $values['type'],
                     implode(',', $values['churches']),
@@ -94,7 +94,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderPrint($type, $churches, $period, $breakAnnouncements)
+    public function renderExport($type, $churches, $period, $breakAnnouncements)
     {
         if(empty($type) || empty($churches) || empty($period)){
             $this->error('Formulář byl vyplněn nesprávně.', 500);
