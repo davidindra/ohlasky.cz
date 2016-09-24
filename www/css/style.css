@@ -39,7 +39,7 @@ div.flexible {
   width: 23%;
   margin: 4px 0; }
 
-.picker__frame {
+.picker--opened .picker__frame {
   top: 1%; }
 
 .collection-item .announcement {
