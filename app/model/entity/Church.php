@@ -14,6 +14,11 @@ class Church
     use MagicAccessors, Identifier;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    protected $order;
+
+    /**
      * @ORM\Column(type="string", unique=true)
      */
     protected $abbreviation;

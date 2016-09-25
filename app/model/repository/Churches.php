@@ -26,11 +26,11 @@ class Churches extends Nette\Object
     }
 
     public function getAll(){
-        return $this->churches->findAll();
+        return $this->churches->findBy([], ['order' => 'ASC']);
     }
 
     public function getByMaintainer(User $maintainer){
-        return $this->churches->findBy(['maintainer_id' => $maintainer]);
+        return $this->churches->findBy(['maintainer_id' => $maintainer], ['order' => 'ASC']);
     }
 
     public function getByAbbreviation($abbreviation){
@@ -42,7 +42,7 @@ class Churches extends Nette\Object
     }
 
     public function getByIds(array $ids){
-        return $this->churches->findBy(['id' => $ids]);
+        return $this->churches->findBy(['id' => $ids], ['order' => 'ASC']);
     }
 
     public function __destruct()
