@@ -19,7 +19,7 @@ class Announcement
     protected $lastEdit;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=10000)
      */
     protected $content;
 
