@@ -9,7 +9,7 @@ $(document).ready(function () {
             currGroupStartIdx = 0;
         $rows.each(function(i) {
             var $this = $(this);
-            var itemCell = $(this).find('td:eq(0)')
+            var itemCell = $(this).find('td:eq(0),td:eq(1)')
             var item = itemCell.html();
             itemCell.remove();
             if ($.inArray(item, itemtext) === -1) {
