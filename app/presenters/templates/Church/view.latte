@@ -36,7 +36,7 @@
             </td>
             <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
-                <a n:href="deleteMass!, $mass->id">
+                <a n:href="deleteMass!, $mass->getId()">
                     <i class="material-icons small teal-text">
                         delete
                     </i>
