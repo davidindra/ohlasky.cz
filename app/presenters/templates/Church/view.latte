@@ -20,7 +20,7 @@
         <tr n:foreach="$masses as $mass"
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             <td class="date">
-                {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>
+                {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
             </td>
             <td class="liturgy">
                 {if empty($mass->celebration)}
@@ -33,9 +33,6 @@
                 {else}
                     {$mass->celebration}
                 {/if}
-            </td>
-            <td class="date">
-                <b>{$mass->datetime|czdate:'G:i'}</b><br>
             </td>
             <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
