@@ -81,9 +81,9 @@ class ChurchPresenter extends BasePresenter
         $form = new Form();
 
         $form->addHidden('churchId')
-            ->setDefaultValue($this->getParameter('church'));
+            ->setDefaultValue($this->getParameters()['church']);
         $form->addHidden('massId')
-            ->setDefaultValue($this->getParameter('edit'));
+            ->setDefaultValue('value', $this->getParameters()['edit']);
 
         $form->addText('date', 'Datum')
             ->setAttribute('placeholder', 'Datum')
