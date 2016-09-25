@@ -87,6 +87,10 @@ table.masses {
   td {
     text-align: center;
 
+    &[rowspan] {
+      background-color: transparent;
+    }
+
     &.date, &:first-child {
       .liturgy {
         font-size: 0.8rem;
