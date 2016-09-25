@@ -69,8 +69,9 @@ class PrintPresenter extends SecuredPresenter
             ->setRequired('Zvolte, prosím, období.')
             ->setDefaultValue('next');
 
-        $form->addCheckbox('breakAnnouncements', 'Ohlášky až na druhou stranu:')
-            ->setDefaultValue(false);
+        $form->addRadioList('announcements', 'Ohlášky:', ['yes' => 'ano', 'break' => 'ano, na další stranu', 'no' => 'ne'])
+            ->setRequired('Zvolte, prosím, typ tisku ohlášek.')
+            ->setDefaultValue('yes');
 
         $form->addText('zoom', 'Měřítko:')
             ->setType('range')
@@ -100,7 +101,7 @@ class PrintPresenter extends SecuredPresenter
                     $values['type'],
                     implode('a', $values['churches']),
                     $values['period'],
-                    $values['breakAnnouncements'],
+                    $values['announcements'],
                     $values['zoom'],
                     $values['massSpacing'],
                     true
@@ -111,7 +112,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderExport($type, $churches, $period, $breakAnnouncements, $zoom = 100, $massSpacing = 0.5, $print = false)
+    public function renderExport($type, $churches, $period, $announcements, $zoom = 100, $massSpacing = 0.5, $print = false)
     {
         if (empty($type) || empty($churches) || empty($period)) {
             $this->error('Formulář byl vyplněn nesprávně.', 500);
@@ -160,7 +161,7 @@ class PrintPresenter extends SecuredPresenter
                 $this->template->weekEnd = $nextEnd;
             }
 
-            $this->template->breakAnnouncements = $breakAnnouncements;
+            $this->template->breakAnnouncements = $announcements;
 
             $this->template->zoom = $zoom;
             $this->template->massSpacing = $massSpacing;

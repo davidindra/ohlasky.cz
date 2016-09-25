@@ -82,13 +82,13 @@
         Na toto období nejsou naplánovány žádné mše.
     </div>
 
-    {if $breakAnnouncements}
+    {if $announcements == 'break'}
 </div>
 
 <div class="page">
     {/if}
 
-    <div class="announcements">
+    <div class="announcements" n:if="$announcements != 'no'">
         <div n:foreach="$announcements as $announcement">
             <b n:if="count($churches) > 1">{$announcement->church->nameShort}
                 :</b> {$announcement->content|markdown|noescape}

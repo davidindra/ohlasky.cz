@@ -39,11 +39,13 @@
 
             <div class="row">
                 <div class="col m3 offset-m2 right-align">
-                    <b>Ohlášky až na druhou stranu:</b>
+                    <b>Ohlášky:</b>
                 </div>
                 <div class="col m7">
-                    <input n:name="breakAnnouncements" class="filled-in" id="breakAnnouncements">
-                    <label for="breakAnnouncements"></label>
+                    {foreach $form[announcements]->items as $key => $label}
+                        <input n:name="announcements:$key" class="with-gap">
+                        <label n:name="announcements:$key">{$label}</label>
+                    {/foreach}
                 </div>
             </div>
 
