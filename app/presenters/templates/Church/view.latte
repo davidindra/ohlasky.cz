@@ -9,6 +9,7 @@
         <thead>
         <tr>
             <th>Datum, čas</th>
+            <th>Liturgie</th>
             <th>Úmysl</th>
             <th n:if="$isMaintainer">&nbsp;</th>
         </tr>
@@ -19,19 +20,17 @@
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
+            </td>
+            <td class="liturgy">
                 {if empty($mass->celebration)}
-                    <i>
-                        {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
-                        {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
-                            {$dayInfo->dayEcclesiastical}
-                        {else}
-                            {$dayInfo->feastEcclesiastical}
-                        {/if}
-                    </i>
+                    {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
+                    {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
+                        {$dayInfo->dayEcclesiastical}
+                    {else}
+                        {$dayInfo->feastEcclesiastical}
+                    {/if}
                 {else}
-                    <i>
-                        {$mass->celebration}
-                    </i>
+                    {$mass->celebration}
                 {/if}
             </td>
             <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>

@@ -8,6 +8,7 @@
         <thead>
         <tr>
             <th>Datum, čas</th>
+            <th>Liturgie</th>
             <th>Kostel</th>
             <th>Úmysl</th>
         </tr>
@@ -19,19 +20,17 @@
             {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $mass->church->maintainer->username || $user->isInRole('manager'))}
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
+            </td>
+            <td class="liturgy">
                 {if empty($mass->celebration)}
-                    <i>
-                        {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
-                        {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
-                            {$dayInfo->dayEcclesiastical}
-                        {else}
-                            {$dayInfo->feastEcclesiastical}
-                        {/if}
-                    </i>
+                    {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
+                    {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
+                        {$dayInfo->dayEcclesiastical}
+                    {else}
+                        {$dayInfo->feastEcclesiastical}
+                    {/if}
                 {else}
-                    <i>
-                        {$mass->celebration}
-                    </i>
+                    {$mass->celebration}
                 {/if}
             </td>
             <td class="church">
