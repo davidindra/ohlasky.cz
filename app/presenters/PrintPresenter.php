@@ -97,10 +97,6 @@ class PrintPresenter extends SecuredPresenter
 
     public function renderExport($type, $churches, $period, $breakAnnouncements, $print = false)
     {
-        /** @var Nette\Http\Response $httpResponse */
-        $httpResponse = $this->context->getByType('Nette\Http\Response');
-        $httpResponse->setHeader('X-Frame-Options', 'allowall');
-
         if(empty($type) || empty($churches) || empty($period)){
             $this->error('Formulář byl vyplněn nesprávně.', 500);
         }
