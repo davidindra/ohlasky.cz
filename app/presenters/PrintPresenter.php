@@ -84,7 +84,7 @@ class PrintPresenter extends SecuredPresenter
                 'Print:export',
                 [
                     $values['type'],
-                    implode('+', $values['churches']),
+                    implode('a', $values['churches']),
                     $values['period'],
                     $values['breakAnnouncements'],
                     true
@@ -102,7 +102,7 @@ class PrintPresenter extends SecuredPresenter
         }
 
         $this->setLayout(__DIR__ . '/templates/Print/@printLayout.latte');
-        $churches = explode('+', $churches);
+        $churches = explode('a', $churches);
 
         if ($type == 'banns') {
             $this->setView('banns');
