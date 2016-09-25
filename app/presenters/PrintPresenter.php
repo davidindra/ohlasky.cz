@@ -59,7 +59,7 @@ class PrintPresenter extends SecuredPresenter
 
         $churchList = ['' => Nette\Utils\Html::el('option')->value('')->setHtml('Vyberte prosím kostely')->disabled(TRUE)];
         foreach ($this->churches->getAll() as $church) {
-            $churchList[$church->getId()] = $church->name;
+            $churchList[$church->getId()] = $church->name . ' (' . $church->maintainer->fullName . ')';
         }
         $form->addMultiSelect('churches', 'Výběr kostelů', $churchList)
             ->setOmitted('')
