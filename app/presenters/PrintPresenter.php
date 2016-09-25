@@ -79,6 +79,13 @@ class PrintPresenter extends SecuredPresenter
             ->setAttribute('step', '0.1')
             ->setDefaultValue(1);
 
+        $form->addText('massSpacing', 'Měřítko:')
+            ->setType('range')
+            ->setAttribute('min', '0.1')
+            ->setAttribute('max', '0.9')
+            ->setAttribute('step', '0.1')
+            ->setDefaultValue(0.5);
+
         $form->addSubmit('send', 'Vytisknout');
 
         $form->onSuccess[] = function (Form $form, $values) {
@@ -95,6 +102,7 @@ class PrintPresenter extends SecuredPresenter
                     $values['period'],
                     $values['breakAnnouncements'],
                     $values['zoom'],
+                    $values['massSpacing'],
                     true
                 ]
             );
@@ -103,7 +111,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderExport($type, $churches, $period, $breakAnnouncements, $zoom, $print = false)
+    public function renderExport($type, $churches, $period, $breakAnnouncements, $zoom = 1, $massSpacing = 0.5, $print = false)
     {
         if (empty($type) || empty($churches) || empty($period)) {
             $this->error('Formulář byl vyplněn nesprávně.', 500);
@@ -155,6 +163,7 @@ class PrintPresenter extends SecuredPresenter
             $this->template->breakAnnouncements = $breakAnnouncements;
 
             $this->template->zoom = $zoom;
+            $this->template->massSpacing = $massSpacing;
 
             $this->template->print = $print;
 
