@@ -1,5 +1,5 @@
-$(document).ready(function(){
-    $(function() {
+$(document).ready(function () {
+    $(function () {
         // clone table to display "before"
         var beforeTable = $('table.masses').clone().removeAttr('id').appendTo('#before')
         // code for grouping in "after" table
@@ -7,7 +7,7 @@ $(document).ready(function(){
         var items = [],
             itemtext = [],
             currGroupStartIdx = 0;
-        $rows.each(function(i) {
+        $rows.each(function (i) {
             var $this = $(this);
             var itemCell = $(this).find('td:eq(0)')
             var item = itemCell.html();
@@ -26,8 +26,7 @@ $(document).ready(function(){
         });
 
 
-
-        $.each(items, function(i) {
+        $.each(items, function (i) {
             var $row = $rows.eq(this[0]);
             var rowspan = $row.data('rowspan');
             $row.prepend('<td rowspan="' + rowspan + '">' + this[1] + '</td>');
@@ -36,8 +35,8 @@ $(document).ready(function(){
 
     });
 
-    if(printDocument){
-        setTimeout(function(){
+    if (printDocument) {
+        setTimeout(function () {
             window.print();
         }, 1000);
     }
