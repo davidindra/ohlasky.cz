@@ -36,9 +36,11 @@ div.heading {
   font-weight: bold;
   font-size: 2rem; }
 div.subheading {
-  font-size: 1.3rem; }
+  font-size: 1.3rem;
+  color: #242424; }
 div.subheading2 {
-  font-size: 1.1rem; }
+  font-size: 1.1rem;
+  color: gray; }
 div.no-masses {
   text-align: center;
   margin: 2rem 0;
