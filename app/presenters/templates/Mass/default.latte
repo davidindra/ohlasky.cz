@@ -39,7 +39,7 @@
                     {$mass->church->nameHighlighted|noescape}
                 </a>
             </td>
-            <td class="intention">{$mass->intention}</td>
+            <td class="intention">{$mass->intention ? $mass->intention : '-'}</td>
         </tr>
         </tbody>
     </table>
