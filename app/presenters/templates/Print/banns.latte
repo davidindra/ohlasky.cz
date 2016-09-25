@@ -25,10 +25,8 @@
         </tr>
         </thead>
         <tbody>
-        <tr n:foreach="$masses as $key => $mass">
-            {var prev = isset($masses[$key - 1]) ? $masses[$key-1]->datetime->format('d.m.Y') : null}
-            {var now = $masses[$key]->datetime->format('d.m.Y')}
-            <td class="date" n:if="true || $prev != $now">
+        <tr n:foreach="$masses as $mass">
+            <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
                 {if empty($mass->celebration)}
                     <br>
