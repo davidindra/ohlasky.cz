@@ -38,8 +38,8 @@
         ga('send', 'pageview');
     </script>
 
-    <script n:if="isset($print) && $print">
-        var print = true;
+    <script>
+        var printDocument = {isset($print) && $print ? true : false};
     </script>
 </head>
 
