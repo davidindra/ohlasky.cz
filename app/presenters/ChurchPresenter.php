@@ -95,7 +95,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->addText('time', 'Čas')
             ->setAttribute('placeholder', 'Čas')
-            ->setDefaultValue($mass ? $mass->datetime->format('H:i') : '09:00')
+            ->setDefaultValue($mass ? $mass->datetime->format('G:i') : '9:00')
             ->setRequired('Zvolte, prosím, čas mše.');
 
         $form->addCheckbox('highlight', 'slavnost')
