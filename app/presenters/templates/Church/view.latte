@@ -89,7 +89,7 @@
                 </a>
             </div>
             <div class="announcement">
-                {$announcement->content|breaklines}
+                {$announcement->content|markdown|noescape}
             </div>
         </li>
         <li class="collection-item" n:if="$isMaintainer">

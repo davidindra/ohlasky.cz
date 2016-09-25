@@ -70,7 +70,7 @@
 
     <div class="announcements">
         <div n:foreach="$announcements as $announcement">
-            <b n:if="count($churches) > 1">{$announcement->church->nameShort}:</b> {$announcement->content|breaklines}
+            <b n:if="count($churches) > 1">{$announcement->church->nameShort}:</b> {$announcement->content|markdown|noescape}
         </div>
     </div>
 

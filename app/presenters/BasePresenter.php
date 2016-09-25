@@ -58,6 +58,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $html = new Nette\Utils\Html();
             return $html->setHtml(Debugger::dump($input, true));
         });
+
+        $this->template->addFilter('markdown', function($input) {
+            $md = \Parsedown::instance();
+            $html = new Nette\Utils\Html();
+            return $html->setHtml($md->line($this->template->getLatte()->invokeFilter('breaklines', [$input])));
+        });
     }
 
     public function deleteDirectory($dir) {
