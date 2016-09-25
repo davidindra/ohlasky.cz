@@ -161,7 +161,7 @@ class PrintPresenter extends SecuredPresenter
                 $this->template->weekEnd = $nextEnd;
             }
 
-            $this->template->announcements = $announcements;
+            $this->template->announcementsOption = $announcements;
 
             $this->template->zoom = $zoom;
             $this->template->massSpacing = $massSpacing;
