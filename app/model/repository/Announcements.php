@@ -30,7 +30,7 @@ class Announcements extends Nette\Object
     }
 
     public function getByChurch(Church $church){
-        return $this->announcements->findBy(['church' => $church]);
+        return $this->announcements->findBy(['church' => $church], ['lastEdit' => 'DESC']);
     }
 
     public function getByChurches(array $churches){
