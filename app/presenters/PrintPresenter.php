@@ -72,6 +72,13 @@ class PrintPresenter extends SecuredPresenter
         $form->addCheckbox('breakAnnouncements', 'Ohlášky až na druhou stranu:')
             ->setDefaultValue(false);
 
+        $form->addText('zoom', 'Měřítko:')
+            ->setType('range')
+            ->setAttribute('min', '0.4')
+            ->setAttribute('max', '1.6')
+            ->setAttribute('step', '0.1')
+            ->setDefaultValue(1);
+
         $form->addSubmit('send', 'Vytisknout');
 
         $form->onSuccess[] = function (Form $form, $values) {
@@ -87,6 +94,7 @@ class PrintPresenter extends SecuredPresenter
                     implode('a', $values['churches']),
                     $values['period'],
                     $values['breakAnnouncements'],
+                    $values['zoom'],
                     true
                 ]
             );
@@ -95,7 +103,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderExport($type, $churches, $period, $breakAnnouncements, $print = false)
+    public function renderExport($type, $churches, $period, $breakAnnouncements, $zoom, $print = false)
     {
         if (empty($type) || empty($churches) || empty($period)) {
             $this->error('Formulář byl vyplněn nesprávně.', 500);
@@ -145,6 +153,8 @@ class PrintPresenter extends SecuredPresenter
             }
 
             $this->template->breakAnnouncements = $breakAnnouncements;
+
+            $this->template->zoom = $zoom;
 
             $this->template->print = $print;
 

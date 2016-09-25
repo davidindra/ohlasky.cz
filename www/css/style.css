@@ -18,6 +18,9 @@ div.flexible {
 .bold {
   font-weight: bold; }
 
+.middle {
+  vertical-align: sub; }
+
 .masses td.date {
   line-height: 1.7em; }
 .masses td.maintain {

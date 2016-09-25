@@ -1,3 +1,15 @@
+{define head}
+    <script>
+        var printDocument = {$print ? true : false};
+    </script>
+
+    <style>
+        .page {
+            zoom: {$zoom|noescape};
+        }
+    </style>
+{/define}
+
 {block content}
 
 <div class="page">
@@ -70,7 +82,8 @@
 
     <div class="announcements">
         <div n:foreach="$announcements as $announcement">
-            <b n:if="count($churches) > 1">{$announcement->church->nameShort}:</b> {$announcement->content|markdown|noescape}
+            <b n:if="count($churches) > 1">{$announcement->church->nameShort}
+                :</b> {$announcement->content|markdown|noescape}
         </div>
     </div>
 

@@ -27,6 +27,11 @@ div.flexible {
   font-weight: bold;
 }
 
+.middle {
+  //vertical-align: -webkit-baseline-middle;
+  vertical-align: sub;
+}
+
 .masses {
   td {
     &.date {
