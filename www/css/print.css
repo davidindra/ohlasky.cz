@@ -62,7 +62,7 @@ table.masses {
       background-color: white;
     }*/ }
     table.masses td[rowspan] {
-      background-color: transparent; }
+      background-color: white; }
     table.masses td.date .liturgy, table.masses td:first-child .liturgy {
       font-size: 0.8rem;
       font-style: italic; }

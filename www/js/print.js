@@ -35,4 +35,8 @@ $(document).ready(function(){
 
 
     });
+
+    if(print){
+        window.print();
+    }
 });
