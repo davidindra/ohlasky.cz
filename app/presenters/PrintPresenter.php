@@ -97,7 +97,7 @@ class PrintPresenter extends SecuredPresenter
 
     public function renderExport($type, $churches, $period, $breakAnnouncements, $print = false)
     {
-        if(empty($type) || empty($churches) || empty($period)){
+        if (empty($type) || empty($churches) || empty($period)) {
             $this->error('Formulář byl vyplněn nesprávně.', 500);
         }
 
@@ -111,17 +111,22 @@ class PrintPresenter extends SecuredPresenter
 
             $this->template->churches = $churchList;
 
+            $thisStart = DateTime::from(strtotime(date('o-\\WW')) - 24 * 60 * 60);
+            $thisEnd = DateTime::from(strtotime(date('o-\\WW')) + 7 * 24 * 60 * 60 - 1);
+            $nextStart = DateTime::from(strtotime(date('o-\\WW', time() + 7*24*60*60)) - 24 * 60 * 60);
+            $nextEnd = DateTime::from(strtotime(date('o-\\WW', time() + 7*24*60*60)) + 7 * 24 * 60 * 60 - 1);
+
             $massList = $this->masses->getByChurches($churchList);
             foreach ($massList as $key => $mass) {
                 if ($period == 'this') {
-                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('monday this week', time()))) ||
-                        (DateTime::from($mass->datetime) > DateTime::from(strtotime('sunday this week', time() + 24 * 60 * 60 - 1)))
+                    if ((DateTime::from($mass->datetime) < $thisStart) ||
+                        (DateTime::from($mass->datetime) > $thisEnd)
                     ) {
                         unset($massList[$key]);
                     }
                 } else {
-                    if ((DateTime::from($mass->datetime) < DateTime::from(strtotime('monday this week', time() + 7 * 24 * 60 * 60))) ||
-                        (DateTime::from($mass->datetime) > DateTime::from(strtotime('sunday this week', time() + 7 * 24 * 60 * 60 + 24 * 60 * 60 - 1)))
+                    if ((DateTime::from($mass->datetime) < $nextStart) ||
+                        (DateTime::from($mass->datetime) > $nextEnd)
                     ) {
                         unset($massList[$key]);
                     }
@@ -131,12 +136,12 @@ class PrintPresenter extends SecuredPresenter
 
             $this->template->announcements = $this->announcements->getByChurches($churchList);
 
-            if($period == 'this'){
-                $this->template->weekStart = strtotime('monday this week', time());
-                $this->template->weekEnd = strtotime('sunday this week', time() + 24 * 60 * 60 - 1);
-            }else{
-                $this->template->weekStart = strtotime('monday this week', time() + 7 * 24 * 60 * 60);
-                $this->template->weekEnd = strtotime('sunday this week', time() + 7 * 24 * 60 * 60 + 24 * 60 * 60 - 1);
+            if ($period == 'this') {
+                $this->template->weekStart = $thisStart;
+                $this->template->weekEnd = $thisEnd;
+            } else {
+                $this->template->weekStart = $nextStart;
+                $this->template->weekEnd = $nextEnd;
             }
 
             $this->template->breakAnnouncements = $breakAnnouncements;
