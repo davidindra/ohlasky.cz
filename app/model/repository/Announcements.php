@@ -34,7 +34,7 @@ class Announcements extends Nette\Object
     }
 
     public function getByChurches(array $churches){
-        return $this->announcements->findBy(['church' => $churches], ['lastEdit' => 'DESC']);
+        return $this->announcements->findBy(['church' => $churches], ['church' => 'ASC', 'lastEdit' => 'DESC']);
     }
 
     public function getById($id){
