@@ -17,7 +17,7 @@
             <td>{$church->nameHighlighted|noescape}</td>
             <td>
                 {if count($church->masses) > 0}
-                    <b>{$church->nearestMass()->datetime|date:'G:i'}</b>
+                    <b>{$church->nearestMass()->datetime|czdate:'l <b>j. F</b> G:i'|noescape}</b>
                     {$church->nearestMass()->intention}
                 {else}
                     <i>nejsou mše</i>
