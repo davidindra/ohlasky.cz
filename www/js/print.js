@@ -37,6 +37,8 @@ $(document).ready(function(){
     });
 
     if(printDocument){
-        window.print();
+        setTimeout(function(){
+            window.print();
+        }, 500);
     }
 });
