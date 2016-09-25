@@ -37,9 +37,15 @@
         {/if}
         ga('send', 'pageview');
     </script>
+
+    <script n:if="isset($print) && $print">
+        $(document).ready(function () {
+            window.print();
+        });
+    </script>
 </head>
 
-<body {if isset($print) && $print}onload="window.print()"{/if}>
+<body>
 
 {include content}
 
