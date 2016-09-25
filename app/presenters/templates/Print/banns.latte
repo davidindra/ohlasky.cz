@@ -14,11 +14,15 @@
     </style>
 {/define}
 
+{define title}
+    Export ohlášek {foreach $churches as $church}{$church->nameShort}{if !$iterator->isLast()}, {/if}{/foreach}
+{/define}
+
 {block content}
 
 <div class="page">
 
-    <div class="heading" n:inner-block="title">
+    <div class="heading">
         Ohlášky a aktuální pořad bohoslužeb
     </div>
     <div class="subheading">
