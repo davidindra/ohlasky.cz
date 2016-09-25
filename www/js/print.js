@@ -39,6 +39,6 @@ $(document).ready(function(){
     if(printDocument){
         setTimeout(function(){
             window.print();
-        }, 500);
+        }, 1000);
     }
 });

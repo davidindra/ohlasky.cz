@@ -52,7 +52,7 @@
             {form massForm}
                 <td>
                     <input n:name="churchId" value="{$church->id}">
-                    <input n:name="massId" {if false && $edit}value="{$mass->id}"{/if}>
+                    {input massId}
 
                     <input n:name="date" class="datepicker">
                     &nbsp;
