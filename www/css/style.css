@@ -47,7 +47,7 @@ div.flexible {
 .collection .collection-item {
   padding-right: 10px; }
   .collection .collection-item .announcement {
-    word-break: break-all; }
+    word-break: normal; }
   .collection .collection-item .maintain {
     /*position: absolute;
     right: 0;
