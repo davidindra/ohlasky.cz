@@ -24,6 +24,7 @@ div.flexible {
 .masses td.date {
   line-height: 1.7em; }
 .masses td.maintain {
+  float: right;
   white-space: nowrap; }
 .masses td.more {
   padding: 5px; }
@@ -33,6 +34,8 @@ div.flexible {
   border-bottom: none; }
 .masses .add td {
   padding: 5px; }
+  .masses .add td:last-of-type {
+    float: right; }
 .masses .add input {
   margin: 0; }
 .masses .add input[name=date] {
@@ -44,10 +47,8 @@ div.flexible {
 .masses .add label[for=highlight] {
   padding-left: 25px; }
 .masses .add input[name=intention] {
-  width: 76%; }
+  width: 100%; }
 .masses .add input[name=send] {
-  float: right;
-  width: 23%;
   margin: 4px 0; }
 
 .picker--opened .picker__frame {

@@ -8,8 +8,9 @@
     <table class="masses bordered highlight rowspanize">
         <thead>
         <tr>
-            <th>Datum, čas</th>
+            <th>Datum</th>
             <th>Liturgie</th>
+            <th>Čas</th>
             <th>Úmysl mše svaté</th>
             <th n:if="$isMaintainer">&nbsp;</th>
         </tr>
@@ -19,7 +20,7 @@
         <tr n:foreach="$masses as $mass"
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             <td class="date">
-                {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
+                {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
             </td>
             <td class="liturgy">
                 {if empty($mass->celebration)}
@@ -32,6 +33,9 @@
                 {else}
                     {$mass->celebration}
                 {/if}
+            </td>
+            <td class="date">
+                <b>{$mass->datetime|czdate:'G:i'}</b>
             </td>
             <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
@@ -48,28 +52,29 @@
             </td>
         </tr>
         <tr n:if="!$vice && !$user->isLoggedIn()">
-            <td colspan="4" class="more center-align">
+            <td colspan="5" class="more center-align">
                 <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více mší svatých</a>
             </td>
         </tr>
         <tr class="add" n:if="$isMaintainer">
             {form massForm}
-                <td colspan="2">
+                <td>
                     <input n:name="churchId" value="{$church->id}">
                     {input massId}
 
                     <input n:name="date" class="datepicker">
-                    &nbsp;
-
-                    <input n:name="time" class="timepicker" placeholder="Čas">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
+                </td>
+                <td>
                     <input n:name="highlight" id="highlight">
                     <label for="highlight">slavnost</label>
                 </td>
-                <td {if $isMaintainer}colspan="2"{/if}>
+                <td>
+                    <input n:name="time" class="timepicker" placeholder="Čas">
+                </td>
+                <td>
                     <input n:name="intention" placeholder="Intence">
-
+                </td>
+                <td>
                     <input n:name="send" class="btn">
                 </td>
             {/form}
