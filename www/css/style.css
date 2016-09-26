@@ -27,6 +27,8 @@ div.flexible {
   float: right; }
 .masses td.more {
   padding: 5px; }
+  .masses td.more a.btn {
+    width: 100%; }
 .masses .add td {
   padding: 5px; }
 .masses .add input {

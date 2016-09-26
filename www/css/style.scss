@@ -48,6 +48,10 @@ div.flexible {
 
     &.more {
       padding: 5px;
+
+      a.btn {
+        width: 100%;
+      }
     }
   }
 
