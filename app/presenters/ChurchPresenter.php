@@ -50,16 +50,17 @@ class ChurchPresenter extends BasePresenter
         $this->template->churches = $this->churches->getAll();
     }
 
-    public function renderView($church, $edit = null, $editAnnouncement = null){
+    public function renderView($church, $edit = null, $editAnnouncement = null, $vice = false){
         $this->template->edit = $edit;
         $this->template->editAnnouncement = $editAnnouncement;
+        $this->template->vice = $vice;
 
         $this->template->church = $this->churches->getByAbbreviation($church);
         if(!$this->template->church){
             $this->error();
         }
 
-        $future = $this->user->isLoggedIn();
+        $future = $this->user->isLoggedIn() || $vice;
 
         $this->template->masses = array();
         foreach($this->masses->getByChurch($this->template->church) as $mass){

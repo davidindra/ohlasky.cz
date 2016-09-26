@@ -25,6 +25,8 @@ div.flexible {
   line-height: 1.7em; }
 .masses td.maintain {
   float: right; }
+.masses td.more {
+  padding: 5px; }
 .masses .add td {
   padding: 5px; }
 .masses .add input {

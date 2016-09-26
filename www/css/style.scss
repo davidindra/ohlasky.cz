@@ -45,6 +45,10 @@ div.flexible {
     &.maintain {
       float: right;
     }
+
+    &.more {
+      padding: 5px;
+    }
   }
 
   .add {

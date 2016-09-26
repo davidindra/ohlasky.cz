@@ -47,6 +47,11 @@
                 </a>
             </td>
         </tr>
+        <tr n:if="!$vice && !$user->isLoggedIn()">
+            <td colspan="4" class="more center-align">
+                <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více</a>
+            </td>
+        </tr>
         <tr class="add" n:if="$isMaintainer">
             {form massForm}
                 <td colspan="2">
