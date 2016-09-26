@@ -24,7 +24,7 @@ div.flexible {
 .masses td.date {
   line-height: 1.7em; }
 .masses td.maintain {
-  float: right; }
+  white-space: nowrap; }
 .masses td.more {
   padding: 5px; }
   .masses td.more a.btn {

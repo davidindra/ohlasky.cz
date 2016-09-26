@@ -35,14 +35,14 @@
             </td>
             <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
-                <a n:href="deleteMass!, $mass->getId()">
-                    <i class="material-icons small teal-text">
-                        delete
-                    </i>
-                </a>
                 <a n:href="Church:view $church->abbreviation, $mass->getId()">
                     <i class="material-icons small teal-text">
                         mode_edit
+                    </i>
+                </a>
+                <a n:href="deleteMass!, $mass->getId()">
+                    <i class="material-icons small teal-text">
+                        delete
                     </i>
                 </a>
             </td>
