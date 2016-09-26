@@ -29,6 +29,8 @@ div.flexible {
   padding: 5px; }
   .masses td.more a.btn {
     width: 100%; }
+.masses tr:last-child {
+  border-bottom: none; }
 .masses .add td {
   padding: 5px; }
 .masses .add input {

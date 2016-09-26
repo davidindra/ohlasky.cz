@@ -49,7 +49,7 @@
         </tr>
         <tr n:if="!$vice && !$user->isLoggedIn()">
             <td colspan="4" class="more center-align">
-                <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více</a>
+                <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více mší svatých</a>
             </td>
         </tr>
         <tr class="add" n:if="$isMaintainer">
