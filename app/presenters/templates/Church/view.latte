@@ -5,7 +5,7 @@
     </h4>
 
     {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $church->maintainer->username || $user->isInRole('manager'))}
-    <table class="masses bordered highlight">
+    <table class="masses bordered highlight rowspanize">
         <thead>
         <tr>
             <th>Datum, čas</th>

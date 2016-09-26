@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $("table.rowspanize").rowspanizer({
+        vertical_align: 'middle'
+    });
+
     $(".button-collapse").sideNav();
 
     $('.modal-trigger').leanModal();
@@ -52,7 +56,7 @@ $(document).ready(function () {
         labelMonthPrev: 'Předchozí měsíc',
         labelMonthSelect: 'Zvolit měsíc',
         labelYearSelect: 'Zvolit rok',
-        onClose: function(){
+        onClose: function () {
             $(document.activeElement).blur()
         }
     });

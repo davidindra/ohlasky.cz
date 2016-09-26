@@ -1,5 +1,9 @@
 $(document).ready(function () {
-    $(function () {
+    $("table.rowspanize").rowspanizer({
+        vertical_align: 'middle'
+    });
+
+    /*$(function () {
         // clone table to display "before"
         var beforeTable = $('table.masses').clone().removeAttr('id').appendTo('#before')
         // code for grouping in "after" table
@@ -33,7 +37,7 @@ $(document).ready(function () {
         });
 
 
-    });
+    });*/
 
     if (printDocument) {
         setTimeout(function () {
