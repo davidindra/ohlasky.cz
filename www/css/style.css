@@ -28,7 +28,8 @@ div.flexible {
   vertical-align: sub; }
 
 .masses td.time, .masses th.time {
-  text-align: right; }
+  text-align: right;
+  padding-right: 20px; }
 .masses td {
   vertical-align: top; }
   .masses td.date, .masses td.time {
