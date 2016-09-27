@@ -18,6 +18,7 @@
             <td>
                 {$church->nameHighlighted|noescape}
                 <span class="hide-on-med-and-up">
+                    <br>
                     <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
                         {$church->locationShort}
                     </a>
