@@ -7,16 +7,16 @@
         <thead>
         <tr>
             <th>Název kostela</th>
-            <th>Umístění</th>
+            <th class="hide-on-small-only">Umístění</th>
             <th>Nejbližší mše</th>
-            <th>Zodpovědný farář</th>
+            <th class="right-align hide-on-small-only">Zodpovědný farář</th>
         </tr>
         </thead>
 
         <tbody>
         <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
-            <td>{$church->nameHighlighted|noescape}</td>
-            <td><a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">{$church->locationShort}</a></td>
+            <td>{$church->nameHighlighted|noescape}<span class="show-on-small-only">, <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">{$church->locationShort}</a></span></td>
+            <td class="hide-on-small-only"><a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">{$church->locationShort}</a></td>
             <td>
                 {if count($church->masses) > 0}
                     <b>{$church->nearestMass()->datetime|czdate:'l j. F G:i'|noescape}</b>
@@ -25,7 +25,7 @@
                     <i>nejsou mše</i>
                 {/if}
             </td>
-            <td><a href="mailto:{$church->maintainer->email}">{$church->maintainer->fullName}</a></td>
+            <td class="right-align hide-on-small-only"><a href="mailto:{$church->maintainer->email}">{$church->maintainer->fullName}</a></td>
         </tr>
         </tbody>
     </table>
