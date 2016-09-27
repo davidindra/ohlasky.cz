@@ -12,6 +12,8 @@ main {
 .churches th {
   cursor: default;
   white-space: nowrap; }
+.churches td.church, .churches td.location {
+  white-space: nowrap; }
 
 div.flexible {
   height: auto; }

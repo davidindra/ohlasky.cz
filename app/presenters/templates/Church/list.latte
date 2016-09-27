@@ -15,7 +15,7 @@
 
         <tbody>
         <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
-            <td>
+            <td class="church">
                 {$church->nameHighlighted|noescape}
                 <span class="hide-on-med-and-up">
                     <br>
@@ -23,7 +23,7 @@
                         {$church->locationShort}
                     </a>
                 </span>
-            </td>
+            </td class="location">
             <td class="hide-on-small-only">
                 <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
                     {$church->locationShort}

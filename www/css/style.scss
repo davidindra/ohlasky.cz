@@ -18,6 +18,12 @@ main {
     cursor: default;
     white-space: nowrap;
   }
+
+  td {
+    &.church, &.location {
+      white-space: nowrap;
+    }
+  }
 }
 
 div.flexible {
