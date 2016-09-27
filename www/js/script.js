@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("table.rowspanize").rowspanizer({
-        vertical_align: 'middle'
+        td: 'td:nth-child(1), td:nth-child(2)'
     });
 
     $(".button-collapse").sideNav();
