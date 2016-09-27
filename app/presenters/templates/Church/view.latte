@@ -51,6 +51,11 @@
                 </a>
             </td>
         </tr>
+        <tr n:if="$vice">
+            <td colspan="5" class="center-align">
+                <i>Další mše svaté prozatím nevyplněny.</i>
+            </td>
+        </tr>
         <tr n:if="!$vice && !$user->isLoggedIn()">
             <td colspan="5" class="more center-align">
                 <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více mší svatých</a>
