@@ -1,7 +1,7 @@
 {block content}
 <div class="section container">
     <h4 class="indigo-text" n:block="title">
-        {$church->nameHighlighted|noescape}
+        {$church->nameHighlighted|noescape} | {$church->locationShort}
     </h4>
 
     {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $church->maintainer->username || $user->isInRole('manager'))}
