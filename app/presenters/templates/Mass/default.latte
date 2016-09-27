@@ -11,7 +11,7 @@
             <!--<th>Liturgie</th>-->
             <th>Čas</th>
             <th>Kostel</th>
-            <!--<th>Úmysl mše svaté</th>-->
+            <th class="hide-on-small-only">Úmysl mše svaté</th>
         </tr>
         </thead>
 
@@ -42,7 +42,7 @@
                     {$mass->church->nameHighlighted|noescape}
                 </a>
             </td>
-            <!--<td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>-->
+            <td class="intention hide-on-small-only">{$mass->intention ? $mass->intention : '−−−'}</td>
         </tr>
         </tbody>
     </table>
