@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $("table.rowspanize").rowspanizer({
-        vertical_align: 'middle'
+        td: 'td:nth-child(1)'
     });
 
     if (printDocument) {
