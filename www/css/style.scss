@@ -44,16 +44,15 @@ div.flexible {
 }
 
 .masses {
-  td.time, th.time {
-    text-align: right;
-    padding-right: 20px;
-  }
-
   td {
     vertical-align: top;
 
     &.date, &.time {
       line-height: 1.7em;
+      white-space: nowrap;
+    }
+
+    &.church {
       white-space: nowrap;
     }
 
@@ -73,6 +72,11 @@ div.flexible {
         width: 100%;
       }
     }
+  }
+
+  td.time, th.time {
+    text-align: right;
+    padding-right: 20px;
   }
 
   tr {
