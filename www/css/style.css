@@ -22,7 +22,8 @@ div.flexible {
   vertical-align: sub; }
 
 .masses td.date {
-  line-height: 1.7em; }
+  line-height: 1.7em;
+  white-space: nowrap; }
 .masses td.maintain {
   float: right;
   white-space: nowrap; }

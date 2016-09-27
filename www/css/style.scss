@@ -36,6 +36,7 @@ div.flexible {
   td {
     &.date {
       line-height: 1.7em;
+      white-space: nowrap;
     }
 
     &.intention {
