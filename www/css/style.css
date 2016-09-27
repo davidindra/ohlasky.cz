@@ -58,6 +58,7 @@ div.flexible {
   width: 8ex;
   cursor: pointer; }
 .masses .add label[for=highlight] {
+  margin-top: 10px;
   padding-left: 25px; }
 .masses .add input[name=intention] {
   width: 100%; }
