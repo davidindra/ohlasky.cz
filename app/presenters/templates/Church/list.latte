@@ -20,7 +20,7 @@
             <td>
                 {if count($church->masses) > 0}
                     <b>{$church->nearestMass()->datetime|czdate:'l j. F G:i'|noescape}</b>
-                    {$church->nearestMass()->intention}
+                    <span class="hide-on-small-only">{$church->nearestMass()->intention}</span>
                 {else}
                     <i>nejsou mše</i>
                 {/if}
