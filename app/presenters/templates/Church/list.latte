@@ -7,6 +7,7 @@
         <thead>
         <tr>
             <th>Název kostela</th>
+            <th>Umístění</th>
             <th>Nejbližší mše</th>
             <th>Zodpovědný farář</th>
         </tr>
@@ -15,6 +16,7 @@
         <tbody>
         <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
             <td>{$church->nameHighlighted|noescape}</td>
+            <td>{$church->locationShort}</td>
             <td>
                 {if count($church->masses) > 0}
                     <b>{$church->nearestMass()->datetime|czdate:'l j. F G:i'|noescape}</b>

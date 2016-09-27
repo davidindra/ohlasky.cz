@@ -34,6 +34,16 @@ class Church
     protected $nameShort;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $location;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $locationShort;
+
+    /**
      * @ORM\Column(type="string", unique=true)
      */
     protected $nameHighlighted;
