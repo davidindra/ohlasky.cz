@@ -3,6 +3,10 @@ $(document).ready(function () {
         td: 'td:nth-child(1), td:nth-child(2)'
     });
 
+    $("table.rowspanize-first").rowspanizer({
+        td: 'td:nth-child(1)'
+    });
+
     $(".button-collapse").sideNav();
 
     $('.modal-trigger').leanModal();
