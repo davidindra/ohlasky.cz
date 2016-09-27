@@ -32,6 +32,8 @@ div.flexible {
   .masses td.date, .masses td.time {
     line-height: 1.7em;
     white-space: nowrap; }
+  .masses td.liturgy {
+    width: 16%; }
   .masses td.church {
     white-space: nowrap; }
   .masses td.maintain {
