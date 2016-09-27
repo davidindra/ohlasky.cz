@@ -37,7 +37,7 @@
             <td class="date">
                 <b>{$mass->datetime|czdate:'G:i'}</b>
             </td>
-            <td n:class="$mass->intention ? 'intention' : 'intention center-align'">{$mass->intention ? $mass->intention : '−−−'}</td>
+            <td class="intention" ">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
                 <a n:href="Church:view $church->abbreviation, $mass->getId()">
                     <i class="material-icons small teal-text">
