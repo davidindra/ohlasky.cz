@@ -65,7 +65,8 @@ class ChurchPresenter extends BasePresenter
         $this->template->masses = array();
         foreach($this->masses->getByChurch($this->template->church) as $mass){
             if(DateTime::from($mass->datetime) > DateTime::from(strtotime(date('o-\\WW')))
-                && (DateTime::from($mass->datetime) <= DateTime::from(time() + 7*24*60*60) || $future)) {
+                //&& (DateTime::from($mass->datetime) <= DateTime::from(time() + 7*24*60*60) || $future)) {
+                && (DateTime::from($mass->datetime) <= strtotime(date('o-\\WW', time() + 7*24*60*60)) || $future)) {
 
                 $this->template->masses[] = $mass;
             }
