@@ -10,7 +10,8 @@ main {
 .churches tr {
   cursor: pointer; }
 .churches th {
-  cursor: default; }
+  cursor: default;
+  white-space: nowrap; }
 
 div.flexible {
   height: auto; }
