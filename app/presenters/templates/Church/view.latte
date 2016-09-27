@@ -1,9 +1,9 @@
 {block content}
 <div class="section container">
     <h4 class="indigo-text" n:block="title">
-        {$church->nameHighlighted|noescape} |
+        {$church->nameHighlighted|noescape}
         <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
-            {$church->locationShort}
+            | {$church->locationShort}
         </a>
     </h4>
 
