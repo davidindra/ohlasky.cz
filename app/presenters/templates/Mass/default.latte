@@ -7,8 +7,9 @@
     <table class="masses bordered highlight rowspanize">
         <thead>
         <tr>
-            <th>Datum, čas</th>
+            <th>Datum</th>
             <th>Liturgie</th>
+            <th>Čas</th>
             <th>Kostel</th>
             <th>Úmysl mše svaté</th>
         </tr>
@@ -19,7 +20,7 @@
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $mass->church->maintainer->username || $user->isInRole('manager'))}
             <td class="date">
-                {$mass->datetime|czdate:'l <b>j. F</b> G:i'|noescape}<br>
+                {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>
             </td>
             <td class="liturgy">
                 {if empty($mass->celebration)}
@@ -32,6 +33,9 @@
                 {else}
                     {$mass->celebration}
                 {/if}
+            </td>
+            <td class="date">
+                <b>{$mass->datetime|czdate:'G:i'}</b><br>
             </td>
             <td class="church">
                 <a n:href="Church:view $mass->church->abbreviation">
