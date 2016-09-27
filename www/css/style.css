@@ -31,7 +31,8 @@ div.flexible {
   vertical-align: top; }
   .masses td.date {
     line-height: 1.7em;
-    white-space: nowrap; }
+    white-space: nowrap;
+    text-align: right; }
   .masses td.maintain {
     float: right;
     white-space: nowrap; }
