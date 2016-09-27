@@ -1,10 +1,12 @@
 $(document).ready(function () {
     $("table.rowspanize").rowspanizer({
-        td: 'td:nth-child(1), td:nth-child(2)'
+        td: 'td:nth-child(1), td:nth-child(2)',
+        vertical_align: 'top'
     });
 
     $("table.rowspanize-first").rowspanizer({
-        td: 'td:nth-child(1)'
+        td: 'td:nth-child(1)',
+        vertical_align: 'top'
     });
 
     $(".button-collapse").sideNav();

@@ -19,7 +19,7 @@
         <tr n:foreach="$masses as $mass"
                 n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $mass->church->maintainer->username || $user->isInRole('manager'))}
-            <td class="date valign-top">
+            <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>
             </td>
             <td class="liturgy hide-on-small-only">
