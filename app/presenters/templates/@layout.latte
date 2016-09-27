@@ -105,12 +105,7 @@
                 </li>-->
 
                 <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
-                    <a n:href="About:">
-                        O projektu
-                    </a>
-                </li>
-                <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
-                    <a n:href="About:default#jaksezapojit">
+                    <a n:href="About:default">
                         Chci se zapojit!
                     </a>
                 </li>
