@@ -27,16 +27,18 @@ div.flexible {
 .middle {
   vertical-align: sub; }
 
-.masses td.date {
-  line-height: 1.7em;
-  white-space: nowrap; }
-.masses td.maintain {
-  float: right;
-  white-space: nowrap; }
-.masses td.more {
-  padding: 5px; }
-  .masses td.more a.btn {
-    width: 100%; }
+.masses td {
+  vertical-align: top; }
+  .masses td.date {
+    line-height: 1.7em;
+    white-space: nowrap; }
+  .masses td.maintain {
+    float: right;
+    white-space: nowrap; }
+  .masses td.more {
+    padding: 5px; }
+    .masses td.more a.btn {
+      width: 100%; }
 .masses tr.past {
   opacity: 0.6; }
 .masses tr:last-child {
