@@ -56,6 +56,7 @@ div.flexible {
   cursor: pointer; }
 .masses .add input[name=time] {
   width: 8ex;
+  text-align: right;
   cursor: pointer; }
 .masses .add label[for=highlight] {
   margin-top: 10px;
