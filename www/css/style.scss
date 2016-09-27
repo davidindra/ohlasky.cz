@@ -44,18 +44,16 @@ div.flexible {
 }
 
 .masses {
+  td.time, th.time {
+    text-align: right;
+  }
+
   td {
     vertical-align: top;
 
-    &.date {
+    &.date, &.time {
       line-height: 1.7em;
       white-space: nowrap;
-    }
-
-    &.time {
-      line-height: 1.7em;
-      white-space: nowrap;
-      text-align: right;
     }
 
     &.intention {

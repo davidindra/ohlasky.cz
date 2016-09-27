@@ -27,15 +27,13 @@ div.flexible {
 .middle {
   vertical-align: sub; }
 
+.masses td.time, .masses th.time {
+  text-align: right; }
 .masses td {
   vertical-align: top; }
-  .masses td.date {
+  .masses td.date, .masses td.time {
     line-height: 1.7em;
     white-space: nowrap; }
-  .masses td.time {
-    line-height: 1.7em;
-    white-space: nowrap;
-    text-align: right; }
   .masses td.maintain {
     float: right;
     white-space: nowrap; }
