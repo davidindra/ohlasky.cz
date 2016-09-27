@@ -50,6 +50,11 @@ div.flexible {
     &.date {
       line-height: 1.7em;
       white-space: nowrap;
+    }
+
+    &.time {
+      line-height: 1.7em;
+      white-space: nowrap;
       text-align: right;
     }
 
