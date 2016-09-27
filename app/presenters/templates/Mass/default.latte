@@ -8,10 +8,10 @@
         <thead>
         <tr>
             <th>Datum</th>
-            <th>Liturgie</th>
+            <!--<th>Liturgie</th>-->
             <th>Čas</th>
             <th>Kostel</th>
-            <th>Úmysl mše svaté</th>
+            <!--<th>Úmysl mše svaté</th>-->
         </tr>
         </thead>
 
@@ -22,7 +22,7 @@
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>
             </td>
-            <td class="liturgy">
+            <!--<td class="liturgy">
                 {if empty($mass->celebration)}
                     {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
                     {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
@@ -33,7 +33,7 @@
                 {else}
                     {$mass->celebration}
                 {/if}
-            </td>
+            </td>-->
             <td class="date">
                 <b>{$mass->datetime|czdate:'G:i'}</b><br>
             </td>
@@ -42,7 +42,7 @@
                     {$mass->church->nameHighlighted|noescape}
                 </a>
             </td>
-            <td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>
+            <!--<td class="intention">{$mass->intention ? $mass->intention : '−−−'}</td>-->
         </tr>
         </tbody>
     </table>
