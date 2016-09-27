@@ -17,7 +17,7 @@
 
         <tbody>
         <tr n:foreach="$masses as $mass"
-                n:class="$mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
+                n:class="$mass->highlighted == 'ignore-this-rule' || date('N', $mass->datetime->getTimestamp()) == 7 ? 'indigo lighten-5 bold'">
             {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $mass->church->maintainer->username || $user->isInRole('manager'))}
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>

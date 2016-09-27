@@ -21,7 +21,7 @@
 
         <tbody>
         <tr n:foreach="$masses as $mass"
-                class="{if $mass->highlighted || date('N', $mass->datetime->getTimestamp()) == 7}indigo lighten-5 bold{/if}{if $mass->datetime->getTimestamp() < time() - (time() % (24*60*60))} past{/if}">
+                class="{if $mass->highlighted == 'invalid-rule' || date('N', $mass->datetime->getTimestamp()) == 7}indigo lighten-5 bold{/if}{if $mass->datetime->getTimestamp() < time() - (time() % (24*60*60))} past{/if}">
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
             </td>
