@@ -100,8 +100,12 @@ class ChurchPresenter extends BasePresenter
             ->setDefaultValue($mass ? $mass->datetime->format('G:i') : '9:00')
             ->setRequired('Zvolte, prosím, čas mše.');
 
-        $form->addCheckbox('highlight', 'slavnost')
-            ->setDefaultValue($mass ? $mass->highlighted : false);
+        /*$form->addCheckbox('highlight', 'slavnost')
+            ->setDefaultValue($mass ? $mass->highlighted : false);*/
+
+        $form->addText('liturgy', 'Liturgická oslava')
+            ->setDefaultValue($mass ? $mass->celebration : null)
+            ->setAttribute('placeholder', 'Liturgická oslava; doplněno automaticky');
 
         $form->addText('intention', 'Intence')
             ->setDefaultValue($mass ? $mass->intention : null)
@@ -122,7 +126,9 @@ class ChurchPresenter extends BasePresenter
                 $mass->church = $church;
 
                 $mass->datetime = DateTime::from($values['date'] . ' ' . $values['time']);
-                $mass->highlighted = $values['highlight'];
+                //$mass->highlighted = $values['highlight'];
+                $mass->highlighted = $values['liturgy'] ? true : false;
+                $mass->celebration = $values['liturgy'] ? $values['liturgy'] : null;
                 $mass->intention = $values['intention'];
                 $this->masses->create($mass);
                 $this->flashMessage('Mše byla vytvořena.');
@@ -131,7 +137,9 @@ class ChurchPresenter extends BasePresenter
                 /** @var Mass $mass */
                 $mass = $this->masses->getById($values['massId']);
                 $mass->datetime = DateTime::from($values['date'] . ' ' . $values['time']);
-                $mass->highlighted = $values['highlight'];
+                //$mass->highlighted = $values['highlight'];
+                $mass->highlighted = $values['liturgy'] ? true : false;
+                $mass->celebration = $values['liturgy'] ? $values['liturgy'] : null;
                 $mass->intention = $values['intention'];
                 $this->flashMessage('Mše byla upravena.');
                 $this->redirect('Church:view', [$this->getParameter('church')]);
