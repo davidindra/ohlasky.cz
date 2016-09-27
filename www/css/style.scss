@@ -113,8 +113,10 @@ div.flexible {
 
     input[name=time] {
       width: 8ex;
-      text-align: right;
       cursor: pointer;
+      text-align: right;
+      float: right;
+      padding-right: 20px;
     }
 
     input[name=highlight] {
