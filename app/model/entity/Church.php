@@ -24,7 +24,7 @@ class Church
     protected $abbreviation;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     protected $name;
 
@@ -44,7 +44,7 @@ class Church
     protected $locationShort;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     protected $nameHighlighted;
 
