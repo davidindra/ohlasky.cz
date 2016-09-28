@@ -29,7 +29,7 @@ class Church
     protected $name;
 
     /**
-     * @ORM\Column(type="string", unique=true)
+     * @ORM\Column(type="string")
      */
     protected $nameShort;
 
