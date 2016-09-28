@@ -109,7 +109,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->addText('intention', 'Intence')
             ->setDefaultValue($mass ? $mass->intention : null)
-            ->setAttribute('placeholder', 'Intence');
+            ->setAttribute('placeholder', 'Intence - pokud není, ponechte pole prázdné');
 
         $form->addSubmit('send', 'Uložit');
 
@@ -120,7 +120,6 @@ class ChurchPresenter extends BasePresenter
                 $this->redirect('this');
             }
 
-            Debugger::barDump($values);
             if(empty($values['massId'])){
                 $mass = new Mass();
                 $mass->church = $church;
