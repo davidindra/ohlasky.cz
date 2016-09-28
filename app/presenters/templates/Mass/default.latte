@@ -40,6 +40,9 @@
             <td class="church">
                 <a n:href="Church:view $mass->church->abbreviation">
                     {$mass->church->nameHighlighted|noescape}
+                    <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
+                        | {$church->locationShort}
+                    </a>
                 </a>
             </td>
             <td class="intention hide-on-small-only">{$mass->intention ? $mass->intention : '−−−'}</td>
