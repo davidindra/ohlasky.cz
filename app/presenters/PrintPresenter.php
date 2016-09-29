@@ -112,7 +112,7 @@ class PrintPresenter extends SecuredPresenter
         return $form;
     }
 
-    public function renderExport($type, $churches, $period, $announcements, $zoom = 100, $massSpacing = 0.5, $print = false)
+    public function renderExport($type, $churches, $period, $announcements, $zoom = 1, $massSpacing = 0.5, $print = false)
     {
         if (empty($type) || empty($churches) || empty($period)) {
             $this->error('Formulář byl vyplněn nesprávně.', 500);
