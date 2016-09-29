@@ -34,7 +34,7 @@
                     <b>{$church->nearestMass()->datetime|czdate:'l j. F G:i'|noescape}</b>
                     <span class="hide-on-small-only">{$church->nearestMass()->intention}</span>
                 {else}
-                    <i>nejsou mše</i>
+                    <i>nejsou zadány žádné bohoslužby</i>
                 {/if}
             </td>
             <td class="right-align hide-on-small-only"><a
