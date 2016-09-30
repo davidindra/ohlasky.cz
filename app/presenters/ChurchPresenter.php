@@ -73,8 +73,6 @@ class ChurchPresenter extends BasePresenter
 
         $form = new Form();
 
-        Debugger::barDump($this->getParameters());
-
         $form->addHidden('churchId');
         $form->addHidden('massId')
             ->setDefaultValue($this->getParameter('edit'));
@@ -173,7 +171,6 @@ class ChurchPresenter extends BasePresenter
                 $this->redirect('this');
             }
 
-            Debugger::barDump($values);
             if(empty($values['announcementId'])){
                 $announcement = new Announcement();
                 $announcement->church = $church;
