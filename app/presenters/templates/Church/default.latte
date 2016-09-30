@@ -2,7 +2,7 @@
 <div class="section container">
     <h4 class="indigo-text" n:block="title">
         {$church->nameHighlighted|noescape}
-        <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
+        <a n:tag-if="!empty($church->location)" href="{$church->location|gmaps}" target="_blank">
             | {$church->locationShort}
         </a>
     </h4>
@@ -42,7 +42,7 @@
             </td>
             <td class="intention" ">{$mass->intention ? $mass->intention : '−−−'}</td>
             <td class="maintain" n:if="$isMaintainer">
-                <a n:href="Church:view $church->abbreviation, $mass->getId()">
+                <a n:href="Church:default $church->abbreviation, $mass->getId()">
                     <i class="material-icons small teal-text">
                         mode_edit
                     </i>
@@ -61,7 +61,7 @@
         </tr>
         <tr n:if="!$vice && !$user->isLoggedIn()">
             <td colspan="5" class="more center-align">
-                <a n:href="Church:view church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více mší svatých</a>
+                <a n:href="Church:default church => $church->abbreviation, vice => true" class="btn indigo">Zobrazit více mší svatých</a>
             </td>
         </tr>
         <tr class="add" n:if="$isMaintainer">
@@ -95,7 +95,7 @@
     <ul class="collection" n:if="$isMaintainer || count($announcements) > 0">
         <li n:foreach="$announcements as $announcement" class="collection-item">
             <div class="maintain" n:if="$isMaintainer">
-                <a n:href="Church:view $church->abbreviation, null, $announcement->id">
+                <a n:href="Church:default $church->abbreviation, null, $announcement->id">
                     <i class="material-icons small teal-text">
                         mode_edit
                     </i>

@@ -41,16 +41,7 @@ class ChurchPresenter extends BasePresenter
      */
     public $liturgy;
 
-    public function renderDefault()
-    {
-        $this->redirect('Church:list');
-    }
-
-    public function renderList(){
-        $this->template->churches = $this->churches->getAll();
-    }
-
-    public function renderView($church, $edit = null, $editAnnouncement = null, $vice = false){
+    public function renderDefault($church, $edit = null, $editAnnouncement = null, $vice = false){
         $this->template->edit = $edit;
         $this->template->editAnnouncement = $editAnnouncement;
         $this->template->vice = $vice;
@@ -141,7 +132,7 @@ class ChurchPresenter extends BasePresenter
                 $mass->celebration = $values['liturgy'] ? $values['liturgy'] : null;
                 $mass->intention = $values['intention'];
                 $this->flashMessage('Mše byla upravena.');
-                $this->redirect('Church:view', [$this->getParameter('church')]);
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }
         };
 
@@ -156,7 +147,7 @@ class ChurchPresenter extends BasePresenter
         }
         $this->masses->deleteById($massId);
         $this->flashMessage('Mše byla odstraněna.');
-        $this->redirect('Church:view', [$this->getParameter('church')]);
+        $this->redirect('Church:', [$this->getParameter('church')]);
     }
 
     public function createComponentAnnouncementForm(){
@@ -197,7 +188,7 @@ class ChurchPresenter extends BasePresenter
                 $announcement->lastEdit = DateTime::from(time());
                 $announcement->content = $values['announcement'];
                 $this->flashMessage('Ohláška byla upravena.');
-                $this->redirect('Church:view', [$this->getParameter('church')]);
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }
         };
 
@@ -212,6 +203,6 @@ class ChurchPresenter extends BasePresenter
         }
         $this->announcements->deleteById($announcementId);
         $this->flashMessage('Ohláška byla odstraněna.');
-        $this->redirect('Church:view', [$this->getParameter('church')]);
+        $this->redirect('Church:', [$this->getParameter('church')]);
     }
 }

@@ -34,6 +34,8 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
 
     protected function beforeRender()
     {
+        $this->template->ga = $this->getParameter('ga');
+
         $this->template->addFilter('czdate', function ($input, $format = 'l j. F G:i') {
             $en = [
                 "January", "February", "March", "April", "May", "June",
@@ -63,6 +65,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $md = \Parsedown::instance();
             $html = new Nette\Utils\Html();
             return $html->setHtml($md->line($this->template->getLatte()->invokeFilter('breaklines', [$input])));
+        });
+
+        $this->template->addFilter('gmaps', function($input) {
+            $html = new Nette\Utils\Html();
+            return $html->setHtml('https://www.google.cz/maps/search/' . $this->template->getLatte()->invokeFilter('escapeurl', [$input]) . '?hl=cs&source=opensearch');
         });
     }
 

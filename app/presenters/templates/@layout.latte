@@ -88,8 +88,8 @@
 
         <ul class="right hide-on-med-and-down">
             {block menuitems}
-                <li n:class="$presenter->name == 'Church' ? active">
-                    <a n:href="Church:list">
+                <li n:class="$presenter->name == 'ChurchList' ? active">
+                    <a n:href="ChurchList:default">
                         Přehled kostelů
                     </a>
                 </li>
@@ -122,7 +122,7 @@
                 </li>
                 <li>
                     {if $user->isLoggedIn()}
-                        <a n:href="Homepage:signOut">
+                        <a n:href="Account:logout">
                             <b>Odhlásit se</b> ({$user->identity->data['fullname']})
                         </a>
                     {else}

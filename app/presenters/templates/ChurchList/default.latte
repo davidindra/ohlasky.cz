@@ -14,23 +14,23 @@
         </thead>
 
         <tbody>
-        <tr n:foreach="$churches as $church" data-link="{link Church:view $church->abbreviation}">
+        <tr n:foreach="$churches as $church" data-link="{link Church: $church->abbreviation}">
             <td class="church">
                 {$church->nameHighlighted|noescape}
                 <span class="hide-on-med-and-up">
                     <br>
-                    <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
+                    <a n:tag-if="!empty($church->location)" href="{$church->location|gmaps}" target="_blank">
                         {$church->locationShort}
                     </a>
                 </span>
             </td>
             <td class="location hide-on-small-only">
-                <a n:tag-if="!empty($church->location)" href="https://www.google.cz/maps/search/{$church->location}?hl=cs&source=opensearch" target="_blank">
+                <a n:tag-if="!empty($church->location)" href="{$church->location|gmaps}" target="_blank">
                     {$church->locationShort}
                 </a>
             </td>
             <td>
-                {if count($church->masses) > 0}
+                {if !empty($church->nearestMass())}
                     <b>{$church->nearestMass()->datetime|czdate:'l j. F G:i'|noescape}</b>
                     <span class="hide-on-small-only">{$church->nearestMass()->intention}</span>
                 {else}
