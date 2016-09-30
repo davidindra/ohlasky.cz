@@ -21,7 +21,7 @@ class RouterFactory
 	public function createRouter()
 	{
 		$router = new RouteList;
-		$router[] = new Route('[kostel/]<church>', [
+		$router[] = new Route('<church>[/<action>]', [
 			'presenter' => 'Church',
 			'action' => 'default',
 			'church' => [
@@ -46,7 +46,12 @@ class RouterFactory
 					'admin' => 'Admin'
 				],
 			],
-			'action' => 'default'
+			'action' => [
+				Route::VALUE => 'default',
+				Route::FILTER_TABLE => [
+
+				]
+			]
 		]);
 
 		return $router;
