@@ -1,0 +1,135 @@
+{define head}
+    <script>
+        var printDocument = {$print ? true : false};
+    </script>
+
+    <style>
+        .page {
+            zoom: {$zoom|noescape};
+        }
+
+        table.masses td, table.masses th {
+            padding: {$massSpacing|noescape}rem;
+        }
+
+        div.subheading2 {
+            font-size: {count($churches) < 5 ? '1.1rem' : '0.9rem'|noescape};
+        }
+    </style>
+{/define}
+
+{define title}
+    Export nedělníku {foreach $churches as $church}{$church->nameShort}{if !$iterator->isLast()}, {/if}{/foreach}
+{/define}
+
+{block content}
+
+<div class="page">
+    <div class="heading">
+        Nedělník 27. neděle v mezidobí {$weekStart|date:'j. n. Y'}
+    </div>
+    <div class="subheading">
+        <i>Vezmi si mě, prosím, s sebou domů!</i>
+    </div>
+
+    <div class="sundayliturgy">
+        <div class="section" n:foreach="$sundayLiturgy as $section">
+            <div class="heading" n:if="!empty($section['heading'])">
+                {$section['heading']}
+            </div>
+            <div class="source" n:if="!empty($section['source'])">
+                {$section['source']}
+            </div>
+            <div class="perex" n:if="!empty($section['perex'])">
+                {$section['perex']}
+            </div>
+            <div class="responsum" n:if="!empty($section['responsum'])">
+                {$section['responsum']}
+            </div>
+            <div class="content" n:if="!empty($section['content'])">
+                {$section['content']}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="page">
+
+    <div class="heading">
+        Ohlášky a aktuální pořad bohoslužeb
+    </div>
+    <div class="subheading">
+        v týdnu od {$weekStart|date:'j. n. Y'} do {$weekEnd|date:'j. n. Y'}
+    </div>
+    <div class="subheading2">
+        {foreach $churches as $church}
+            {$church->name|noescape} <span n:if="count($churches) != 1">({$church->nameShort})</span>
+            {if !$iterator->isLast()} | {/if}
+        {/foreach}
+    </div>
+
+    <table class="masses rowspanize" n:if="!empty($masses)">
+        <tr>
+            <th>Den</th>
+            <th>Čas</th>
+            <th n:if="count($churches) != 1">Místo</th>
+            <th>Úmysl</th>
+        </tr>
+        <tr n:foreach="$masses as $mass">
+            <td class="date">
+                {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
+                {if empty($mass->celebration)}
+                    <br>
+                    <span class="liturgy">
+                        {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
+                        {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
+                            {$dayInfo->dayEcclesiastical}
+                        {else}
+                            {$dayInfo->feastEcclesiastical}
+                        {/if}
+                    </span>
+                {else}
+                    <br>
+                    <span class="liturgy">
+                        <b>{$mass->celebration}</b>
+                    </span>
+                {/if}
+            </td>
+            <td class="time">
+                {$mass->datetime|czdate:'G:i'|noescape}
+            </td>
+            <td class="place" n:if="count($churches) != 1">
+                {$mass->church->nameShort}
+            </td>
+            <td class="intention">
+                {$mass->intention}
+            </td>
+        </tr>
+    </table>
+
+    <div class="no-masses" n:if="empty($masses)">
+        Na toto období nejsou naplánovány žádné mše.
+    </div>
+
+    {if $announcementsOption == 'break'}
+</div>
+
+<div class="page">
+    {/if}
+
+    <div class="announcements" n:if="$announcementsOption != 'no'">
+        <div n:foreach="$announcements as $announcement">
+            <b n:if="count($churches) > 1">{$announcement->church->nameShort}
+                :</b> {$announcement->content|markdown|noescape}
+        </div>
+    </div>
+
+    <footer {if !$print}style="bottom: auto;"{/if}>
+        Vygenerováno pomocí
+        <a href="https://ohlasky.cz" target="_blank">
+            <img src="/favicon.ico">
+            Ohlášky.cz
+        </a>
+        | {time()|date:'j.n.Y'}
+    </footer>
+</div>
