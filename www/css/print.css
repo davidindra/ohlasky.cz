@@ -103,8 +103,8 @@ div.sundayliturgy .section .content {
 
 footer {
   position: relative;
+  margin-top: 0.8rem;
   width: 100%;
-  bottom: 0rem;
   text-align: center;
   font-size: 0.7rem;
   color: #727272; }
