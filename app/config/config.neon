@@ -27,6 +27,8 @@ services:
     - App\Model\Repository\Users
     - App\Model\Repository\Masses
     - App\Model\Repository\Announcements
+    - App\Model\Repository\LiturgyDays
+    - App\Model\Repository\LiturgyTexts
 
     - GuzzleHttp\Client
     - App\Model\LiturgyCollector
