@@ -88,9 +88,9 @@ div.flexible {
       opacity: 0.6;
     }
 
-    &:last-child {
+    /*&:last-child {
       border-bottom: none;
-    }
+    }*/
   }
 
   .add {
@@ -104,6 +104,7 @@ div.flexible {
 
     input {
       margin: 0;
+      border-bottom: none;
     }
 
     input[name=date] {
