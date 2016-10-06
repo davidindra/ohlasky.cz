@@ -9,7 +9,8 @@
     <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico'>
     <meta name="theme-color" content="#3f51b5">
 
-    <meta name="description" content="Ohlášky.cz jsou stránkou, díky které mají farníci (především) prostějovských kostelů vždy přehled o nejbližších bohoslužbách a informacích z farností.">
+    <meta name="description"
+          content="Ohlášky.cz jsou stránkou, díky které mají farníci (především) prostějovských kostelů vždy přehled o nejbližších bohoslužbách a informacích z farností.">
     <meta name="keywords" content="ohlášky,Prostějov,kostel,mše,bohoslužba,farnost">
     <meta name="author" content="David Indra">
 
@@ -17,7 +18,8 @@
     <meta property="og:title" content="Ohlášky.cz">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://ohlasky.cz">
-    <meta property="og:description" content="Okamžitý přehled o bohoslužbách v (především) prostějovských farnostech a informacích z nich.">
+    <meta property="og:description"
+          content="Okamžitý přehled o bohoslužbách v (především) prostějovských farnostech a informacích z nich.">
     <meta property="og:image" content="https://ohlasky.cz/logo.png">
 
     <!-- jQuery -->
@@ -105,11 +107,17 @@
                     </a>
                 </li>
 
-                <!--<li n:class="$presenter->name == 'Liturgy' ? active">
-                    <a n:href="Homepage:">
-                        Liturgie
+                <li n:class="$presenter->name == 'LiturgyDays' ? active" n:if="$user->isInRole('manager')">
+                    <a n:href="LiturgyDays:">
+                        <b>Slavnosti</b>
                     </a>
-                </li>-->
+                </li>
+                <li n:class="$presenter->name == 'LiturgyTexts' ? active" n:if="$user->isInRole('manager')">
+                    <a n:href="LiturgyDays:">
+                        <b>Texty</b>
+                    </a>
+                </li>
+
                 <li n:class="$presenter->name == '' ? active" n:if="$user->isLoggedIn()">
                     <a n:href="Print:">
                         <b>Tisk</b>

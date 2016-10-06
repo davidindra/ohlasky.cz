@@ -4,6 +4,7 @@ namespace App\Model\Repository;
 use App\Model\Entity\LiturgyDay;
 use Nette;
 use Kdyby\Doctrine\EntityManager;
+use Nette\Utils\DateTime;
 
 class LiturgyDays extends Nette\Object
 {
@@ -21,8 +22,14 @@ class LiturgyDays extends Nette\Object
         $this->em->persist($liturgyDay);
     }
 
-    public function getAll(){
-        return $this->liturgyDays->findAll();
+    public function getAll($futureOnly = true){
+        $data = [];
+        foreach($this->liturgyDays->findBy([], ['date' => 'ASC']) as $day){
+            if(DateTime::from($day->date)->getTimestamp() > time() - 24*60*60 || !$futureOnly){
+                $data[] = $day;
+            }
+        }
+        return $data;
     }
 
     public function getById($id){

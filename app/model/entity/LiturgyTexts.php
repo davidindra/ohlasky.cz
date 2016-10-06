@@ -18,6 +18,11 @@ class LiturgyTexts
     protected $date;
 
     /**
+     * @ORM\Column(type="int")
+     */
+    protected $order;
+
+    /**
      * @ORM\Column(type="string", length=100)
      */
     protected $heading;

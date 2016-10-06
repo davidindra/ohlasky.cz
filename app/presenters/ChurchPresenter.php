@@ -138,7 +138,7 @@ class ChurchPresenter extends BasePresenter
     }
 
     public function handleDeleteMass($massId){
-        $mass = $this->announcements->getById($massId);
+        $mass = $this->masses->getById($massId);
         if(!$this->user->isLoggedIn() || ($mass->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))) {
             $this->flashMessage('Nemáte oprávnění mazat mše tohoto kostela.');
             $this->redirect('this');

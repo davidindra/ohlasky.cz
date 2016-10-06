@@ -1,0 +1,53 @@
+{block content}
+<div class="section container">
+    <h4 class="indigo-text" n:block="title">
+        Liturgické slavnosti
+    </h4>
+
+    <table class="liturgy bordered highlight rowspanize">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Popis</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr class="add">
+            {form dayForm}
+                <td>
+                    {input dayId}
+                    <input n:name="date" class="datepicker">
+                </td>
+                <td>
+                    <input n:name="description">
+                </td>
+                <td>
+                    <input n:name="send" class="btn">
+                </td>
+            {/form}
+        </tr>
+        <tr n:foreach="$liturgyDays as $day">
+            <td class="date">
+                {$day->date|czdate:'l <b>j. F</b>'|noescape}
+            </td>
+            <td class="description">
+                {$day->description}
+            </td>
+            <td class="maintain">
+                <a n:href="LiturgyDays:default $day->getId()">
+                    <i class="material-icons small teal-text">
+                        mode_edit
+                    </i>
+                </a>
+                <a n:href="delete!, $day->getId()">
+                    <i class="material-icons small teal-text">
+                        delete
+                    </i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

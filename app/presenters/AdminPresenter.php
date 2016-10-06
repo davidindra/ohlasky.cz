@@ -48,7 +48,7 @@ class AdminPresenter extends BasePresenter
     {
         if(!$this->user->isInRole('admin')){
             $this->flashMessage('Nemáte oprávnění pro přístup k této stránce.');
-            $this->redirect('Homepage:', ['backlink' => $this->storeRequest()]);
+            $this->redirect('Homepage:');
         }
 
         parent::startup();

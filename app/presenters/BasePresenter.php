@@ -13,9 +13,6 @@ use Tracy\Debugger;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-    /** @persistent */
-    public $backlink = '';
-
     /** @var Forms\SignInFormFactory @inject */
     public $signInFactory;
 
@@ -27,7 +24,6 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
     {
         return $this->signInFactory->create(function () {
             $this->flashMessage('Byl jste úspěšně přihlášen!');
-            $this->restoreRequest($this->backlink);
             $this->redirect('Homepage:', ['ga' => 'login']);
         });
     }

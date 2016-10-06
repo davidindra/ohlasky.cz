@@ -97,4 +97,28 @@ div.flexible {
   .collection .collection-item input[type=submit] {
     float: right; }
 
+.liturgy td {
+  vertical-align: top; }
+  .liturgy td.date {
+    line-height: 1.7em;
+    white-space: nowrap; }
+  .liturgy td.maintain {
+    float: right;
+    white-space: nowrap; }
+.liturgy tr:last-child {
+  border-bottom: none; }
+.liturgy .add td {
+  padding: 5px; }
+  .liturgy .add td:last-of-type {
+    float: right; }
+.liturgy .add input {
+  margin: 0; }
+.liturgy .add input[name=date] {
+  width: 100%;
+  cursor: pointer; }
+.liturgy .add input[name=description] {
+  width: 100%; }
+.liturgy .add input[name=send] {
+  margin: 4px 0; }
+
 /*# sourceMappingURL=style.css.map */

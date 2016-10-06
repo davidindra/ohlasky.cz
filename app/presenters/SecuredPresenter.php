@@ -11,7 +11,7 @@ class SecuredPresenter extends BasePresenter
     {
         if(!$this->user->isLoggedIn() && $this->action != 'export'){
             $this->flashMessage('Pro přístup k této stránce se musíte přihlásit.');
-            $this->redirect('Homepage:', ['backlink' => $this->storeRequest()]);
+            $this->redirect('Homepage:');
         }
 
         parent::startup();

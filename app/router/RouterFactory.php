@@ -41,6 +41,8 @@ class RouterFactory
 					'mse' => 'Mass',
 					'oprojektu' => 'About',
 					'ucet' => 'Account',
+					'texty' => 'LiturgyTexts',
+					'slavnosti' => 'LiturgyDays',
 					'export' => 'Export',
 					'tisk' => 'Print',
 					'admin' => 'Admin'
