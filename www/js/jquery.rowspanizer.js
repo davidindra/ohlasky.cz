@@ -42,7 +42,7 @@
                 $(this).find(_this.settings.td).each(function (d, td) {
                     var $td = $(td);
                     var v_dato = $td.html();
-                    if(typeof arr[d] != 'undefined' && 'dato' in arr[d] && arr[d].dato == v_dato) {
+                    if(typeof arr[d] != 'undefined' && 'dato' in arr[d] && arr[d].dato == v_dato && v_dato.trim() != "") {
                         var rs = arr[d].elem.data('rowspan');
                         if(rs == 'undefined' || isNaN(rs)) rs = 1;
                         arr[d].elem.data('rowspan', parseInt(rs) + 1).addClass('rowspan-combine');

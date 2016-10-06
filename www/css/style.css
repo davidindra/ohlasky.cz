@@ -76,6 +76,9 @@ div.flexible {
 .picker--opened .picker__frame {
   top: 1%; }
 
+.picker__day--selected {
+  border-radius: 10% !important; }
+
 .collection .collection-item {
   padding-right: 10px; }
   .collection .collection-item .announcement {
