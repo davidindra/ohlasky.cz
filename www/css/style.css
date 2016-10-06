@@ -98,27 +98,28 @@ div.flexible {
     float: right; }
 
 .liturgy td {
-  vertical-align: top; }
+  vertical-align: middle; }
   .liturgy td.date {
     line-height: 1.7em;
     white-space: nowrap; }
   .liturgy td.maintain {
     float: right;
     white-space: nowrap; }
-.liturgy tr:last-child {
-  border-bottom: none; }
+.liturgy tr {
+  /*&:last-child {
+    border-bottom: none;
+  }*/ }
 .liturgy .add td {
   padding: 5px; }
   .liturgy .add td:last-of-type {
     float: right; }
 .liturgy .add input {
-  margin: 0; }
+  margin: 0;
+  border-bottom: none; }
 .liturgy .add input[name=date] {
   width: 100%;
-  border-bottom: none;
   cursor: pointer; }
 .liturgy .add input[name=description] {
-  border-bottom: none;
   width: 100%; }
 .liturgy .add input[name=send] {
   margin: 4px 0; }

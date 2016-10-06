@@ -176,7 +176,7 @@ div.flexible {
 
 .liturgy {
   td {
-    vertical-align: top;
+    vertical-align: middle;
 
     &.date {
       line-height: 1.7em;
@@ -194,9 +194,9 @@ div.flexible {
   }
 
   tr {
-    &:last-child {
+    /*&:last-child {
       border-bottom: none;
-    }
+    }*/
   }
 
   .add {
@@ -210,16 +210,15 @@ div.flexible {
 
     input {
       margin: 0;
+      border-bottom: none;
     }
 
     input[name=date] {
       width: 100%;
-      border-bottom: none;
       cursor: pointer;
     }
 
     input[name=description] {
-      border-bottom: none;
       width: 100%;
     }
 
