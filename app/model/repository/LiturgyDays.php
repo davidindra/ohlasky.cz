@@ -36,6 +36,10 @@ class LiturgyDays extends Nette\Object
         return $this->liturgyDays->findOneBy(['id' => $id]);
     }
 
+    public function getByDate(DateTime $date){
+        return $this->liturgyDays->findOneBy(['date' => $date]);
+    }
+
     public function deleteById($id){
         $this->em->remove($this->getById($id));
     }

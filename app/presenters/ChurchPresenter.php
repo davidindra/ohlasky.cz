@@ -41,6 +41,9 @@ class ChurchPresenter extends BasePresenter
      */
     public $liturgy;
 
+    /** @var  Model\Repository\LiturgyDays @inject */
+    public $liturgyDays;
+
     public function renderDefault($church, $edit = null, $editAnnouncement = null, $vice = false){
         $this->template->edit = $edit;
         $this->template->editAnnouncement = $editAnnouncement;
@@ -65,7 +68,7 @@ class ChurchPresenter extends BasePresenter
 
         $this->template->announcements = $this->announcements->getByChurch($this->template->church);
 
-        $this->template->liturgy = $this->liturgy;
+        $this->template->liturgyDays = $this->liturgyDays;
     }
 
     public function createComponentMassForm(){

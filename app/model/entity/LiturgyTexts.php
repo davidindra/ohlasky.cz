@@ -18,7 +18,7 @@ class LiturgyTexts
     protected $date;
 
     /**
-     * @ORM\Column(type="int")
+     * @ORM\Column(type="integer")
      */
     protected $order;
 
