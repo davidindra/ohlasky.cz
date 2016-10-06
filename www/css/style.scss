@@ -214,10 +214,12 @@ div.flexible {
 
     input[name=date] {
       width: 100%;
+      border-bottom: none;
       cursor: pointer;
     }
 
     input[name=description] {
+      border-bottom: none;
       width: 100%;
     }
 

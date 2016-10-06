@@ -115,8 +115,10 @@ div.flexible {
   margin: 0; }
 .liturgy .add input[name=date] {
   width: 100%;
+  border-bottom: none;
   cursor: pointer; }
 .liturgy .add input[name=description] {
+  border-bottom: none;
   width: 100%; }
 .liturgy .add input[name=send] {
   margin: 4px 0; }
