@@ -23,17 +23,11 @@
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}<br>
             </td>
             <td class="liturgy hide-on-small-only">
-                {**{if empty($mass->celebration)}
-                    {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
-                    {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
-                        {$dayInfo->dayEcclesiastical}
-                    {else}
-                        {$dayInfo->feastEcclesiastical}
-                    {/if}
+                {if empty($mass->celebration)}
+                    {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
                 {else}
                     {$mass->celebration}
-                {/if}**}
-                {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
+                {/if}
             </td>
             <td class="time">
                 <b>{$mass->datetime|czdate:'G:i'}</b><br>
@@ -41,7 +35,8 @@
             <td class="church">
                 <a n:href="Church: $mass->church->abbreviation">
                     {$mass->church->nameHighlighted|noescape}
-                    <a n:tag-if="!empty($mass->church->location)" href="{$mass->church->location|gmaps}" target="_blank">
+                    <a n:tag-if="!empty($mass->church->location)" href="{$mass->church->location|gmaps}"
+                                                                  target="_blank">
                         | {$mass->church->locationShort}
                     </a>
                 </a>

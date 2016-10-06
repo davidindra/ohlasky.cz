@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use App\Model\Repository\LiturgyDays;
 use Nette;
 use Nette\Utils\DateTime;
 use App\Model\LiturgyCollector;
@@ -34,6 +35,12 @@ class ExportPresenter extends BasePresenter
      * @var LiturgyCollector
      */
     public $liturgy;
+
+    /**
+     * @inject
+     * @var LiturgyDays
+     */
+    public $liturgyDays;
 
     public function renderDefault($type, $churches, $period, $announcements, $zoom, $massSpacing, $print = false)
     {
@@ -104,7 +111,7 @@ class ExportPresenter extends BasePresenter
 
         $this->template->print = $print;
 
-        $this->template->liturgy = $this->liturgy;
+        $this->template->liturgyDays = $this->liturgyDays;
     }
 
     private function prepareSundayNews($type, $churches, $period, $announcements, $zoom, $massSpacing, $print)

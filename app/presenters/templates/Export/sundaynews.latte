@@ -78,22 +78,14 @@
         <tr n:foreach="$masses as $mass">
             <td class="date">
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
-                {if empty($mass->celebration)}
-                    <br>
-                    <span class="liturgy">
-                        {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
-                        {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
-                            {$dayInfo->dayEcclesiastical}
-                        {else}
-                            {$dayInfo->feastEcclesiastical}
-                        {/if}
-                    </span>
-                {else}
-                    <br>
-                    <span class="liturgy">
+                <br>
+                <span class="liturgy">
+                    {if empty($mass->celebration)}
+                        {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
+                    {else}
                         <b>{$mass->celebration}</b>
-                    </span>
-                {/if}
+                    {/if}
+                </span>
             </td>
             <td class="time">
                 {$mass->datetime|czdate:'G:i'|noescape}

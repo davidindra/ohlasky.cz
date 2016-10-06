@@ -26,17 +26,11 @@
                 {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
             </td>
             <td class="liturgy">
-                {**{if empty($mass->celebration)}
-                    {var $dayInfo = $liturgy->getDayInfo(\Nette\Utils\DateTime::from($mass->datetime))}
-                    {if $mass->datetime->format('N') == 7 || empty($dayInfo->feastEcclesiastical)}
-                        {$dayInfo->dayEcclesiastical}
-                    {else}
-                        {$dayInfo->feastEcclesiastical}
-                    {/if}
+                {if empty($mass->celebration)}
+                    {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
                 {else}
                     {$mass->celebration}
-                {/if}**}
-                {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
+                {/if}
             </td>
             <td class="time">
                 <b>{$mass->datetime|czdate:'G:i'}</b>
