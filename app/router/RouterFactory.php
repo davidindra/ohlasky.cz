@@ -51,7 +51,7 @@ class RouterFactory
 			'action' => [
 				Route::VALUE => 'default',
 				Route::FILTER_TABLE => [
-
+					'upravit' => 'edit'
 				]
 			]
 		]);

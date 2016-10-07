@@ -1,8 +1,10 @@
 <?php
 namespace App\Model\Repository;
 
+use App\Model\Entity\LiturgyText;
 use Nette;
 use Kdyby\Doctrine\EntityManager;
+use Nette\Utils\DateTime;
 
 class LiturgyTexts extends Nette\Object
 {
@@ -12,20 +14,31 @@ class LiturgyTexts extends Nette\Object
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
-        $this->liturgyTexts = $em->getRepository(\App\Model\Entity\LiturgyTexts::class);
+        $this->liturgyTexts = $em->getRepository(LiturgyText::class);
     }
 
-    public function create(\App\Model\Entity\LiturgyTexts $liturgyTexts)
+    public function create(LiturgyText $liturgyText)
     {
-        $this->em->persist($liturgyTexts);
+        $this->em->persist($liturgyText);
+        $this->em->flush();
     }
 
-    public function getAll(){
-        return $this->liturgyTexts->findAll();
+    public function getAll($futureOnly = true){
+        $data = [];
+        foreach($this->liturgyTexts->findBy([], ['date' => 'ASC', 'order' => 'ASC']) as $text){
+            if(DateTime::from($text->date)->getTimestamp() > time() - 24*60*60 || !$futureOnly){
+                $data[] = $text;
+            }
+        }
+        return $data;
     }
 
     public function getById($id){
         return $this->liturgyTexts->findOneBy(['id' => $id]);
+    }
+
+    public function getByDate(DateTime $date){
+        return $this->liturgyTexts->findBy(['date' => $date], ['date' => 'ASC', 'order' => 'ASC']);
     }
 
     public function deleteById($id){

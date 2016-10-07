@@ -34,20 +34,20 @@
 
     <div class="sundayliturgy">
         <div class="section" n:foreach="$sundayLiturgy as $section">
-            <div class="heading" n:if="!empty($section['heading'])">
-                {$section['heading']}
+            <div class="heading" n:if="!empty($section->heading)">
+                {$section->heading}
             </div>
-            <div class="source" n:if="!empty($section['source'])">
-                {$section['source']}
+            <div class="source" n:if="!empty($section->source)">
+                {$section->source}
             </div>
-            <div class="perex" n:if="!empty($section['perex'])">
-                {$section['perex']}
+            <div class="perex" n:if="!empty($section->perex)">
+                {$section->perex}
             </div>
-            <div class="responsum" n:if="!empty($section['responsum'])">
-                {$section['responsum']}
+            <div class="responsum" n:if="!empty($section->responsum)">
+                {$section->responsum}
             </div>
-            <div class="content" n:if="!empty($section['content'])">
-                {$section['content']}
+            <div class="content" n:if="!empty($section->content)">
+                {$section->content}
             </div>
         </div>
     </div>

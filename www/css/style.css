@@ -120,6 +120,10 @@ div.flexible {
   padding: 5px; }
   .liturgy .add td:last-of-type {
     float: right; }
+  .liturgy .add td.fullwidth {
+    float: none; }
+    .liturgy .add td.fullwidth a.btn {
+      width: 100%; }
 .liturgy .add input {
   margin: 0;
   border-bottom: none; }

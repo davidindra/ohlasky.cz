@@ -212,6 +212,14 @@ div.flexible {
       &:last-of-type {
         float: right;
       }
+
+      &.fullwidth {
+        float: none;
+
+        a.btn {
+          width: 100%;
+        }
+      }
     }
 
     input {

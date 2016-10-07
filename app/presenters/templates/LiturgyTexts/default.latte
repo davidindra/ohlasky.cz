@@ -5,8 +5,64 @@
         Liturgické texty
     </h4>
 
-    <div class="flow-text center-align">
-        <br><br><br><br>
-        Prozatím nelze upravovat liturgické texty. Již brzy! ;)
-    </div>
+    <table class="liturgy bordered highlight rowspanize">
+        <thead>
+        <tr>
+            <th>Datum</th>
+            <th>Název</th>
+            <th>Zdroj</th>
+            <th>Perex</th>
+            <th>Odpověď (žalmu)</th>
+            <th>Obsah</th>
+            <th>&nbsp;</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr n:foreach="$liturgyTexts as $text">
+            <td class="date">
+                {$text->date|czdate:'l <b>j. F</b>'|noescape}
+            </td>
+            <td class="heading">
+                {$text->heading|truncate:50}
+            </td>
+            <td class="source">
+                {$text->source|truncate:30}
+            </td>
+            <td class="perex">
+                {$text->perex|truncate:20}
+            </td>
+            <td class="responsum">
+                {$text->responsum|truncate:20}
+            </td>
+            <td class="content">
+                {$text->content|truncate:20}
+            </td>
+            <td class="maintain">
+                <a n:href="LiturgyTexts:edit $text->getId()">
+                    <i class="material-icons small teal-text">
+                        mode_edit
+                    </i>
+                </a>
+                <a n:href="delete!, $text->getId()">
+                    <i class="material-icons small teal-text">
+                        delete
+                    </i>
+                </a>
+            </td>
+        </tr>
+        <tr n:if="!$liturgyTexts">
+            <td colspan="7" class="center-align">
+                <i>Nebyly nalezeny žádné liturgické texty.</i>
+            </td>
+        </tr>
+        <tr class="add">
+            <td colspan="7" class="fullwidth">
+                <a class="btn" n:href="LiturgyTexts:edit">
+                    Přidat nový text
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

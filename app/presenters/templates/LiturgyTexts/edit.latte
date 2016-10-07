@@ -1,0 +1,44 @@
+{block content}
+
+<div class="section container">
+    <h4 class="indigo-text" n:block="title">
+        Úprava liturgického textu
+    </h4>
+
+    {form textForm}
+        {input textId}
+        <div class="row">
+            <div class="col m12">
+                <input n:name="date" class="datepicker">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m8">
+                {input heading}
+            </div>
+            <div class="col m4">
+                {input source}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                <textarea n:name="perex" class="materialize-textarea"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                {input responsum}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                <textarea n:name="content" class="materialize-textarea"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col m12">
+                <input n:name="send" class="btn">
+            </div>
+        </div>
+    {/form}
+</div>
