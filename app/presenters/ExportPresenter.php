@@ -10,6 +10,7 @@ use App\Model\LiturgyCollector;
 use App\Model\Repository\Announcements;
 use App\Model\Repository\Churches;
 use App\Model\Repository\Masses;
+use Wkhtmltopdf\Document;
 
 class ExportPresenter extends BasePresenter
 {
@@ -67,6 +68,12 @@ class ExportPresenter extends BasePresenter
         } else {
             $this->error('Neznámý typ požadovaného exportu.');
         }
+
+        /*$document = new Document(__DIR__ . '/../../temp/');
+        $document->addFile($this->selfURL());
+        //$document->save(__FILE__ . '.pdf');
+        $document->send($this->getHttpRequest(), $this->getHttpResponse());
+        $this->terminate();*/
     }
 
     private function prepareBanns($type, $churches, $period, $announcements, $zoom, $massSpacing, $print)
@@ -120,10 +127,23 @@ class ExportPresenter extends BasePresenter
 
     private function prepareSundayNews($type, $churches, $period, $announcements, $zoom, $massSpacing, $print)
     {
-        if($period == 'this') {
+        if ($period == 'this') {
             $this->template->sundayLiturgy = $this->liturgyTexts->getByDate(DateTime::from(strtotime(date('o-\\WW')) - 24 * 60 * 60));
-        }else{
+        } else {
             $this->template->sundayLiturgy = $this->liturgyTexts->getByDate(DateTime::from(strtotime(date('o-\\WW', time() + 7 * 24 * 60 * 60)) - 24 * 60 * 60));
         }
     }
+
+    /*private function selfURL()
+    {
+        $s = empty($_SERVER["HTTPS"]) ? '' : ($_SERVER["HTTPS"] == "on") ? "s" : "";
+        $protocol = $this->strleft(strtolower($_SERVER["SERVER_PROTOCOL"]), "/") . $s;
+        $port = ($_SERVER["SERVER_PORT"] == "80") ? "" : (":" . $_SERVER["SERVER_PORT"]);
+        return $protocol . "://" . $_SERVER['SERVER_NAME'] . $port . $_SERVER['REQUEST_URI'];
+    }
+
+    private function strleft($s1, $s2)
+    {
+        return substr($s1, 0, strpos($s1, $s2));
+    }*/
 }
