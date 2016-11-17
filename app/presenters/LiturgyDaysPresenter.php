@@ -69,6 +69,7 @@ class LiturgyDaysPresenter extends BasePresenter
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl upraven.');
+                $this->redirect('this');
             }
         };
 
@@ -80,6 +81,6 @@ class LiturgyDaysPresenter extends BasePresenter
         $this->liturgyDays->deleteById($dayId);
         $this->liturgyDays->flush();
         $this->flashMessage('Den byl odstraněn.');
-        $this->redirect('LiturgyDays:');
+        $this->redirect('this');
     }
 }
