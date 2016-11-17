@@ -44,7 +44,7 @@ class RouterFactory
 					'export' => 'Export',
 					'tisk' => 'Print',
 					'admin' => 'Admin',
-					'messenger-webhook' => 'Homepage'
+					'messenger-webhook' => 'MessengerWebhook'
 				],
 			],
 			'action' => [
