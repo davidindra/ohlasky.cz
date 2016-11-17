@@ -109,9 +109,9 @@ function init(ajax = false) {
 $(document).ready(init());
 
 $.nette.ext('custom', {
-    before: function () {
+    /*before: function () {
         $('[name=date]').val($('[name=date_submit]').val());
-    },
+    },*/
 
     complete: function () {
         init(true);
