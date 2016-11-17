@@ -1,10 +1,10 @@
-$(function () {
+/*$(function () {
     $.nette.init();
     //$.nette.ext('init').linkSelector = 'a';
     //$.nette.ext('init').formSelector = 'form';
     //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
     //$('.no-ajax').netteAjaxOff();
-});
+});*/
 
 function init(ajax = false) {
     if(!ajax){
@@ -95,10 +95,10 @@ function init(ajax = false) {
         }
     });
 
-    $('form').on('submit', function (e) {
+    /*$('form').on('submit', function (e) {
         $('[name=date]').val($('[name=date_submit]').val());
         //$(this).netteAjax(e);
-    });
+    });*/
 
     $('.timepicker').pickatime({
         twelvehour: false,

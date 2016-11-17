@@ -3,7 +3,7 @@
     <h4 class="indigo-text" n:block="title">
         Liturgické slavnosti
     </h4>
-
+    {form dayForm}
     <table class="liturgy bordered highlight rowspanize">
         <thead>
         <tr>
@@ -15,7 +15,7 @@
 
         <tbody>
         <tr class="add">
-            {form dayForm}
+
                 <td>
                     {input dayId}
                     <input n:name="date" class="datepicker">
@@ -26,7 +26,7 @@
                 <td>
                     <input n:name="send" class="btn">
                 </td>
-            {/form}
+
         </tr>
         <tr n:foreach="$liturgyDays as $day">
             <td class="date">
@@ -50,4 +50,5 @@
         </tr>
         </tbody>
     </table>
+    {/form}
 </div>

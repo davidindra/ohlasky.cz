@@ -54,7 +54,7 @@ class LiturgyDaysPresenter extends BasePresenter
             if(empty($values['dayId'])){
                 $liturgyDay = new LiturgyDay();
 
-                $liturgyDay->date = DateTime::from($values['date']);
+                $liturgyDay->date = DateTime::from($values['date_submit']);
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->create($liturgyDay);
                 $this->liturgyDays->flush();
@@ -65,7 +65,7 @@ class LiturgyDaysPresenter extends BasePresenter
             }else{
                 /** @var LiturgyDay $liturgyDay */
                 $liturgyDay = $this->liturgyDays->getById($values['dayId']);
-                $liturgyDay->date = DateTime::from($values['date']);
+                $liturgyDay->date = DateTime::from($values['date_submit']);
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl upraven.');
