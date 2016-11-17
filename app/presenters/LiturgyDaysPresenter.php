@@ -7,6 +7,7 @@ use App\Model\Repository\LiturgyDays;
 use Nette;
 use Nette\Application\UI\Form;
 use Nette\Utils\DateTime;
+use Tracy\Debugger;
 
 class LiturgyDaysPresenter extends BasePresenter
 {
@@ -54,6 +55,7 @@ class LiturgyDaysPresenter extends BasePresenter
             if(empty($values['dayId'])){
                 $liturgyDay = new LiturgyDay();
 
+                Debugger::barDump($values);
                 $liturgyDay->date = DateTime::from($values['date_submit']);
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->create($liturgyDay);
