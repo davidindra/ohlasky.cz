@@ -6,9 +6,8 @@ $(function () {
     //$('.no-ajax').netteAjaxOff();
 });
 
-//$(document).ready(function () {
 function init(ajax = false) {
-    /*if(!ajax){
+    if(!ajax){
         $(function () {
             $.nette.init();
             //$.nette.ext('init').linkSelector = 'a';
@@ -16,7 +15,7 @@ function init(ajax = false) {
             //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
             //$('.no-ajax').netteAjaxOff();
         });
-    }*/
+    }
 
     if(ajax) {
         if(typeof ga != 'undefined') {
@@ -114,5 +113,3 @@ $.nette.ext('custom', {
         init(true);
     }
 });
-
-//});

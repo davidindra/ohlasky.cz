@@ -237,6 +237,7 @@ var nette = function () {
 
 		if (xhr && (typeof xhr.statusText === 'undefined' || xhr.statusText !== 'canceled')) {
 			xhr.done(function (payload, status, xhr) {
+				console.log(xhr); console.log(payload); console.log(status); //kuxa
 				inner.fire({
 					name: 'success',
 					off: settings.off || {}
