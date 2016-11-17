@@ -95,10 +95,10 @@ function init(ajax = false) {
         }
     });
 
-    $('form').on('submit', function (e) {
+    /*$('form').on('submit', function (e) {
         $('[name=date]').val($('[name=date_submit]').val());
         //$(this).netteAjax(e);
-    });
+    });*/
 
     $('.timepicker').pickatime({
         twelvehour: false,
@@ -109,6 +109,10 @@ function init(ajax = false) {
 $(document).ready(init());
 
 $.nette.ext('custom', {
+    before: function () {
+        $('[name=date]').val($('[name=date_submit]').val());
+    },
+
     complete: function () {
         init(true);
     }
