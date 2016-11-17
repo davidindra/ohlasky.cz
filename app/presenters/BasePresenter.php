@@ -4,7 +4,6 @@ namespace App\Presenters;
 
 use Nette;
 use App\Model;
-use App\Forms;
 use Tracy\Debugger;
 
 
@@ -13,21 +12,6 @@ use Tracy\Debugger;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
-    /** @var Forms\SignInFormFactory @inject */
-    public $signInFactory;
-
-    /**
-     * Sign-in form factory.
-     * @return Nette\Application\UI\Form
-     */
-    protected function createComponentSignInForm()
-    {
-        return $this->signInFactory->create(function () {
-            $this->flashMessage('Byl jste úspěšně přihlášen!');
-            $this->redirect('Homepage:', ['ga' => 'login']);
-        });
-    }
-
     protected function beforeRender()
     {
         $this->template->ga = $this->getParameter('ga');
@@ -67,6 +51,11 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             $html = new Nette\Utils\Html();
             return $html->setHtml('https://www.google.cz/maps/search/' . $this->template->getLatte()->invokeFilter('escapeurl', [$input]) . '?hl=cs&source=opensearch');
         });
+
+        $this->redrawControl('title');
+        $this->redrawControl('menu');
+        $this->redrawControl('flashes');
+        $this->redrawControl('container');
     }
 
     public function deleteDirectory($dir) {

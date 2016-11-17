@@ -14,7 +14,7 @@
         </thead>
 
         <tbody>
-        <tr n:foreach="$churches as $church" data-link="{link Church: $church->abbreviation}">
+        <tr n:foreach="$churches as $church" onclick="$.nette.ajax({link Church: $church->abbreviation})">
             <td class="church">
                 {$church->nameHighlighted|noescape}
                 <span class="hide-on-med-and-up">

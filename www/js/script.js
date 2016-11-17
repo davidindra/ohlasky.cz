@@ -1,4 +1,19 @@
-$(document).ready(function () {
+//$(document).ready(function () {
+function init(ajax = false) {
+    if(!ajax){
+        $(function () {
+            $.nette.init();
+            //$.nette.ext('init').linkSelector = 'a';
+            //$.nette.ext('init').formSelector = 'form';
+            //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
+            //$('.no-ajax').netteAjaxOff();
+        });
+    }
+
+    for (i = 0; i < flashes.length; i++) {
+        Materialize.toast(flashes[i], 3000, 'rounded');
+    }
+
     $("table.rowspanize").rowspanizer({
         td: 'td:nth-child(1), td:nth-child(2)',
         vertical_align: 'top'
@@ -75,4 +90,14 @@ $(document).ready(function () {
         twelvehour: false,
         donetext: 'Uložit'
     });
+}
+
+$(document).ready(init());
+
+$.nette.ext('custom', {
+    complete: function () {
+        init(true);
+    }
 });
+
+//});

@@ -1,5 +1,5 @@
 {define form $form}
-    <form n:name=$form class="container center-align">
+    <form n:name=$form class="container center-align ajax">
         <script type="text/javascript" n:if="$form->ownErrors">
             {foreach $form->ownErrors as $error}
             Materialize.toast({$error}, 3000, 'rounded');

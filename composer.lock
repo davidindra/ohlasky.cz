@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9d7748170e18143722e75d32fd00bcd6",
-    "content-hash": "3cc1836c7325b3810fbfe2ce3f9d9430",
+    "hash": "319cb46ee32a8f6812635d9138dfd27b",
+    "content-hash": "290088cb54e92b6105ca15efbbb3a2d0",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -2912,6 +2912,49 @@
                 "nette"
             ],
             "time": "2016-07-31 16:43:38"
+        },
+        {
+            "name": "vojtech-dobes/nette-ajax-history",
+            "version": "2.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/vojtech-dobes/history.nette.ajax.js.git",
+                "reference": "f3fab92e5ed17ff6e8d4325401cbf211c4e17dba"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/vojtech-dobes/history.nette.ajax.js/zipball/f3fab92e5ed17ff6e8d4325401cbf211c4e17dba",
+                "reference": "f3fab92e5ed17ff6e8d4325401cbf211c4e17dba",
+                "shasum": ""
+            },
+            "require": {
+                "nette/nette": "~2.0",
+                "php": ">=5.3.1"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Vojtěch Dobeš",
+                    "email": "me@vojtechdobes.com"
+                }
+            ],
+            "description": "Adds History API support for Nette Framework.",
+            "homepage": "https://github.com/vojtech-dobes/history.nette.ajax.js",
+            "keywords": [
+                "ajax",
+                "nette",
+                "nette.ajax.js"
+            ],
+            "time": "2015-01-17 21:08:34"
         }
     ],
     "packages-dev": [
