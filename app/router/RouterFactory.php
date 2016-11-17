@@ -30,8 +30,6 @@ class RouterFactory
 			]
 		]);
 
-		//$router[] = new Route('prihlasit', 'Homepage:signIn'); // TODO presunout login form na jine misto atd.?
-
 		$router[] = new Route('<presenter>[/<action>]', [
 			'presenter' => [
 				Route::VALUE => 'Homepage',
@@ -45,13 +43,16 @@ class RouterFactory
 					'slavnosti' => 'LiturgyDays',
 					'export' => 'Export',
 					'tisk' => 'Print',
-					'admin' => 'Admin'
+					'admin' => 'Admin',
+					'messenger-webhook' => 'Homepage'
 				],
 			],
 			'action' => [
 				Route::VALUE => 'default',
 				Route::FILTER_TABLE => [
-					'upravit' => 'edit'
+					'upravit' => 'edit',
+					'prihlasit' => 'login',
+					'odhlasit' => 'logout'
 				]
 			]
 		]);
