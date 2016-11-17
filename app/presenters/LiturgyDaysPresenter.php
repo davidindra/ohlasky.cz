@@ -32,6 +32,7 @@ class LiturgyDaysPresenter extends BasePresenter
         $liturgyDay = empty($this->getParameter('edit')) ? null : $this->liturgyDays->getById($this->getParameter('edit'));
 
         $form = new Form();
+        $form->elementPrototype->setAttribute('class', 'ajax');
 
         $form->addHidden('dayId')
             ->setDefaultValue($this->getParameter('edit'));
@@ -56,15 +57,17 @@ class LiturgyDaysPresenter extends BasePresenter
                 $liturgyDay->date = DateTime::from($values['date']);
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->create($liturgyDay);
+                $this->liturgyDays->flush();
                 $this->flashMessage('Den byl vytvořen.');
-                $this->redirect('this');
+
+                //$this->redirect('this');
             }else{
                 /** @var LiturgyDay $liturgyDay */
                 $liturgyDay = $this->liturgyDays->getById($values['dayId']);
                 $liturgyDay->date = DateTime::from($values['date']);
                 $liturgyDay->description = $values['description'];
+                $this->liturgyDays->flush();
                 $this->flashMessage('Den byl upraven.');
-                $this->redirect('LiturgyDays:');
             }
         };
 
@@ -74,6 +77,7 @@ class LiturgyDaysPresenter extends BasePresenter
     public function handleDelete($dayId)
     {
         $this->liturgyDays->deleteById($dayId);
+        $this->liturgyDays->flush();
         $this->flashMessage('Den byl odstraněn.');
         $this->redirect('LiturgyDays:');
     }

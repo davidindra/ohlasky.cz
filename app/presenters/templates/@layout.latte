@@ -45,19 +45,19 @@
         <!-- Materialize clockpicker JS -->
         <script src="{$basePath}/js/clockpicker.js"></script>
 
+        <!-- Nette Forms validation -->
+        <script src="{$basePath}/js/netteForms.min.js"></script>
+
         <!-- Nette.ajax.js -->
         <script src="{$basePath}/js/nette.ajax.js"></script>
         <script src="{$basePath}/js/nette.history.ajax.js"></script>
         <script src="{$basePath}/js/ajax-extensions/fidRemove.ajax.js"></script>
-        <script src="{$basePath}/js/ajax-extensions/ga.ajax.js"></script>
         <script src="{$basePath}/js/ajax-extensions/spinner.ajax.js"></script>
-
-        <!-- Nette Forms validation -->
-        <script src="{$basePath}/js/netteForms.min.js"></script>
 
         <!-- Custom JS -->
         <script src="{$basePath}/js/script.js"></script>
 
+        <!-- Google Analytics -->
         <script n:if="!$user->isInRole('admin')">
             (function (i, s, o, g, r, a, m) {
                 i['GoogleAnalyticsObject'] = r;

@@ -36,12 +36,12 @@
                 {$day->description}
             </td>
             <td class="maintain">
-                <a n:href="LiturgyDays:default $day->getId()">
+                <a n:href="LiturgyDays:default $day->getId()" class="ajax">
                     <i class="material-icons small teal-text">
                         mode_edit
                     </i>
                 </a>
-                <a n:href="delete!, $day->getId()">
+                <a n:href="delete!, $day->getId()" class="ajax">
                     <i class="material-icons small teal-text">
                         delete
                     </i>

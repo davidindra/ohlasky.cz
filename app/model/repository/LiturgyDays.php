@@ -44,8 +44,12 @@ class LiturgyDays extends Nette\Object
         $this->em->remove($this->getById($id));
     }
 
+    public function flush(){
+        $this->em->flush();
+    }
+
     public function __destruct()
     {
-        $this->em->flush();
+        $this->flush();
     }
 }

@@ -1,6 +1,14 @@
+$(function () {
+    $.nette.init();
+    //$.nette.ext('init').linkSelector = 'a';
+    //$.nette.ext('init').formSelector = 'form';
+    //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
+    //$('.no-ajax').netteAjaxOff();
+});
+
 //$(document).ready(function () {
 function init(ajax = false) {
-    if(!ajax){
+    /*if(!ajax){
         $(function () {
             $.nette.init();
             //$.nette.ext('init').linkSelector = 'a';
@@ -8,6 +16,12 @@ function init(ajax = false) {
             //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
             //$('.no-ajax').netteAjaxOff();
         });
+    }*/
+
+    if(ajax) {
+        if(typeof ga != 'undefined') {
+            ga('send', 'pageview');
+        }
     }
 
     for (i = 0; i < flashes.length; i++) {
@@ -30,15 +44,15 @@ function init(ajax = false) {
 
     $('select').material_select();
 
-    $('[data-link]')
+    /*$('[data-link]')
     /*.each(function () {
      $(this).children()
      .wrapInner('<a class="js-link" href="' + $(this).attr('data-link') + '"></a>')
      .addClass('js-link');
-     })*/
+     })/
         .click(function () {
             location.href = $(this).attr('data-link');
-        });
+        });*/
 
     // clean URL GET parameters
     if (window.location.search.substring(1).length) {
@@ -82,9 +96,10 @@ function init(ajax = false) {
         }
     });
 
-    $('form').submit(function () {
+    $('form').on('submit', function (e) {
         $('[name=date]').val($('[name=date_submit]').val());
-    })
+        //$(this).netteAjax(e);
+    });
 
     $('.timepicker').pickatime({
         twelvehour: false,
