@@ -59,6 +59,7 @@ class LiturgyDaysPresenter extends BasePresenter
                 $this->liturgyDays->create($liturgyDay);
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl vytvořen.');
+                $this->redirect('this');
 
                 //$this->redirect('this');
             }else{
