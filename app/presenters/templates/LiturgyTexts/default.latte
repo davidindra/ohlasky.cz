@@ -39,12 +39,12 @@
                 {$text->content|truncate:20}
             </td>
             <td class="maintain">
-                <a n:href="LiturgyTexts:edit $text->getId()">
+                <a n:href="LiturgyTexts:edit $text->getId()" class="ajax">
                     <i class="material-icons small teal-text">
                         mode_edit
                     </i>
                 </a>
-                <a n:href="delete!, $text->getId()">
+                <a n:href="delete!, $text->getId()" class="ajax">
                     <i class="material-icons small teal-text">
                         delete
                     </i>
@@ -58,7 +58,7 @@
         </tr>
         <tr class="add">
             <td colspan="7" class="fullwidth">
-                <a class="btn" n:href="LiturgyTexts:edit">
+                <a class="ajax btn" n:href="LiturgyTexts:edit">
                     Přidat nový text
                 </a>
             </td>

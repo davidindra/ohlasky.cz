@@ -78,8 +78,7 @@ div.flexible {
   margin: 0;
   border-bottom: none; }
 .masses .add input[name=date] {
-  width: 16ex;
-  cursor: pointer; }
+  width: 16ex; }
 .masses .add input[name=time] {
   width: 8ex;
   cursor: pointer;
@@ -93,6 +92,9 @@ div.flexible {
   width: 100%; }
 .masses .add input[name=send] {
   margin: 4px 0; }
+
+.datepicker {
+  cursor: text !important; }
 
 .picker--opened .picker__frame {
   top: 1%; }
@@ -146,8 +148,7 @@ div.flexible {
   margin: 0;
   border-bottom: none; }
 .liturgy .add input[name=date] {
-  width: 100%;
-  cursor: pointer; }
+  width: 100%; }
 .liturgy .add input[name=description] {
   width: 100%; }
 .liturgy .add input[name=send] {

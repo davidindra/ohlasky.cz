@@ -127,7 +127,6 @@ div.flexible {
 
     input[name=date] {
       width: 16ex;
-      cursor: pointer;
     }
 
     input[name=time] {
@@ -155,6 +154,10 @@ div.flexible {
       margin: 4px 0;
     }
   }
+}
+
+.datepicker {
+  cursor: text !important;
 }
 
 .picker--opened .picker__frame {
@@ -247,7 +250,6 @@ div.flexible {
 
     input[name=date] {
       width: 100%;
-      cursor: pointer;
     }
 
     input[name=description] {

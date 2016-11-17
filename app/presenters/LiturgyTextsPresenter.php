@@ -38,6 +38,7 @@ class LiturgyTextsPresenter extends BasePresenter
 		$liturgyText = empty($this->getParameter('id')) ? null : $this->liturgyTexts->getById($this->getParameter('id'));
 
 		$form = new Form();
+		$form->elementPrototype->setAttribute('class', 'ajax');
 
 		$form->addHidden('textId')
 			->setDefaultValue($this->getParameter('id'));
@@ -46,6 +47,8 @@ class LiturgyTextsPresenter extends BasePresenter
 			->setAttribute('placeholder', 'Datum')
 			->setAttribute('data-value', $liturgyText ? $liturgyText->date->format('Y-m-d') : DateTime::from(time()+24*60*60)->format('Y-m-d'))
 			->setRequired('Zvolte, prosím, datum.');
+
+		$form->addHidden('date_submit');
 
 		$form->addText('heading', 'Název')
 			->setDefaultValue($liturgyText ? $liturgyText->heading : null)
@@ -75,7 +78,7 @@ class LiturgyTextsPresenter extends BasePresenter
 			if(empty($values['textId'])){
 				$liturgyText = new LiturgyText();
 
-				$liturgyText->date = DateTime::from($values['date']);
+				$liturgyText->date = DateTime::from($values['date_submit']);
 				$liturgyText->order = null;
 				$liturgyText->heading = $values['heading'];
 				$liturgyText->source = $values['source'];
@@ -92,7 +95,7 @@ class LiturgyTextsPresenter extends BasePresenter
 				/** @var LiturgyText $liturgyText */
 				$liturgyText = $this->liturgyTexts->getById($values['textId']);
 
-				$liturgyText->date = DateTime::from($values['date']);
+				$liturgyText->date = DateTime::from($values['date_submit']);
 				$liturgyText->order = null;
 				$liturgyText->heading = $values['heading'];
 				$liturgyText->source = $values['source'];
@@ -111,6 +114,7 @@ class LiturgyTextsPresenter extends BasePresenter
 	public function handleDelete($textId)
 	{
 		$this->liturgyTexts->deleteById($textId);
+		$this->liturgyTexts->flush();
 		$this->flashMessage('Oddíl byl odstraněn.');
 		$this->redirect('LiturgyTexts:');
 	}

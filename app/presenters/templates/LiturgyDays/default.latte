@@ -6,17 +6,17 @@
     {form dayForm}
         {input dayId}
         {input date_submit}
-    <table class="liturgy bordered highlight rowspanize">
-        <thead>
-        <tr>
-            <th>Datum</th>
-            <th>Popis</th>
-            <th>&nbsp;</th>
-        </tr>
-        </thead>
+        <table class="liturgy bordered highlight rowspanize">
+            <thead>
+            <tr>
+                <th>Datum</th>
+                <th>Popis</th>
+                <th>&nbsp;</th>
+            </tr>
+            </thead>
 
-        <tbody>
-        <tr class="add">
+            <tbody>
+            <tr class="add">
 
                 <td>
                     <input n:name="date" class="datepicker">
@@ -28,28 +28,28 @@
                     <input n:name="send" class="btn">
                 </td>
 
-        </tr>
-        <tr n:foreach="$liturgyDays as $day">
-            <td class="date">
-                {$day->date|czdate:'l <b>j. F</b>'|noescape}
-            </td>
-            <td class="description">
-                {$day->description}
-            </td>
-            <td class="maintain">
-                <a n:href="LiturgyDays:default $day->getId()" class="ajax">
-                    <i class="material-icons small teal-text">
-                        mode_edit
-                    </i>
-                </a>
-                <a n:href="delete!, $day->getId()" class="ajax">
-                    <i class="material-icons small teal-text">
-                        delete
-                    </i>
-                </a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+            </tr>
+            <tr n:foreach="$liturgyDays as $day">
+                <td class="date">
+                    {$day->date|czdate:'l <b>j. F</b>'|noescape}
+                </td>
+                <td class="description">
+                    {$day->description}
+                </td>
+                <td class="maintain">
+                    <a n:href="LiturgyDays:default $day->getId()" class="ajax">
+                        <i class="material-icons small teal-text">
+                            mode_edit
+                        </i>
+                    </a>
+                    <a n:href="delete!, $day->getId()" class="ajax">
+                        <i class="material-icons small teal-text">
+                            delete
+                        </i>
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     {/form}
 </div>

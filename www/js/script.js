@@ -1,13 +1,5 @@
-/*$(function () {
-    $.nette.init();
-    //$.nette.ext('init').linkSelector = 'a';
-    //$.nette.ext('init').formSelector = 'form';
-    //$.nette.ext('init').buttonSelector = 'button[type="submit"]';
-    //$('.no-ajax').netteAjaxOff();
-});*/
-
 function init(ajax = false) {
-    if(!ajax){
+    if (!ajax) {
         $(function () {
             $.nette.init();
             //$.nette.ext('init').linkSelector = 'a';
@@ -17,8 +9,8 @@ function init(ajax = false) {
         });
     }
 
-    if(ajax) {
-        if(typeof ga != 'undefined') {
+    if (ajax) {
+        if (typeof ga != 'undefined') {
             ga('send', 'pageview');
         }
     }
@@ -42,16 +34,6 @@ function init(ajax = false) {
     $('.modal-trigger').leanModal();
 
     $('select').material_select();
-
-    /*$('[data-link]')
-    /*.each(function () {
-     $(this).children()
-     .wrapInner('<a class="js-link" href="' + $(this).attr('data-link') + '"></a>')
-     .addClass('js-link');
-     })/
-        .click(function () {
-            location.href = $(this).attr('data-link');
-        });*/
 
     // clean URL GET parameters
     if (window.location.search.substring(1).length) {
@@ -95,11 +77,6 @@ function init(ajax = false) {
         }
     });
 
-    /*$('form').on('submit', function (e) {
-        $('[name=date]').val($('[name=date_submit]').val());
-        //$(this).netteAjax(e);
-    });*/
-
     $('.timepicker').pickatime({
         twelvehour: false,
         donetext: 'Uložit'
@@ -109,10 +86,6 @@ function init(ajax = false) {
 $(document).ready(init());
 
 $.nette.ext('custom', {
-    /*before: function () {
-        $('[name=date]').val($('[name=date_submit]').val());
-    },*/
-
     complete: function () {
         init(true);
     }

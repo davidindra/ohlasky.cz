@@ -16,7 +16,7 @@ class LiturgyDaysPresenter extends BasePresenter
 
     public function startup()
     {
-        if(!$this->user->isInRole('manager')){
+        if (!$this->user->isInRole('manager')) {
             $this->flashMessage('Nemáte oprávnění pro přístup k této stránce.');
             $this->redirect('Homepage:');
         }
@@ -29,7 +29,8 @@ class LiturgyDaysPresenter extends BasePresenter
         $this->template->liturgyDays = $this->liturgyDays->getAll();
     }
 
-    public function createComponentDayForm(){
+    public function createComponentDayForm()
+    {
         $liturgyDay = empty($this->getParameter('edit')) ? null : $this->liturgyDays->getById($this->getParameter('edit'));
 
         $form = new Form();
@@ -40,7 +41,7 @@ class LiturgyDaysPresenter extends BasePresenter
 
         $form->addText('date', 'Datum')
             ->setAttribute('placeholder', 'Datum')
-            ->setAttribute('data-value', $liturgyDay ? $liturgyDay->date->format('Y-m-d') : DateTime::from(time()+24*60*60)->format('Y-m-d'))
+            ->setAttribute('data-value', $liturgyDay ? $liturgyDay->date->format('Y-m-d') : DateTime::from(time() + 24 * 60 * 60)->format('Y-m-d'))
             ->setRequired('Zvolte, prosím, datum.');
 
         $form->addHidden('date_submit');
@@ -52,19 +53,16 @@ class LiturgyDaysPresenter extends BasePresenter
         $form->addSubmit('send', 'Uložit');
 
         $form->onSuccess[] = function (Form $form, $values) {
-            if(empty($values['dayId'])){
+            if (empty($values['dayId'])) {
                 $liturgyDay = new LiturgyDay();
 
-                Debugger::barDump($values);
                 $liturgyDay->date = DateTime::from($values['date_submit']);
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->create($liturgyDay);
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl vytvořen.');
                 $this->redirect('this');
-
-                //$this->redirect('this');
-            }else{
+            } else {
                 /** @var LiturgyDay $liturgyDay */
                 $liturgyDay = $this->liturgyDays->getById($values['dayId']);
                 $liturgyDay->date = DateTime::from($values['date_submit']);
