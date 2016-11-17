@@ -81,7 +81,6 @@ div.flexible {
   width: 16ex; }
 .masses .add input[name=time] {
   width: 8ex;
-  cursor: pointer;
   text-align: right;
   float: right;
   margin-right: 15px; }
@@ -93,7 +92,7 @@ div.flexible {
 .masses .add input[name=send] {
   margin: 4px 0; }
 
-.datepicker {
+.datepicker, .timepicker {
   cursor: text !important; }
 
 .picker--opened .picker__frame {

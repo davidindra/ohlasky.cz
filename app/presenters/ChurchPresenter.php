@@ -75,6 +75,7 @@ class ChurchPresenter extends BasePresenter
         $mass = empty($this->getParameter('edit')) ? null : $this->masses->getById($this->getParameter('edit'));
 
         $form = new Form();
+        $form->elementPrototype->setAttribute('class', 'ajax');
 
         $form->addHidden('churchId');
         $form->addHidden('massId')
@@ -109,29 +110,31 @@ class ChurchPresenter extends BasePresenter
             $church = $this->churches->getById($values['churchId']);
             if(!$this->user->isLoggedIn() || ($church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
                 $this->flashMessage('Nemáte oprávnění upravovat mše tohoto kostela.');
-                $this->redirect('this');
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }
 
             if(empty($values['massId'])){
                 $mass = new Mass();
                 $mass->church = $church;
 
-                $mass->datetime = DateTime::from($values['date'] . ' ' . $values['time']);
+                $mass->datetime = DateTime::from($values['date_submit'] . ' ' . $values['time']);
                 //$mass->highlighted = $values['highlight'];
                 $mass->highlighted = $values['liturgy'] ? true : false;
                 $mass->celebration = $values['liturgy'] ? $values['liturgy'] : null;
                 $mass->intention = $values['intention'];
                 $this->masses->create($mass);
+                $this->masses->flush();
                 $this->flashMessage('Mše byla vytvořena.');
-                $this->redirect('this');
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }else{
                 /** @var Mass $mass */
                 $mass = $this->masses->getById($values['massId']);
-                $mass->datetime = DateTime::from($values['date'] . ' ' . $values['time']);
+                $mass->datetime = DateTime::from($values['date_submit'] . ' ' . $values['time']);
                 //$mass->highlighted = $values['highlight'];
                 $mass->highlighted = $values['liturgy'] ? true : false;
                 $mass->celebration = $values['liturgy'] ? $values['liturgy'] : null;
                 $mass->intention = $values['intention'];
+                $this->masses->flush();
                 $this->flashMessage('Mše byla upravena.');
                 $this->redirect('Church:', [$this->getParameter('church')]);
             }
@@ -144,9 +147,10 @@ class ChurchPresenter extends BasePresenter
         $mass = $this->masses->getById($massId);
         if(!$this->user->isLoggedIn() || ($mass->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))) {
             $this->flashMessage('Nemáte oprávnění mazat mše tohoto kostela.');
-            $this->redirect('this');
+            $this->redirect('Church:', [$this->getParameter('church')]);
         }
         $this->masses->deleteById($massId);
+        $this->masses->flush();
         $this->flashMessage('Mše byla odstraněna.');
         $this->redirect('Church:', [$this->getParameter('church')]);
     }
@@ -155,6 +159,7 @@ class ChurchPresenter extends BasePresenter
         $announcement = empty($this->getParameter('editAnnouncement')) ? null : $this->announcements->getById($this->getParameter('editAnnouncement'));
 
         $form = new Form();
+        $form->elementPrototype->setAttribute('class', 'ajax');
 
         $form->addHidden('churchId')
             ->setDefaultValue($this->getParameter('church'));
@@ -171,7 +176,7 @@ class ChurchPresenter extends BasePresenter
             $church = $this->churches->getById($values['churchId']);
             if(!$this->user->isLoggedIn() || ($church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
                 $this->flashMessage('Nemáte oprávnění upravovat ohlášky tohoto kostela.');
-                $this->redirect('this');
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }
 
             if(empty($values['announcementId'])){
@@ -180,13 +185,15 @@ class ChurchPresenter extends BasePresenter
                 $announcement->lastEdit = DateTime::from(time());
                 $announcement->content = $values['announcement'];
                 $this->announcements->create($announcement);
+                $this->announcements->flush();
                 $this->flashMessage('Ohláška byla vytvořena.');
-                $this->redirect('this');
+                $this->redirect('Church:', [$this->getParameter('church')]);
             }else{
                 /** @var Announcement $announcement */
                 $announcement = $this->announcements->getById($values['announcementId']);
                 $announcement->lastEdit = DateTime::from(time());
                 $announcement->content = $values['announcement'];
+                $this->announcements->flush();
                 $this->flashMessage('Ohláška byla upravena.');
                 $this->redirect('Church:', [$this->getParameter('church')]);
             }
@@ -199,9 +206,10 @@ class ChurchPresenter extends BasePresenter
         $announcement = $this->announcements->getById($announcementId);
         if(!$this->user->isLoggedIn() || ($announcement->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
             $this->flashMessage('Nemáte oprávnění mazat ohlášky tohoto kostela.');
-            $this->redirect('this');
+            $this->redirect('Church:', [$this->getParameter('church')]);
         }
         $this->announcements->deleteById($announcementId);
+        $this->announcements->flush();
         $this->flashMessage('Ohláška byla odstraněna.');
         $this->redirect('Church:', [$this->getParameter('church')]);
     }

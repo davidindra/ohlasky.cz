@@ -52,10 +52,12 @@ abstract class BasePresenter extends Nette\Application\UI\Presenter
             return $html->setHtml('https://www.google.cz/maps/search/' . $this->template->getLatte()->invokeFilter('escapeurl', [$input]) . '?hl=cs&source=opensearch');
         });
 
-        $this->redrawControl('title');
-        $this->redrawControl('menu');
-        $this->redrawControl('flashes');
-        $this->redrawControl('container');
+        if($this->isAjax()) {
+            $this->redrawControl('title');
+            $this->redrawControl('menu');
+            $this->redrawControl('flashes');
+            $this->redrawControl('container');
+        }
     }
 
     public function deleteDirectory($dir) {

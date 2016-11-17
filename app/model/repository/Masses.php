@@ -49,8 +49,12 @@ class Masses extends Nette\Object
         return $this->masses->findBy(['maintainer_id' => $maintainer]);
     }*/
 
+    public function flush(){
+        $this->em->flush();
+    }
+
     public function __destruct()
     {
-        $this->em->flush();
+        $this->flush();
     }
 }

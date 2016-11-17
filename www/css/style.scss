@@ -131,7 +131,6 @@ div.flexible {
 
     input[name=time] {
       width: 8ex;
-      cursor: pointer;
       text-align: right;
       float: right;
       margin-right: 15px;
@@ -156,7 +155,7 @@ div.flexible {
   }
 }
 
-.datepicker {
+.datepicker, .timepicker {
   cursor: text !important;
 }
 
