@@ -36,8 +36,8 @@ class MessengerWebhookPresenter extends BasePresenter
 
         /** @var MessageReceived[] $messages */
         $messages = $bot->getMessagesReceived();
-        Debugger::log(var_dump($messages, true));
         foreach ($messages ? $messages : [] as $message) {
+            Debugger::log($message);
             //$bot->sendMessage($message->messaging->sender->id, 'text');
         }
 
