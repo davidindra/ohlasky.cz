@@ -17,55 +17,56 @@ class MessengerWebhookPresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->verifyProcess();
+
         //Debugger::log($this->httpRequest->getRawBody());
-        $request = json_decode($this->httpRequest->getRawBody(), true);
+        $request = json_decode($this->httpRequest->getRawBody());
 
-        $bot = new MessengerPlatform(
-            [
-                'accessToken' => $this->accessToken,
-                'webhookToken' => $this->verifyToken,
-                'facebookApiUrl' => 'https://graph.facebook.com/v2.6/me/' //2.6 is minimum
-            ],
-            $this->httpRequest->getRawBody());
-
-        if ($bot->checkSubscribe()) {
-            print $bot->request->getChallenge();
-            exit;
-        }
-        //$bot->subscribe();
-
-        /** @var MessageReceived[] $messages */
-        $messages = $bot->getMessagesReceived();
-        foreach ($messages ? $messages : [] as $message) {
-            Debugger::log(json_encode($message->messaging));
-            Debugger::log(json_encode($message->messaging->sender->id));
-            $userToSendMessage = new MessengerPlatform\UserRecipient($message->messaging->sender->id);
-            $bot->sendMessage($userToSendMessage, 'text');
-        }
-
+        $this->parse($request);
     }
 
     private function verifyProcess()
     {
-        $hub_verify_token = null;
-
         if (isset($_REQUEST['hub_challenge'])) {
             $challenge = $_REQUEST['hub_challenge'];
             $hub_verify_token = $_REQUEST['hub_verify_token'];
+
+            if ($hub_verify_token === $this->verifyToken) {
+                $this->template->response = $challenge;
+                exit;
+            }
         }
-        if ($hub_verify_token === $this->verifyToken) {
-            $this->template->response = $challenge;
+    }
+
+    private function parse($json){
+        if(@$json->object != 'page'){
+            $this->terminate();
+        }
+
+        foreach(@$json->entry as $entry){
+            foreach(@$entry->messaging as $message){
+                $sender = $message->sender->id;
+                $recipient = $message->recipient->id;
+                $timestamp = $message->timestamp;
+                $seq = $message->message->seq;
+                $text = $message->message->text;
+
+                Debugger::log($sender . ': ' . $text);
+            }
         }
     }
 }
 
-/*{
+/*
+{
     "object":"page",
-    "entry": [
+    "entry":
+    [
         {
             "id":"560319450832679",
             "time":1479428716398,
-            "messaging": [
+            "messaging":
+            [
                 {
                     "sender": {
                         "id":"1105714516202492"
@@ -77,5 +78,11 @@ class MessengerWebhookPresenter extends BasePresenter
                     "message": {
                         "mid":"mid.1479428716373:a9fbdb1d34",
                         "seq":12,
-                        "text":"aha"}}]}]}
+                        "text":"aha"
+                    }
+                }
+            ]
+        }
+    ]
+}
 */
