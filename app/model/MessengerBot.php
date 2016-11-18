@@ -109,7 +109,7 @@ class MessengerBot
         if ($text != '') { // attachments not supported
             $this->sendMessage($sender, json_encode($this->wit->apiConverseNew($sender, $text)));
 
-            $this->sendMessage($sender, 'Napsal jsi: ' . $text);
+            //$this->sendMessage($sender, 'Napsal jsi: ' . $text);
         }else{
             $this->sendMessage($sender, 'Omlouvám se, zatím tvojí zprávě nerozumím.');
         }
