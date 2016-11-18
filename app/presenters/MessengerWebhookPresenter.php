@@ -52,7 +52,7 @@ class MessengerWebhookPresenter extends BasePresenter
         $messages = $bot->getMessagesReceived();
         Debugger::log($messages);
         foreach($messages ? $messages : [] as $message){
-            $bot->sendMessage($message->messaging->sender->id, $message->messaging->message->text);
+            $bot->sendMessage(/*$message->messaging->sender*/ 560319450832679, 'text');
         }
     }
 }
