@@ -2,6 +2,8 @@
 
 namespace App\Presenters;
 
+use fritak\MessengerPlatform;
+use fritak\MessengerPlatform\MessageReceived;
 use Nette;
 use Tracy\Debugger;
 
@@ -29,17 +31,48 @@ class MessengerWebhookPresenter extends BasePresenter
     public function renderDefault()
     {
         //Debugger::log($this->httpRequest->getRawBody());
-        $data = json_decode($this->httpRequest->getRawBody());
+        $request = json_decode($this->httpRequest->getRawBody(), true);
 
-        Debugger::log($data);
+        $bot = new MessengerPlatform(
+            [
+                'accessToken' => $this->accessToken,
+                'webhookToken' => $this->verifyToken,
+                'facebookApiUrl' => 'https://graph.facebook.com/v2.6/me/' //2.6 is minimum
+            ],
+            $request);
+
+        if($bot->checkSubscribe())
+        {
+            print $bot->request->getChallenge();
+            exit;
+        }
+        //$bot->subscribe();
+
+        /** @var MessageReceived[] $messages */
+        $messages = $bot->getMessagesReceived();
+        foreach($messages as $message){
+            $bot->sendMessage($message->messaging['sender']['id'], $message->messaging['message']['text']);
+        }
     }
 }
 
-    /*{
-        "object":"page","entry":[{
-        "id":"560319450832679","time":1479428716398,"messaging":[{
-            "sender":{
-                "id":"1105714516202492"},"recipient":{
-                "id":"560319450832679"},"timestamp":1479428716373,"message":{
-                "mid":"mid.1479428716373:a9fbdb1d34","seq":12,"text":"aha"}}]}]}
-    */
+/*{
+    "object":"page",
+    "entry": [
+        {
+            "id":"560319450832679",
+            "time":1479428716398,
+            "messaging": [
+                {
+                    "sender": {
+                        "id":"1105714516202492"
+                    },
+                    "recipient": {
+                        "id":"560319450832679"
+                    },
+                    "timestamp":1479428716373,
+                    "message": {
+                        "mid":"mid.1479428716373:a9fbdb1d34",
+                        "seq":12,
+                        "text":"aha"}}]}]}
+*/

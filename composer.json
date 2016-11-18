@@ -33,7 +33,8 @@
 		"querypath/querypath": "3.0.5",
 		"erusev/parsedown": "1.6.0",
 		"kdyby/wkhtmltopdf": "v0.1",
-		"vojtech-dobes/nette-ajax-history": "2.0.0"
+		"vojtech-dobes/nette-ajax-history": "2.0.0",
+		"fritak/messenger-platform": "v1.2"
 	},
 	"require-dev": {
 		"nette/tester": "^1.6"
