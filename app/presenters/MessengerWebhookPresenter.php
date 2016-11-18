@@ -15,6 +15,8 @@ class MessengerWebhookPresenter extends BasePresenter
 
     public function renderDefault()
     {
+        $this->getHttpResponse()->setContentType('application/json');
+
         $this->template->response = $this->bot->parse($this->httpRequest->getRawBody());
     }
 
