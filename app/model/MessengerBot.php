@@ -46,40 +46,42 @@ class MessengerBot
         }
     }
 
-    private function requestApi($data){
+    private function requestApi($data)
+    {
         $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
 
-        if($response->getStatusCode() != 200){
+        if ($response->getStatusCode() != 200) {
             throw new MessengerBotException('Messenger SendAPI request failed.');
         }
 
         return $response->getBody()->getContents();
     }
 
-    public function parse($raw){
+    public function parse($raw)
+    {
         Debugger::log('DEBG: ' . $raw);
 
         $json = json_decode($raw);
 
-        if(@$json->object != 'page'){
+        if (@$json->object != 'page') {
             exit;
         }
 
-        foreach(@$json->entry as $entry){
-            foreach(@$entry->messaging as $message){
+        foreach (@$json->entry as $entry) {
+            foreach (@$entry->messaging as $message) {
                 $sender = $message->sender->id;
                 $recipient = $message->recipient->id;
                 $timestamp = $message->timestamp;
                 $seq = $message->message->seq;
                 $text = $message->message->text;
 
-                if(trim($text) != '') { // attachments not supported
-                    if($recipient == $this->pageFib) { // it's for our page, not from us manually to the client
-                        $this->requestApi([
-                            'recipient' => ['id' => $sender],
-                            'sender_action' => 'mark_seen'
-                        ]);
+                if ($recipient == $this->pageFib) { // it's for our page, not from us manually to the client
+                    $this->requestApi([
+                        'recipient' => ['id' => $sender],
+                        'sender_action' => 'mark_seen'
+                    ]);
 
+                    if (trim($text) != '') { // attachments not supported
                         $this->receivedMessage($sender, $text);
                     }
                 }
@@ -89,7 +91,8 @@ class MessengerBot
         return '';
     }
 
-    private function receivedMessage($sender, $text){
+    private function receivedMessage($sender, $text)
+    {
         Debugger::log('RECV: ' . $sender . ': ' . $text);
 
         $this->requestApi([
@@ -105,8 +108,9 @@ class MessengerBot
         ]);
     }
 
-    private function sendMessage($recipient, $text){
-        if(!is_numeric($recipient) || trim($text) == ''){
+    private function sendMessage($recipient, $text)
+    {
+        if (!is_numeric($recipient) || trim($text) == '') {
             throw new MessengerBotException('Invalid recipient ID or missing text.');
         }
 
