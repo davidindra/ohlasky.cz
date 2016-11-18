@@ -5,7 +5,6 @@ namespace App\Model;
 use GuzzleHttp\Client;
 use Nette;
 use Tracy\Debugger;
-use Tracy\ILogger;
 
 class MessengerBot
 {
@@ -17,6 +16,12 @@ class MessengerBot
      */
     private $guzzle;
 
+    /**
+     * Wit model instance
+     * @var Wit
+     */
+    private $wit;
+
     private $apiUrl = 'https://graph.facebook.com/v2.6/me/messages';
 
     private $accessToken = 'EAAP6B4JPne8BABfkuowWxrGHCkK3tbHa25ZC2JY0nJZBibiI9YSZA6Buki8ZByIlHJ8ObZCacA1gmzNI1W7BWGYe9Vy12inseS25VcVxRWabR4nZBUsFAUAXOa4Tjbzw4NKuknPwCFKLvVxt9nkgpr4vnisPwTZAEuTdO1vVq0cGwZDZD';
@@ -24,9 +29,10 @@ class MessengerBot
 
     private $pageFib = 560319450832679;
 
-    public function __construct(Client $client)
+    public function __construct(Client $client, Wit $wit)
     {
         $this->guzzle = $client;
+        $this->wit = $wit;
 
         $this->apiUrl = $this->apiUrl . '?access_token=' . $this->accessToken;
 
@@ -75,7 +81,7 @@ class MessengerBot
                 $recipient = $message->recipient->id;
                 $timestamp = $message->timestamp;
                 $seq = $message->message->seq;
-                $text = @$message->message->text;
+                $text = trim($message->message->text);
 
                 if ($recipient == $this->pageFib) { // it's for our page, not from us manually to the client
                     $this->requestApi([
@@ -83,9 +89,7 @@ class MessengerBot
                         'sender_action' => 'mark_seen'
                     ]);
 
-                    if (trim($text) != '') { // attachments not supported
-                        $this->receivedMessage($sender, $text);
-                    }
+                    $this->receivedMessage($sender, $text);
                 }
             }
         }
@@ -102,7 +106,13 @@ class MessengerBot
             'sender_action' => 'typing_on'
         ]);
 
-        $this->sendMessage($sender, 'Napsal jsi: ' . $text);
+        if ($text != '') { // attachments not supported
+            $this->sendMessage($sender, json_encode($this->wit->apiConverseNew($sender, $text)));
+
+            $this->sendMessage($sender, 'Napsal jsi: ' . $text);
+        }else{
+            $this->sendMessage($sender, 'Omlouvám se, zatím tvojí zprávě nerozumím.');
+        }
 
         $this->requestApi([
             'recipient' => ['id' => $sender],
