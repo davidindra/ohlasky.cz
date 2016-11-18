@@ -5,6 +5,7 @@ namespace App\Model;
 use GuzzleHttp\Client;
 use Nette;
 use Tracy\Debugger;
+use Tracy\ILogger;
 
 class MessengerBot
 {
@@ -44,6 +45,8 @@ class MessengerBot
     }
 
     public function parse($raw){
+        Debugger::log('DEBG: ' . $raw);
+
         $json = json_decode($raw);
 
         if(@$json->object != 'page'){
@@ -58,6 +61,7 @@ class MessengerBot
                 $seq = $message->message->seq;
                 $text = $message->message->text;
 
+
                 $this->receivedMessage($sender, $text);
             }
         }
@@ -66,11 +70,15 @@ class MessengerBot
     }
 
     private function receivedMessage($sender, $text){
-        Debugger::log($sender . ': ' . $text);
-        $this->sendMessage($sender, $text);
+        Debugger::log('RECV: ' . $sender . ': ' . $text);
+        $this->sendMessage($sender, 'Napsal jsi: ' . $text);
     }
 
     private function sendMessage($recipient, $text){
+        if(!is_numeric($recipient) || trim($text) == ''){
+            throw new MessengerBotException('Invalid recipient ID or missing text.');
+        }
+
         $data = [
             'recipient' => ['id' => $recipient],
             'message' => ['text' => $text]
@@ -83,6 +91,8 @@ class MessengerBot
         if($response->getStatusCode() != 200){
             throw new MessengerBotException('Failed message sending.');
         }
+
+        Debugger::log('SENT: ' . $recipient . ': ' . $text);
     }
 }
 
