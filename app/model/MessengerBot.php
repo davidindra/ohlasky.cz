@@ -61,8 +61,9 @@ class MessengerBot
                 $seq = $message->message->seq;
                 $text = $message->message->text;
 
-
-                $this->receivedMessage($sender, $text);
+                if(trim($text) != '') { // attachments not supported
+                    $this->receivedMessage($sender, $text);
+                }
             }
         }
 
