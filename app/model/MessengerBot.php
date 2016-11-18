@@ -71,10 +71,10 @@ class MessengerBot
     }
 
     private function sendMessage($recipient, $text){
-        $data = array([
+        $data = [
             'recipient' => ['id' => $recipient],
             'message' => ['text' => $text]
-        ]);
+        ];
 
         $response = $this->guzzle->post($this->apiUrl, ['form_data' => json_encode($data)]);
             //->getBody()
