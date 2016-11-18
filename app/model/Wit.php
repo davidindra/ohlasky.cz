@@ -42,7 +42,7 @@ class Wit
     }*/
 
     public function apiConverseNew($sender, $text){
-        $response = $this->guzzle->request('post', 'https://api.wit.ai/converse?v=20161118&session_id=' . $sender . '&q=' . urlencode($text), [
+        $response = $this->guzzle->request('get', 'https://api.wit.ai/converse?v=20161118&session_id=' . $sender . '&q=' . urlencode($text), [
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->accessToken,
                 'Content-Type' => 'application/json',
