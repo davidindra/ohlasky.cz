@@ -39,14 +39,14 @@ class MessengerWebhookPresenter extends BasePresenter
                 'webhookToken' => $this->verifyToken,
                 'facebookApiUrl' => 'https://graph.facebook.com/v2.6/me/' //2.6 is minimum
             ],
-            $request);
+            $this->httpRequest->getRawBody());
 
         if($bot->checkSubscribe())
         {
             print $bot->request->getChallenge();
             exit;
         }
-        $bot->subscribe();
+        //$bot->subscribe();
 
         /** @var MessageReceived[] $messages */
         $messages = $bot->getMessagesReceived();
