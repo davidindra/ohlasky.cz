@@ -76,7 +76,7 @@ class MessengerBot
             'message' => ['text' => $text]
         ];
 
-        $response = $this->guzzle->post($this->apiUrl, ['form_data' => json_encode($data)]);
+        $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
             //->getBody()
             //->getContents();
 
