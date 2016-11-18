@@ -3,13 +3,14 @@
 namespace App\Presenters;
 
 use Nette;
+use App\Model\MessengerBot;
 
 class MessengerWebhookPresenter extends BasePresenter
 {
     /** @inject @var Nette\Http\Request */
     public $httpRequest;
 
-    /** @inject @var App\Model\MessengerBot */
+    /** @inject @var MessengerBot */
     public $bot;
 
     public function renderDefault()
