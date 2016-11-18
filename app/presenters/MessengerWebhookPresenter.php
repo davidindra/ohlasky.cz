@@ -18,7 +18,7 @@ class MessengerWebhookPresenter extends BasePresenter
             $hub_verify_token = $_REQUEST['hub_verify_token'];
         }
         if ($hub_verify_token === $verify_token) {
-            $this->sendResponse($challenge);
+            $this->sendJson($challenge);
             //echo $challenge;
         }
     }
