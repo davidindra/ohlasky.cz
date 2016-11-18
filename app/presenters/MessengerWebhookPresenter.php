@@ -31,7 +31,7 @@ class MessengerWebhookPresenter extends BasePresenter
     public function renderDefault()
     {
         //Debugger::log($this->httpRequest->getRawBody());
-        $request = json_decode($this->httpRequest->getRawBody());
+        $request = json_decode($this->httpRequest->getRawBody(), true);
 
         $bot = new MessengerPlatform(
             [
