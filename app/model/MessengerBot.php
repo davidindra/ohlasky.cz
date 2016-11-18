@@ -48,6 +48,8 @@ class MessengerBot
 
     private function requestApi($data)
     {
+        Debugger::log('DBGS: ' . json_encode($data));
+
         $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
 
         if ($response->getStatusCode() != 200) {
@@ -59,7 +61,7 @@ class MessengerBot
 
     public function parse($raw)
     {
-        Debugger::log('DEBG: ' . $raw);
+        Debugger::log('DBGR: ' . $raw);
 
         $json = json_decode($raw);
 
