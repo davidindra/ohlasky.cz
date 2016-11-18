@@ -22,6 +22,8 @@ class MessengerBot
     private $accessToken = 'EAAP6B4JPne8BABfkuowWxrGHCkK3tbHa25ZC2JY0nJZBibiI9YSZA6Buki8ZByIlHJ8ObZCacA1gmzNI1W7BWGYe9Vy12inseS25VcVxRWabR4nZBUsFAUAXOa4Tjbzw4NKuknPwCFKLvVxt9nkgpr4vnisPwTZAEuTdO1vVq0cGwZDZD';
     private $verifyToken = '2c7dd4efbf3ad50d6d1e2b038df0c0927810fa62';
 
+    private $pageFib = 560319450832679;
+
     public function __construct(Client $client)
     {
         $this->guzzle = $client;
@@ -44,6 +46,16 @@ class MessengerBot
         }
     }
 
+    private function requestApi($data){
+        $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
+
+        if($response->getStatusCode() != 200){
+            throw new MessengerBotException('Messenger SendAPI request failed.');
+        }
+
+        return $response->getBody()->getContents();
+    }
+
     public function parse($raw){
         Debugger::log('DEBG: ' . $raw);
 
@@ -62,7 +74,14 @@ class MessengerBot
                 $text = $message->message->text;
 
                 if(trim($text) != '') { // attachments not supported
-                    $this->receivedMessage($sender, $text);
+                    if($recipient == $this->pageFib) { // it's for our page, not from us manually to the client
+                        $this->requestApi([
+                            'recipient' => ['id' => $sender],
+                            'sender_action' => 'mark_seen'
+                        ]);
+
+                        $this->receivedMessage($sender, $text);
+                    }
                 }
             }
         }
@@ -72,7 +91,18 @@ class MessengerBot
 
     private function receivedMessage($sender, $text){
         Debugger::log('RECV: ' . $sender . ': ' . $text);
+
+        $this->requestApi([
+            'recipient' => ['id' => $sender],
+            'sender_action' => 'typing_on'
+        ]);
+
         $this->sendMessage($sender, 'Napsal jsi: ' . $text);
+
+        $this->requestApi([
+            'recipient' => ['id' => $sender],
+            'sender_action' => 'typing_off'
+        ]);
     }
 
     private function sendMessage($recipient, $text){
@@ -80,18 +110,10 @@ class MessengerBot
             throw new MessengerBotException('Invalid recipient ID or missing text.');
         }
 
-        $data = [
+        $this->requestApi([
             'recipient' => ['id' => $recipient],
             'message' => ['text' => $text]
-        ];
-
-        $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
-            //->getBody()
-            //->getContents();
-
-        if($response->getStatusCode() != 200){
-            throw new MessengerBotException('Failed message sending.');
-        }
+        ]);
 
         Debugger::log('SENT: ' . $recipient . ': ' . $text);
     }
@@ -100,24 +122,3 @@ class MessengerBot
 class MessengerBotException extends \Exception
 {
 }
-
-
-/*request({
-    uri: 'https://graph.facebook.com/v2.6/me/messages',
-    qs: { access_token: PAGE_ACCESS_TOKEN },
-    method: 'POST',
-    json: messageData
-
-  }, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
-      var recipientId = body.recipient_id;
-      var messageId = body.message_id;
-
-      console.log("Successfully sent generic message with id %s to recipient %s",
-        messageId, recipientId);
-    } else {
-      console.error("Unable to send message.");
-      console.error(response);
-      console.error(error);
-    }
-  });  */

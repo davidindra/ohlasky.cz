@@ -33,7 +33,9 @@ services:
 
     - GuzzleHttp\Client
     - App\Model\LiturgyCollector
+
     - App\Model\MessengerBot
+    - App\Model\Wit
 
     - App\Model\UserManager
 
