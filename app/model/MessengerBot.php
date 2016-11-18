@@ -73,7 +73,7 @@ class MessengerBot
                 $recipient = $message->recipient->id;
                 $timestamp = $message->timestamp;
                 $seq = $message->message->seq;
-                $text = $message->message->text;
+                $text = @$message->message->text;
 
                 if ($recipient == $this->pageFib) { // it's for our page, not from us manually to the client
                     $this->requestApi([
