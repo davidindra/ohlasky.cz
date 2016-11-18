@@ -46,7 +46,7 @@ class MessengerWebhookPresenter extends BasePresenter
             print $bot->request->getChallenge();
             exit;
         }
-        //$bot->subscribe();
+        $bot->subscribe();
 
         /** @var MessageReceived[] $messages */
         $messages = $bot->getMessagesReceived();
