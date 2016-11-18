@@ -24,6 +24,6 @@ class MessengerWebhookPresenter extends BasePresenter
 
     public function renderDefault()
     {
-        Debugger::log($this->request->getPost());
+        Debugger::log('post: ' . $this->request->getPost());
     }
 }
