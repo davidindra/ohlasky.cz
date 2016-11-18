@@ -107,7 +107,7 @@ class MessengerBot
         ]);
 
         if ($text != '') { // attachments not supported
-            $this->sendMessage($sender, json_encode($this->wit->apiConverseNew($sender, $text)));
+            $this->sendMessage($sender, var_export($this->wit->apiConverseNew($sender, $text), true));
 
             //$this->sendMessage($sender, 'Napsal jsi: ' . $text);
         }else{
