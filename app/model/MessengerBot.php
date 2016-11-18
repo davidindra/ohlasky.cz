@@ -107,7 +107,13 @@ class MessengerBot
         ]);
 
         if ($text != '') { // attachments not supported
-            $this->sendMessage($sender, Debugger::dump($this->wit->apiConverseNew($sender, $text), true));
+            $wit = $this->wit->apiConverseNew($sender, $text);
+
+            if($wit->type == 'msg'){
+                $this->sendMessage($sender, $wit->msg);
+            }else{
+                $this->sendMessage($sender, Debugger::dump($wit, true));
+            }
 
             //$this->sendMessage($sender, 'Napsal jsi: ' . $text);
         }else{
