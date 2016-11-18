@@ -2,6 +2,7 @@
 
 namespace App\Presenters;
 
+use Doctrine\Common\Util\Debug;
 use Nette;
 use Tracy\Debugger;
 
@@ -24,6 +25,8 @@ class MessengerWebhookPresenter extends BasePresenter
 
     public function renderDefault()
     {
-        Debugger::log($this->request->getPost());
+        /** @var Nette\Http\Request $httpRequest */
+        $httpRequest = $this->context->getByType('Nette\Http\Request');
+        Debugger::log($httpRequest->getRawBody());
     }
 }
