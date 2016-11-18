@@ -25,6 +25,8 @@ class MessengerBot
     {
         $this->guzzle = $client;
 
+        $this->apiUrl = $this->apiUrl . '?access_token=' . $this->accessToken;
+
         $this->verifyProcess();
     }
 
