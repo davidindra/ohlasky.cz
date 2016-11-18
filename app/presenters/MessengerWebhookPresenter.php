@@ -31,7 +31,7 @@ class MessengerWebhookPresenter extends BasePresenter
     public function renderDefault()
     {
         //Debugger::log($this->httpRequest->getRawBody());
-        $request = json_decode($this->httpRequest->getRawBody(), true);
+        $request = json_decode($this->httpRequest->getRawBody());
 
         $bot = new MessengerPlatform(
             [
@@ -39,7 +39,7 @@ class MessengerWebhookPresenter extends BasePresenter
                 'webhookToken' => $this->verifyToken,
                 'facebookApiUrl' => 'https://graph.facebook.com/v2.6/me/' //2.6 is minimum
             ],
-            $request);
+            $this->httpRequest->getRawBody());
 
         if($bot->checkSubscribe())
         {
