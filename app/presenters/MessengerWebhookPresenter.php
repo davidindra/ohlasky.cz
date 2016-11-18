@@ -38,11 +38,11 @@ class MessengerWebhookPresenter extends BasePresenter
         $messages = $bot->getMessagesReceived();
         foreach ($messages ? $messages : [] as $message) {
             Debugger::log(json_encode($message->messaging));
+            Debugger::log(json_encode($message->messaging->sender));
+            Debugger::log(json_encode($message->messaging->sender['data']['id']));
             //$bot->sendMessage($message->messaging->sender->id, 'text');
         }
 
-        /*$n = array(
-            0 => fritak\MessengerPlatform\MessageReceived::__set_state(array('id' => '560319450832679', 'time' => 1479430459825, 'messaging' => array(0 => fritak\MessengerPlatform\Messaging::__set_state(array('recipient' => fritak\MessengerPlatform\Recipient::__set_state(array('data' => array('id' => '560319450832679',),)), 'sender' => fritak\MessengerPlatform\Sender::__set_state(array('data' => array('id' => '1105714516202492',),)), 'timestamp' => 1479430034937, 'message' => fritak\MessengerPlatform\Message::__set_state(array('mid' => 23, 'seq' => NULL, 'text' => 'ahoj', 'attachments' => NULL, 'quick_reply' => NULL,)), 'delivery' => NULL, 'optin' => NULL,)),),)),);*/
     }
 
     private function verifyProcess()
