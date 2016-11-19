@@ -102,7 +102,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->addText('intention', 'Intence')
             ->setDefaultValue($mass ? $mass->intention : null)
-            ->setAttribute('placeholder', 'Intence - pokud není, ponechte pole prázdné');
+            ->setAttribute('placeholder', 'Zadejte intenci nové mše - pokud není, ponechte pole prázdné');
 
         $form->addSubmit('send', 'Uložit');
 
@@ -168,7 +168,7 @@ class ChurchPresenter extends BasePresenter
 
         $form->addTextArea('announcement', 'Ohláška')
             ->setDefaultValue($announcement ? $announcement->content : null)
-            ->setAttribute('placeholder', 'Napište ohlášku');
+            ->setAttribute('placeholder', 'Napište novou ohlášku');
 
         $form->addSubmit('send', 'Uložit');
 

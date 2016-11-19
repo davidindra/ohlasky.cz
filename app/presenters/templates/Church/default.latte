@@ -101,38 +101,52 @@
     {/if}
 
     <br>
-    <ul class="collection" n:if="$isMaintainer || count($announcements) > 0">
-        <li n:foreach="$announcements as $announcement" class="collection-item">
-            <div class="maintain" n:if="$isMaintainer">
-                <a n:href="Church:default $church->abbreviation, null, $announcement->id" class="ajax">
-                    <i class="material-icons small teal-text">
-                        mode_edit
-                    </i>
-                </a>
-                <a n:href="deleteAnnouncement!, $announcement->id" class="ajax">
-                    <i class="material-icons small teal-text">
-                        delete
-                    </i>
-                </a>
-            </div>
-            <div class="announcement">
-                {$announcement->content|markdown|noescape}
-            </div>
-        </li>
-        <li class="collection-item" n:if="$isMaintainer">
-            {form announcementForm}
+    {form announcementForm}
+        {if $isMaintainer}
+            <input n:name="churchId" value="{$church->id}">
+            <input n:name="announcementId">
+        {/if}
+
+        <ul class="collection" n:if="$isMaintainer || count($announcements) > 0">
+            <li n:foreach="$announcements as $announcement" class="collection-item">
+                {if $announcement->id == $editAnnouncement}
+                    <div class="row">
+                        <div class="col s7 m10">
+                            <textarea n:name="announcement" class="materialize-textarea"></textarea>
+                        </div>
+                        <div class="col s5 m2">
+                            <input n:name="send" class="btn">
+                        </div>
+                    </div>
+                {else}
+                    <div class="maintain" n:if="$isMaintainer">
+                        <a n:href="Church:default $church->abbreviation, null, $announcement->id" class="ajax">
+                            <i class="material-icons small teal-text">
+                                mode_edit
+                            </i>
+                        </a>
+                        <a n:href="deleteAnnouncement!, $announcement->id" class="ajax">
+                            <i class="material-icons small teal-text">
+                                delete
+                            </i>
+                        </a>
+                    </div>
+                    <div class="announcement">
+                        {$announcement->content|markdown|noescape}
+                    </div>
+                {/if}
+            </li>
+
+            <li class="collection-item" n:if="$isMaintainer && $editAnnouncement == null">
                 <div class="row">
                     <div class="col s7 m10">
-                        <input n:name="churchId" value="{$church->id}">
-                        <input n:name="announcementId">
-
                         <textarea n:name="announcement" class="materialize-textarea"></textarea>
                     </div>
                     <div class="col s5 m2">
                         <input n:name="send" class="btn">
                     </div>
                 </div>
-            {/form}
-        </li>
-    </ul>
+            </li>
+        </ul>
+    {/form}
 </div>
