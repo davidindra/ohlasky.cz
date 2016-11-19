@@ -193,15 +193,15 @@
                     </a>
                 </li>
 
-                <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
-                    <a n:href="About:default" class="ajax">
-                        Chci se zapojit!
-                    </a>
-                </li>
-
                 <li class="hide-on-med-and-up{if $presenter->name == 'LiturgyDays'} active{/if}" n:if="$user->isInRole('manager')">
                     <a n:href="LiturgyDays:" class="ajax">
                         <b>Slavnosti</b>
+                    </a>
+                </li>
+
+                <li n:class="$presenter->name == 'About' ? active" n:if="!$user->isLoggedIn()">
+                    <a n:href="About:default" class="ajax">
+                        Chci se zapojit!
                     </a>
                 </li>
                 <li class="hide-on-med-and-up{if $presenter->name == 'LiturgyTexts'} active{/if}" n:if="$user->isInRole('manager')">
@@ -223,7 +223,7 @@
                 </li>
 
                 <li class="dropdown-adm">
-                    <a class="dropdown-button" href="#!" data-activates="dropdown-admin">
+                    <a class="dropdown-button" href="#!" data-activates="dropdown-admin" n:if="$user->isLoggedIn()">
                         <b>Administrace<i class="material-icons right" style="margin: 0;">arrow_drop_down</i></b>
                     </a>
                 </li>
