@@ -9,8 +9,12 @@
 
     {var $isMaintainer = $user->isLoggedIn() && ($user->identity->username == $church->maintainer->username || $user->isInRole('manager'))}
 
-    {define masses}
-        <table class="masses bordered highlight rowspanize">
+    {form massForm}
+        {input massId}
+        {input date_submit}
+        <input n:name="churchId" value="{$church->id}">
+
+        <table class="masses bordered highlight{if $edit == null} rowspanize{/if}">
             <thead>
             <tr>
                 <th>Datum</th>
@@ -23,34 +27,54 @@
 
             <tbody>
             <tr n:foreach="$masses as $mass"
-                    class="{if date('N', $mass->datetime->getTimestamp()) == 7}indigo lighten-5 bold{/if}{if $mass->datetime->getTimestamp() < time() - (time() % (24*60*60))} past{/if}">
-                <td class="date">
-                    {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
-                </td>
-                <td class="liturgy">
-                    {if empty($mass->celebration)}
-                        {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
-                    {else}
-                        {$mass->celebration}
-                    {/if}
-                </td>
-                <td class="time">
-                    <b>{$mass->datetime|czdate:'G:i'}</b>
-                </td>
-                <td class="intention"
-                ">{$mass->intention ? $mass->intention : '−−−'}</td>
-                <td class="maintain" n:if="$isMaintainer">
-                    <a n:href="Church:default $church->abbreviation, $mass->getId()" class="ajax">
-                        <i class="material-icons small teal-text">
-                            mode_edit
-                        </i>
-                    </a>
-                    <a n:href="deleteMass!, $mass->getId()" class="ajax">
-                        <i class="material-icons small teal-text">
-                            delete
-                        </i>
-                    </a>
-                </td>
+                    class="{if date('N', $mass->datetime->getTimestamp()) == 7}indigo lighten-5 bold{/if}{if $mass->datetime->getTimestamp() < time() - (time() % (24*60*60))} past{/if}{if $edit == $mass->id} add{/if}">
+                {if $edit == $mass->id}
+                    <td>
+                        <input n:name="date" class="datepicker">
+                    </td>
+                    <td>
+                        <input n:name="liturgy">
+                        <!--<input name="highlight" id="highlight">
+                        <label for="highlight">slavnost</label>-->
+                    </td>
+                    <td>
+                        <input n:name="time" class="timepicker" placeholder="Čas">
+                    </td>
+                    <td>
+                        <input n:name="intention">
+                    </td>
+                    <td>
+                        <input n:name="send" class="btn">
+                    </td>
+                {else}
+                    <td class="date">
+                        {$mass->datetime|czdate:'l <b>j. F</b>'|noescape}
+                    </td>
+                    <td class="liturgy">
+                        {if empty($mass->celebration)}
+                            {@$liturgyDays->getByDate(\Nette\Utils\DateTime::from($mass->datetime))->description}
+                        {else}
+                            {$mass->celebration}
+                        {/if}
+                    </td>
+                    <td class="time">
+                        <b>{$mass->datetime|czdate:'G:i'}</b>
+                    </td>
+                    <td class="intention"
+                    ">{$mass->intention ? $mass->intention : '−−−'}</td>
+                    <td class="maintain" n:if="$isMaintainer">
+                        <a n:href="Church:default $church->abbreviation, $mass->getId()" class="ajax">
+                            <i class="material-icons small teal-text">
+                                mode_edit
+                            </i>
+                        </a>
+                        <a n:href="deleteMass!, $mass->getId()" class="ajax">
+                            <i class="material-icons small teal-text">
+                                delete
+                            </i>
+                        </a>
+                    </td>
+                {/if}
             </tr>
             <tr n:if="$vice">
                 <td colspan="5" class="center-align">
@@ -63,7 +87,7 @@
                         více mší svatých</a>
                 </td>
             </tr>
-            <tr class="add" n:if="$isMaintainer">
+            <tr class="add" n:if="$isMaintainer && $edit == null">
 
                 <td>
                     <input n:name="date" class="datepicker">
@@ -86,19 +110,8 @@
             </tr>
             </tbody>
         </table>
-    {/define}
 
-    {if $isMaintainer}
-        {form massForm}
-            <input n:name="churchId" value="{$church->id}">
-            {input massId}
-            {input date_submit}
-
-            {include masses}
-        {/form}
-    {else}
-        {include masses}
-    {/if}
+    {/form}
 
     <br>
     {form announcementForm}
