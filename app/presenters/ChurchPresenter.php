@@ -41,7 +41,7 @@ class ChurchPresenter extends BasePresenter
      */
     public $liturgy;
 
-    /** @var  Model\Repository\LiturgyDays @inject */
+    /** @var Model\Repository\LiturgyDays @inject */
     public $liturgyDays;
 
     public function renderDefault($church, $edit = null, $editAnnouncement = null, $vice = false){
@@ -155,6 +155,7 @@ class ChurchPresenter extends BasePresenter
         $this->redirect('Church:', [$this->getParameter('church')]);
     }
 
+
     public function createComponentAnnouncementForm(){
         $announcement = empty($this->getParameter('editAnnouncement')) ? null : $this->announcements->getById($this->getParameter('editAnnouncement'));
 
@@ -184,6 +185,7 @@ class ChurchPresenter extends BasePresenter
                 $announcement->church = $church;
                 $announcement->lastEdit = DateTime::from(time());
                 $announcement->content = $values['announcement'];
+                $announcement->ordering = count($this->announcements->getByChurch($church));
                 $this->announcements->create($announcement);
                 $this->announcements->flush();
                 $this->flashMessage('Ohláška byla vytvořena.');
@@ -208,9 +210,34 @@ class ChurchPresenter extends BasePresenter
             $this->flashMessage('Nemáte oprávnění mazat ohlášky tohoto kostela.');
             $this->redirect('Church:', [$this->getParameter('church')]);
         }
-        $this->announcements->deleteById($announcementId);
+        $this->announcements->delete($announcement);
         $this->announcements->flush();
         $this->flashMessage('Ohláška byla odstraněna.');
+        $this->redirect('Church:', [$this->getParameter('church')]);
+    }
+
+    public function handleMoveUpAnnouncement($announcementId){
+        $announcement = $this->announcements->getById($announcementId);
+        if(!$this->user->isLoggedIn() || ($announcement->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))){
+            $this->flashMessage('Nemáte oprávnění měnit pořadí ohlášek tohoto kostela.');
+            $this->redirect('Church:', [$this->getParameter('church')]);
+        }
+        $this->announcements->moveUp($announcement);
+        $this->announcements->flush();
+        $this->flashMessage('Ohláška byla přesunuta nahoru.');
+        $this->redirect('Church:', [$this->getParameter('church')]);
+    }
+
+    public function handleMoveDownAnnouncement($announcementId)
+    {
+        $announcement = $this->announcements->getById($announcementId);
+        if (!$this->user->isLoggedIn() || ($announcement->church->maintainer->username != $this->user->identity->username && !$this->user->isInRole('manager'))) {
+            $this->flashMessage('Nemáte oprávnění měnit pořadí ohlášek tohoto kostela.');
+            $this->redirect('Church:', [$this->getParameter('church')]);
+        }
+        $this->announcements->moveDown($announcement);
+        $this->announcements->flush();
+        $this->flashMessage('Ohláška byla přesunuta dolů.');
         $this->redirect('Church:', [$this->getParameter('church')]);
     }
 }

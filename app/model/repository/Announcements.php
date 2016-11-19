@@ -30,19 +30,57 @@ class Announcements extends Nette\Object
     }
 
     public function getByChurch(Church $church){
-        return $this->announcements->findBy(['church' => $church], ['lastEdit' => 'DESC']);
+        return $this->announcements->findBy(['church' => $church], ['ordering' => 'DESC']);
     }
 
     public function getByChurches(array $churches){
-        return $this->announcements->findBy(['church' => $churches], ['church' => 'ASC', 'lastEdit' => 'DESC']);
+        return $this->announcements->findBy(['church' => $churches], ['church' => 'ASC', 'ordering' => 'DESC']);
     }
 
     public function getById($id){
         return $this->announcements->findOneBy(['id' => $id]);
     }
 
-    public function deleteById($id){
-        $this->em->remove($this->getById($id));
+    public function delete(Announcement $announcement){
+        $this->em->remove($announcement);
+    }
+
+    public function moveUp(Announcement $announcement){
+        $announcements = $this->getByChurch($announcement->church);
+
+        $last = null;
+        foreach($announcements as $key => $item){
+            if($announcement->getId() == $item->getId()){
+                $upperOrder = $announcements[$last]->ordering;
+                $lowerOrder = $item->ordering;
+
+                $item->ordering = $upperOrder;
+                $announcements[$last]->ordering = $lowerOrder;
+
+                return;
+            }
+
+            $last = $key;
+        }
+    }
+
+    public function moveDown(Announcement $announcement){
+        $announcements = array_reverse($this->getByChurch($announcement->church));
+
+        $last = null;
+        foreach($announcements as $key => $item){
+            if($announcement->getId() == $item->getId()){
+                $upperOrder = $announcements[$last]->ordering;
+                $lowerOrder = $item->ordering;
+
+                $item->ordering = $upperOrder;
+                $announcements[$last]->ordering = $lowerOrder;
+
+                return;
+            }
+
+            $last = $key;
+        }
     }
 
     public function flush(){

@@ -133,12 +133,22 @@
                     </div>
                 {else}
                     <div class="maintain" n:if="$isMaintainer">
-                        <a n:href="Church:default $church->abbreviation, null, $announcement->id" class="ajax">
+                        <a n:href="moveDownAnnouncement!, $announcement->id" class="ajax" n:if="!$iterator->last" title="Přesunout dolů">
+                            <i class="material-icons small teal-text" style="transform: rotate(180deg);">
+                                navigation
+                            </i>
+                        </a>
+                        <a n:href="moveUpAnnouncement!, $announcement->id" class="ajax" n:if="!$iterator->first" title="Přesunout nahoru">
+                            <i class="material-icons small teal-text">
+                                navigation
+                            </i>
+                        </a>
+                        <a n:href="Church:default $church->abbreviation, null, $announcement->id" class="ajax" title="Upravit">
                             <i class="material-icons small teal-text">
                                 mode_edit
                             </i>
                         </a>
-                        <a n:href="deleteAnnouncement!, $announcement->id" class="ajax">
+                        <a n:href="deleteAnnouncement!, $announcement->id" class="ajax" title="Odstranit">
                             <i class="material-icons small teal-text">
                                 delete
                             </i>

@@ -29,6 +29,11 @@ class Announcement
      */
     protected $church;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    protected $ordering;
+
     public function __construct()
     {
         $this->lastEdit = DateTime::from(time());
