@@ -27,6 +27,7 @@ class LiturgyDaysPresenter extends BasePresenter
     public function renderDefault($edit = null)
     {
         $this->template->liturgyDays = $this->liturgyDays->getAll();
+        $this->template->editId = $edit;
     }
 
     public function createComponentDayForm()
@@ -61,7 +62,7 @@ class LiturgyDaysPresenter extends BasePresenter
                 $this->liturgyDays->create($liturgyDay);
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl vytvořen.');
-                $this->redirect('this');
+                $this->redirect('LiturgyDays:');
             } else {
                 /** @var LiturgyDay $liturgyDay */
                 $liturgyDay = $this->liturgyDays->getById($values['dayId']);
@@ -69,7 +70,7 @@ class LiturgyDaysPresenter extends BasePresenter
                 $liturgyDay->description = $values['description'];
                 $this->liturgyDays->flush();
                 $this->flashMessage('Den byl upraven.');
-                $this->redirect('this');
+                $this->redirect('LiturgyDays:');
             }
         };
 
@@ -81,6 +82,6 @@ class LiturgyDaysPresenter extends BasePresenter
         $this->liturgyDays->deleteById($dayId);
         $this->liturgyDays->flush();
         $this->flashMessage('Den byl odstraněn.');
-        $this->redirect('this');
+        $this->redirect('LiturgyDays:');
     }
 }

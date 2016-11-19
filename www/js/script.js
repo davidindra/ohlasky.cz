@@ -31,7 +31,12 @@ function init(ajax = false) {
 
     $(".button-collapse").sideNav();
 
-    $('.modal-trigger').leanModal();
+
+    $('nav #dropdown-admin').remove();
+    $("#nav-mobile li.dropdown-adm").remove();
+    $(".dropdown-button").dropdown();
+
+    //$('.modal-trigger').leanModal();
 
     $('select').material_select();
 

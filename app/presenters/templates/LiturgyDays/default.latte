@@ -16,8 +16,7 @@
             </thead>
 
             <tbody>
-            <tr class="add">
-
+            <tr class="add" n:if="!$editId">
                 <td>
                     <input n:name="date" class="datepicker">
                 </td>
@@ -27,27 +26,38 @@
                 <td>
                     <input n:name="send" class="btn">
                 </td>
-
             </tr>
-            <tr n:foreach="$liturgyDays as $day">
-                <td class="date">
-                    {$day->date|czdate:'l <b>j. F</b>'|noescape}
-                </td>
-                <td class="description">
-                    {$day->description}
-                </td>
-                <td class="maintain">
-                    <a n:href="LiturgyDays:default $day->getId()" class="ajax">
-                        <i class="material-icons small teal-text">
-                            mode_edit
-                        </i>
-                    </a>
-                    <a n:href="delete!, $day->getId()" class="ajax">
-                        <i class="material-icons small teal-text">
-                            delete
-                        </i>
-                    </a>
-                </td>
+            <tr n:foreach="$liturgyDays as $day" n:class="$day->getId() == $editId ? add">
+                {if $day->getId() == $editId}
+                    <td>
+                        <input n:name="date" class="datepicker">
+                    </td>
+                    <td>
+                        <input n:name="description">
+                    </td>
+                    <td>
+                        <input n:name="send" class="btn">
+                    </td>
+                {else}
+                    <td class="date">
+                        {$day->date|czdate:'l <b>j. F</b>'|noescape}
+                    </td>
+                    <td class="description">
+                        {$day->description}
+                    </td>
+                    <td class="maintain">
+                        <a n:href="LiturgyDays:default $day->getId()" class="ajax">
+                            <i class="material-icons small teal-text">
+                                mode_edit
+                            </i>
+                        </a>
+                        <a n:href="delete!, $day->getId()" class="ajax">
+                            <i class="material-icons small teal-text">
+                                delete
+                            </i>
+                        </a>
+                    </td>
+                {/if}
             </tr>
             </tbody>
         </table>
