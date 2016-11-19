@@ -36,6 +36,8 @@ function init(ajax = false) {
     $("#nav-mobile li.dropdown-adm").remove();
     $(".dropdown-button").dropdown();
 
+    $('.collapsible').collapsible();
+
     //$('.modal-trigger').leanModal();
 
     $('select').material_select();
