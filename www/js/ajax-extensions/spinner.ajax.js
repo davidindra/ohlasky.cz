@@ -2,19 +2,22 @@
 
 $.nette.ext('spinner', {
 	init: function () {
-		this.spinner = this.createSpinner();
-		this.spinner.appendTo('body');
+		//this.spinner = this.createSpinner();
+		//this.spinner.appendTo('body');
+		this.spinner = $('#loader');
 	},
 	start: function () {
 		this.counter++;
 		if (this.counter === 1) {
-			this.spinner.show(this.speed);
+			//this.spinner.show(this.speed);
+			this.spinner.css('visibility', 'visible');
 		}
 	},
 	complete: function () {
 		this.counter--;
 		if (this.counter <= 0) {
-			this.spinner.hide(this.speed);
+			//this.spinner.hide(this.speed);
+			this.spinner.css('visibility', 'hidden');
 		}
 	}
 }, {

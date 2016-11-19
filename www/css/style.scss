@@ -9,15 +9,15 @@ main {
   flex: 1 0 auto;
 }
 
-#ajax-spinner {
+/*#ajax-spinner {
   position: absolute;
   top: 7em;
   right: 3em;
   width: 2em;
   height: 2em;
 
-  border: .266em solid #f3f3f3; /* Light grey */
-  border-top: .266em solid #3f51b5; /* Blue */
+  border: .266em solid #f3f3f3; // Light grey
+  border-top: .266em solid #3f51b5; // Blue
   border-radius: 50%;
   animation: spin 2s linear infinite;
 }
@@ -28,6 +28,19 @@ main {
   }
   100% {
     transform: rotate(360deg);
+  }
+}*/
+
+#loader.progress {
+  visibility: hidden;
+
+  margin: 0;
+  //background-color: #f3f3f3;
+  //background-color: #ede8e3;
+
+  .indeterminate {
+    //background-color: #3f51b5;
+    //background-color: #3f51b5;
   }
 }
 
