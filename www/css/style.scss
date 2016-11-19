@@ -23,10 +23,13 @@ main {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
-
 
 .churches {
   tr {
@@ -36,11 +39,19 @@ main {
   th {
     cursor: default;
     white-space: nowrap;
+
+    &:first-of-type {
+      width: 30%;
+    }
   }
 
   td {
     &.church, &.location {
       white-space: nowrap;
+    }
+
+    &.church a {
+      color: inherit !important;
     }
   }
 }

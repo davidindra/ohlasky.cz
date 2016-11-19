@@ -53,6 +53,10 @@ function init(ajax = false) {
         $(this).removeClass('text-darken-4');
     });
 
+    $('.churches tr').on('click', function(){
+        if($.active == 0) $(this).find('td:first a').trigger('click');
+    });
+
     $('.datepicker').pickadate({
         min: new Date().getFullYear() + "-" + new Date().getMonth() + "-" + new Date().getDay,
         format: 'dddd d. mmmm',

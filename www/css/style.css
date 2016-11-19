@@ -30,8 +30,12 @@ main {
 .churches th {
   cursor: default;
   white-space: nowrap; }
+  .churches th:first-of-type {
+    width: 30%; }
 .churches td.church, .churches td.location {
   white-space: nowrap; }
+.churches td.church a {
+  color: inherit !important; }
 
 div.flexible {
   height: auto; }

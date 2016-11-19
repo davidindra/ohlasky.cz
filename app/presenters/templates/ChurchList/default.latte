@@ -14,14 +14,16 @@
         </thead>
 
         <tbody>
-        <tr n:foreach="$churches as $church" onclick="$.nette.ajax({link Church: $church->abbreviation})">
+        <tr n:foreach="$churches as $church" n_onclick="$.nette.ajax({link Church: $church->abbreviation})">
             <td class="church">
-                {$church->nameHighlighted|noescape}
+                <a n:href="Church: $church->abbreviation" class="ajax">
+                    {$church->nameHighlighted|noescape}
+                </a>
                 <span class="hide-on-med-and-up">
-                    <br>
-                    <a n:tag-if="!empty($church->location)" href="{$church->location|gmaps}" target="_blank">
-                        {$church->locationShort}
-                    </a>
+                        <br>
+                        <a n:tag-if="!empty($church->location)" href="{$church->location|gmaps}" target="_blank">
+                            {$church->locationShort}
+                        </a>
                 </span>
             </td>
             <td class="location hide-on-small-only">
