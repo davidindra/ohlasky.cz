@@ -12,8 +12,14 @@ use Tracy\Debugger;
  */
 abstract class BasePresenter extends Nette\Application\UI\Presenter
 {
+    /** @inject
+     *  @var Nette\Http\Request */
+    public $httpRequest;
+
     protected function beforeRender()
     {
+        $this->template->url = $this->httpRequest->getUrl();
+
         $this->template->ga = $this->getParameter('ga');
 
         $this->template->addFilter('czdate', function ($input, $format = 'l j. F G:i') {
