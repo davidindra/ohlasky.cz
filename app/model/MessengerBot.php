@@ -109,14 +109,14 @@ class MessengerBot
         if ($text != '') { // attachments not supported
             $context = [];
             $continue = true;
-            while($continue) {
+            while ($continue) {
                 $wit = $this->wit->converse(
                     $sender,
                     (count($context) == 0 ? $text : null),
                     (count($context) == 0 ? null : json_encode($context))
                 );
 
-                if(isset($wit->entities)) {
+                if (isset($wit->entities)) {
                     $context = $this->contextizeEntities($wit, $context);
                 }
 
@@ -142,7 +142,7 @@ class MessengerBot
                         throw new MessengerBotException('Inappropiate Wit response type!');
                 }
             }
-        }else{
+        } else {
             $this->sendMessage($sender, 'Omlouvám se, zatím tvojí zprávě nerozumím.');
         }
 
@@ -166,8 +166,9 @@ class MessengerBot
         Debugger::log('SENT: ' . $recipient . ': ' . $text);
     }
 
-    private function solveAction($wit, $context){
-        switch($wit->action){
+    private function solveAction($wit, $context)
+    {
+        switch ($wit->action) {
             case 'nearestMass':
                 $context['nearestMass'] = [
                     'church' => 'kostelík',
@@ -181,12 +182,14 @@ class MessengerBot
         return $context;
     }
 
-    private function contextizeEntities($wit, $context){
+    private function contextizeEntities($wit, $context)
+    {
         Debugger::log(json_encode($wit->entities));
-        foreach($wit->entities as $entityName => $entity){
-            if(trim(@$entity->value) != ''){
-                $context[$entityName] = $entity->value;
-            }
+        foreach ($wit->entities as $entityName => $entity) {
+            //if(trim(@$entity->value) != ''){
+            $context[$entityName] = $entity->value;
+            Debugger::log($entityName . $entity->value);
+            //}
         }
         return $context;
     }
