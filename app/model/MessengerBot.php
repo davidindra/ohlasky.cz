@@ -52,19 +52,6 @@ class MessengerBot
         }
     }
 
-    private function requestApi($data)
-    {
-        Debugger::log('DBGS: ' . json_encode($data));
-
-        $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
-
-        if ($response->getStatusCode() != 200) {
-            throw new MessengerBotException('Messenger SendAPI request failed.');
-        }
-
-        return $response->getBody()->getContents();
-    }
-
     public function parse($raw)
     {
         Debugger::log('DBGR: ' . $raw);
@@ -97,6 +84,19 @@ class MessengerBot
         return '';
     }
 
+    private function requestApi($data)
+    {
+        Debugger::log('DBGS: ' . json_encode($data));
+
+        $response = $this->guzzle->post($this->apiUrl, ['json' => $data]);
+
+        if ($response->getStatusCode() != 200) {
+            throw new MessengerBotException('Messenger SendAPI request failed.');
+        }
+
+        return $response->getBody()->getContents();
+    }
+
     private function receivedMessage($sender, $text)
     {
         Debugger::log('RECV: ' . $sender . ': ' . $text);
@@ -107,15 +107,29 @@ class MessengerBot
         ]);
 
         if ($text != '') { // attachments not supported
-            $wit = $this->wit->apiConverseNew($sender, $text);
+            $context = null;
+            while(true) {
+                $wit = $this->wit->converse($sender, $context ? null : $text, $context);
 
-            if($wit->type == 'msg'){
-                $this->sendMessage($sender, $wit->msg);
-            }else{
-                $this->sendMessage($sender, Debugger::dump($wit, true));
+                switch ($wit->type) {
+                    case 'msg':
+                        $this->sendMessage($sender, $wit->msg);
+                        break;
+                    case 'merge':
+                        $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
+                        $context = json_encode(['dummy' => 'context']);
+                        break;
+                    case 'action':
+                        $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
+                        break;
+                    case 'stop':
+                        break 2;
+                    default:
+                        $this->sendMessage($sender, Debugger::dump($wit, true));
+                        throw new MessengerBotException('Inappropiate Wit response type!');
+                        break 2;
+                }
             }
-
-            //$this->sendMessage($sender, 'Napsal jsi: ' . $text);
         }else{
             $this->sendMessage($sender, 'Omlouvám se, zatím tvojí zprávě nerozumím.');
         }

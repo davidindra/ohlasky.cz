@@ -4,6 +4,7 @@ namespace App\Model;
 
 use GuzzleHttp\Client;
 use Nette;
+use Tracy\Debugger;
 
 class Wit
 {
@@ -41,14 +42,26 @@ class Wit
         return $response->getBody()->getContents();
     }*/
 
-    public function apiConverseNew($sender, $text){
-        $response = $this->guzzle->request('post', 'https://api.wit.ai/converse?v=20161118&session_id=' . $sender . '&q=' . urlencode($text), [
+    public function converse($sender, $text = null, $context = null){
+        $url = 'https://api.wit.ai/converse?v=20161118&session_id=' . $sender;
+        if($text){
+            $url .= '&q=' . urlencode($text);
+        }
+        if($context){
+            $url .= '&context=' . urlencode($context);
+        }
+
+        Debugger::log('WITS: ' . $url);
+
+        $response = $this->guzzle->request('post', $url, [
             'headers' => [
                 'Content-Type' => 'application/json',
                 'Accept' => 'application/json',
                 'Authorization' => 'Bearer ' . $this->accessToken
             ]
         ]);
+
+        Debugger::log('WITR: ' . $response->getBody()->getContents());
 
         if ($response->getStatusCode() != 200) {
             throw new MessengerBotException('Wit API request failed.');
