@@ -185,10 +185,10 @@ class MessengerBot
     private function contextizeEntities($wit, $context)
     {
         Debugger::log(json_encode($wit->entities));
-        foreach ($wit->entities as $entityName => $entity) {
+        foreach (json_decode(json_encode($wit->entities), true) as $entityName => $entity) {
             //if(trim(@$entity->value) != ''){
-            $context[$entityName] = $entity[0]->value;
-            Debugger::log($entityName . $entity[0]->value);
+            $context[$entityName] = $entity[0]['value'];
+            Debugger::log($entityName . $entity[0]['value'];
             //}
         }
         return $context;
