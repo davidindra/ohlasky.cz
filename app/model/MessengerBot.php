@@ -112,7 +112,7 @@ class MessengerBot
             while($continue) {
                 $wit = $this->wit->converse(
                     $sender,
-                    (count($context) == 0 ? null : $text),
+                    (count($context) == 0 ? $text : null),
                     (count($context) == 0 ? null : $context)
                 );
 
