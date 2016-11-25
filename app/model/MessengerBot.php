@@ -110,10 +110,9 @@ class MessengerBot
             $context = null;
             $continue = true;
             while($continue) {
-                //$witResponse = $this->wit->converse($sender, ($context ? null : $text), $context);
-                $witResponse = $this->wit->converse($sender, $text);
-                Debugger::log('witlog:' . $witResponse);
-                switch ($witResponse->type) {
+                $witResponse = $this->wit->converse($sender, ($context ? null : $text), $context);
+                Debugger::log($witResponse);
+                switch ('whatever' /*$witResponse->type*/) {
                     case 'msg':
                         $this->sendMessage($sender, $witResponse->msg);
                         break;
@@ -125,6 +124,7 @@ class MessengerBot
                         $this->sendMessage($sender, 'Máme provést action ' . $witResponse->action . '.');
                         break;
                     case 'stop':
+                        $this->sendMessage($sender, 'Máme skončit.');
                         $continue = false;
                         break;
                     default:
