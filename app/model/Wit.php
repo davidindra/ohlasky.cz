@@ -67,7 +67,7 @@ class Wit
 
         Debugger::log('WITR: ' . $response->getBody()->getContents());
 
-        return $response->getBody()->getContents();
+        return gettype($response->getBody()->getContents());
     }
 }
 
