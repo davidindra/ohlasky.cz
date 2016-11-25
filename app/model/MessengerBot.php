@@ -111,7 +111,7 @@ class MessengerBot
             $continue = true;
             while($continue) {
                 $wit = $this->wit->converse($sender, ($context ? null : $text), $context);
-                Debugger::log('witlog: ' . json_encode($wit));
+                Debugger::log('witlog: ' . $wit);
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);

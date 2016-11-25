@@ -67,7 +67,7 @@ class Wit
             throw new MessengerBotException('Wit API request failed.');
         }
 
-        return json_decode($response->getBody()->getContents());
+        return $response->getBody()->getContents();
     }
 }
 
