@@ -116,16 +116,17 @@ class MessengerBot
                     (count($context) == 0 ? null : json_encode($context))
                 );
 
+                if(isset($wit->entities)) {
+                    $context = $this->contextizeEntities($wit, $context);
+                }
+
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);
-                        if(@$wit->entities) {
-                            $context = $this->contextizeEntities($wit, $context);
-                        }
                         break;
                     case 'merge':
                         $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
-                        $context = json_encode(['dummy' => 'context']);
+                        //$context = json_encode(['dummy' => 'context']);
                         $continue = false;
                         break;
                     case 'action':
@@ -181,6 +182,7 @@ class MessengerBot
     }
 
     private function contextizeEntities($wit, $context){
+        Debugger::log(json_encode($wit->entities));
         foreach($wit->entities as $entityName => $entity){
             if(trim(@$entity->value) != ''){
                 $context[$entityName] = $entity->value;
