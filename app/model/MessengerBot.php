@@ -118,9 +118,11 @@ class MessengerBot
                     case 'merge':
                         $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
                         $context = json_encode(['dummy' => 'context']);
+                        $continue = false;
                         break;
                     case 'action':
                         $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
+                        $continue = false;
                         break;
                     case 'stop':
                         $continue = false;
