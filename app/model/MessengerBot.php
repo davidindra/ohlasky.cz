@@ -123,7 +123,6 @@ class MessengerBot
                         $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
                         break;
                     case 'stop':
-                        $this->sendMessage($sender, 'Máme skončit.');
                         $continue = false;
                         break;
                     default:
