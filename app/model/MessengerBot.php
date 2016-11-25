@@ -119,7 +119,9 @@ class MessengerBot
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);
-                        $context = $this->contextizeEntities($wit, $context);
+                        if(@$wit->entities) {
+                            $context = $this->contextizeEntities($wit, $context);
+                        }
                         break;
                     case 'merge':
                         $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
