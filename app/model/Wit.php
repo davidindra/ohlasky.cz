@@ -61,11 +61,11 @@ class Wit
             ]
         ]);
 
-        Debugger::log('WITR: ' . $response->getBody()->getContents());
-
         if ($response->getStatusCode() != 200) {
             throw new MessengerBotException('Wit API request failed.');
         }
+
+        Debugger::log('WITR: ' . $response->getBody()->getContents());
 
         return $response->getBody()->getContents();
     }
