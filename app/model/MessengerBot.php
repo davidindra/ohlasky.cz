@@ -111,23 +111,23 @@ class MessengerBot
             $continue = true;
             while($continue) {
                 $witResponse = $this->wit->converse($sender, ($context ? null : $text), $context);
-                Debugger::log('witlog: ' . $witResponse);
+                Debugger::log('witlog:' . $witResponse);
                 switch ($witResponse->type) {
                     case 'msg':
-                        $this->sendMessage($sender, $wit->msg);
+                        $this->sendMessage($sender, $witResponse->msg);
                         break;
                     case 'merge':
                         $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
                         $context = json_encode(['dummy' => 'context']);
                         break;
                     case 'action':
-                        $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
+                        $this->sendMessage($sender, 'Máme provést action ' . $witResponse->action . '.');
                         break;
                     case 'stop':
                         $continue = false;
                         break;
                     default:
-                        $this->sendMessage($sender, Debugger::dump($wit, true));
+                        $this->sendMessage($sender, Debugger::dump($witResponse, true));
 
                         //throw new MessengerBotException('Inappropiate Wit response type!');
                         $continue = false;
