@@ -107,10 +107,15 @@ class MessengerBot
         ]);
 
         if ($text != '') { // attachments not supported
-            $context = null;
+            $context = [];
             $continue = true;
             while($continue) {
-                $wit = $this->wit->converse($sender, ($context ? null : $text), $context);
+                $wit = $this->wit->converse(
+                    $sender,
+                    (count($context) == 0 ? null : $text),
+                    (count($context) == 0 ? null : $context)
+                );
+
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);
@@ -121,8 +126,8 @@ class MessengerBot
                         $continue = false;
                         break;
                     case 'action':
-                        $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
-                        $continue = false;
+                        //$this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
+                        $context = $this->solveAction($wit, $context);
                         break;
                     case 'stop':
                         $continue = false;
@@ -155,6 +160,21 @@ class MessengerBot
         ]);
 
         Debugger::log('SENT: ' . $recipient . ': ' . $text);
+    }
+
+    private function solveAction($wit, $context){
+        switch($wit->action){
+            case 'nearestMass':
+                $context['nearestMass'] = [
+                    'church' => 'kostelík',
+                    'date' => 'datum',
+                    'time' => 'čas',
+                    'intention' => 'intence'
+                ];
+                break;
+        }
+
+        return $context;
     }
 }
 
