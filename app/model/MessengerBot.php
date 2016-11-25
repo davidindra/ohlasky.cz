@@ -111,7 +111,7 @@ class MessengerBot
             $continue = true;
             while($continue) {
                 $wit = $this->wit->converse($sender, $context ? null : $text, $context);
-
+                Debugger::log('witlog: ' . $wit);
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);
@@ -128,9 +128,9 @@ class MessengerBot
                         break;
                     default:
                         $this->sendMessage($sender, Debugger::dump($wit, true));
-                        throw new MessengerBotException('Inappropiate Wit response type!');
+
+                        //throw new MessengerBotException('Inappropiate Wit response type!');
                         $continue = false;
-                        break;
                 }
             }
         }else{
