@@ -108,7 +108,8 @@ class MessengerBot
 
         if ($text != '') { // attachments not supported
             $context = null;
-            while(true) {
+            $continue = true;
+            while($continue) {
                 $wit = $this->wit->converse($sender, $context ? null : $text, $context);
 
                 switch ($wit->type) {
@@ -123,11 +124,13 @@ class MessengerBot
                         $this->sendMessage($sender, 'Máme provést action ' . $wit->action . '.');
                         break;
                     case 'stop':
-                        break 2;
+                        $continue = false;
+                        break;
                     default:
                         $this->sendMessage($sender, Debugger::dump($wit, true));
                         throw new MessengerBotException('Inappropiate Wit response type!');
-                        break 2;
+                        $continue = false;
+                        break;
                 }
             }
         }else{
