@@ -119,6 +119,7 @@ class MessengerBot
                 switch ($wit->type) {
                     case 'msg':
                         $this->sendMessage($sender, $wit->msg);
+                        $context = $this->contextizeEntities($wit, $context);
                         break;
                     case 'merge':
                         $this->sendMessage($sender, 'Máme mergovat, nastavuji dummy context.');
@@ -174,6 +175,15 @@ class MessengerBot
                 break;
         }
 
+        return $context;
+    }
+
+    private function contextizeEntities($wit, $context){
+        foreach($wit->entities as $entityName => $entity){
+            if(trim(@$entity->value) != ''){
+                $context[$entityName] = $entity->value;
+            }
+        }
         return $context;
     }
 }
