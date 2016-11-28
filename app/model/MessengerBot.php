@@ -188,7 +188,7 @@ class MessengerBot
         foreach (json_decode(json_encode($wit->entities), true) as $entityName => $entity) {
             //if(trim(@$entity->value) != ''){
             $context[$entityName] = $entity[0]['value'];
-            Debugger::log($entityName . $entity[0]['value'];
+            Debugger::log($entityName . $entity[0]['value']);
             //}
         }
         return $context;
